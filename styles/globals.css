@@ -18,7 +18,11 @@ a {
   box-sizing: border-box;
 } */
 
-.container {
+/* .container {
   display: flex;
   flex-wrap: wrap;
- }
+ } */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import logo from '../images/LOGO.svg'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Navbar.module.css'
 
 
 // const Navbar = () => {
@@ -48,13 +48,13 @@ const Navbar = () => {
                             <Link href="/"><a className={'nav-link ' + styles.nav_item_style}>Home</a></Link>
                         </li>
                         <li className="nav-item">
-                            <Link href="/events/"><a className={'nav-link ' + styles.nav_item_style}>Events</a></Link>
+                            <Link href="/about"><a className={'nav-link ' + styles.nav_item_style}>About</a></Link>
                         </li>
                         <li className="nav-item">
-                            <Link href="/news"><a className={'nav-link ' + styles.nav_item_style}>News</a></Link>
+                            <Link href="/login"><a className={'nav-link ' + styles.nav_item_style}>Login</a></Link>
                         </li>
                         <li className="nav-item">
-                            <Link href="/about"><a className={'nav-link ' + styles.nav_item_style}>Contact</a></Link>
+                            <Link href="/signup"><a className={'nav-link ' + styles.nav_item_style}>Signup</a></Link>
                         </li>
                     </ul>
                 </div>            
