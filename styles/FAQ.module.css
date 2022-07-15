@@ -54,6 +54,7 @@
     user-select: none;
     overflow: hidden;
     margin-bottom: 50px;
+    /* text-align: center; */
 }
 
 .question{
@@ -71,13 +72,13 @@
 }
 
 
-@media only screen and (min-width: 400px){
+@media only screen and (min-width: 280px) and (max-width: 500px){
     .faq_flexbox{
       justify-content: center;
     }
 }
     
-@media only screen and (min-width: 800px){
+@media only screen and (min-width: 501px){
     .faq_flexbox{
         justify-content: space-between;
     }
@@ -86,15 +87,27 @@
 
 
 
-@media only screen and (min-width: 400px){
+@media only screen and (min-width: 280px) and (max-width: 500px){
     .faq_column{
         width: 100%;
     }
 }
 
-@media only screen and (min-width: 800px){
+@media only screen and (min-width: 601px)and (max-width: 800px){
     .faq_column{
         width: 47%;
+    }
+}
+
+@media only screen and (min-width: 501px)and (max-width: 600px){
+    .faq_column{
+        width: 44%;
+    }
+}
+
+@media only screen and (min-width: 801px){
+    .faq_column{
+        width: 31%;
     }
 }
 

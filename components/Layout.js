@@ -1,6 +1,5 @@
-import Footer from "./Footer"
-// import Navbar from "./Navbar"
-import Navbar from "./StackBitNavbar"
+// import Footer from "./Footer"
+import Navbar from "./Navbar"
 
 
 
@@ -9,7 +8,7 @@ const Layout = ({ children }) => {
     <div>
       <Navbar />
       { children }
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

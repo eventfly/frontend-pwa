@@ -1,4 +1,4 @@
-import styles from '../styles/PersonCard.css'
+import styles from '../styles/PersonCard.module.css'
 import avatar1 from '../images/avatar_1.jpg'
 import Image from 'next/image'
 import Link from 'next/link'

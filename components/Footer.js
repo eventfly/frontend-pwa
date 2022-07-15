@@ -1,4 +1,4 @@
-import styles from '../styles/Footer.css'
+import styles from '../styles/Footer.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 import logo from '../images/LOGO.svg'

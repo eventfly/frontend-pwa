@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import styles from '../styles/SponsorContainer.css'
+import styles from '../styles/SponsorContainer.module.css'
 
 
 const SponsorContainer = ({sponsors}) => {

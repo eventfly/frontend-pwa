@@ -1,4 +1,4 @@
-import styles from '../styles/FAQ.css'
+import styles from '../styles/FAQ.module.css'
 import Image from 'next/image'
 import background_img from '../images/faq-background.svg'
 import Link from 'next/link'

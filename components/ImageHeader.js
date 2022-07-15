@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import styles from '../styles/ImageHeader.css'
+import styles from '../styles/ImageHeader.module.css'
 import background_img from '../images/background.jpg'
 import Link from 'next/link'
 
