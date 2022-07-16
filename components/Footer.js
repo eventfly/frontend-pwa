@@ -1,151 +1,115 @@
-import styles from '../styles/Footer.module.css'
-import Image from 'next/image'
-import Link from 'next/link'
-import logo from '../images/LOGO.svg'
+import { ReactNode } from 'react';
+import {
+  Button,
+  Box,
+  Container,
+  Stack,
+  SimpleGrid,
+  Text,
+  Link,
+  VisuallyHidden,
+  chakra,
+  useColorModeValue,
+} from '@chakra-ui/react';
 
+import { FaTwitter, FaYoutube, FaInstagram } from 'react-icons/fa';
 
-const Footer = () => {
-    return ( 
-        <>
-            <footer
-                className={"text-white " + styles.footer_box}
-            >
+const ListHeader = ({ children }) => {
+  return (
+    <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
+      {children}
+    </Text>
+  );
+};
 
-                <div className={styles.logo_style}>
-                    <Link href="/">
-                        <a className={"navbar-brand logo"}>
-                            <Image
-                                src={logo}
-                                width='100px'
-                                height='100px'
-                            />                    
-                        </a>
-                    </Link>
-                </div>
+const SocialButton = ({ children, label, href }) => {
+  return (
+    <chakra.button
+      bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
+      rounded={'full'}
+      w={8}
+      h={8}
+      cursor={'pointer'}
+      as={'a'}
+      href={href}
+      display={'inline-flex'}
+      alignItems={'center'}
+      justifyContent={'center'}
+      transition={'background 0.3s ease'}
+      _hover={{
+        bg: useColorModeValue('blackAlpha.200', 'whiteAlpha.200'),
+      }}>
+      <VisuallyHidden>{label}</VisuallyHidden>
+      { children }
+    </chakra.button>
+  );
+};
 
-                <div className="container">
-                    <div className={styles.footer_flexbox}>
+export default function Footer() {
+  return (
+    <Box
+      bg={useColorModeValue('gray.50', 'gray.900')}
+      color={useColorModeValue('gray.700', 'gray.200')}
+      zIndex={1}
+      id="footer"
+      >
+      <Container as={Stack} maxW={'6xl'} py={10}>
+        <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
+          <Stack align={'flex-start'}>
+            <ListHeader><b>Company</b></ListHeader>
+            <Link href={'#'}>About Us</Link>
+            <Link href={'#'}>Blog</Link>
+            <Link href={'#'}>Careers</Link>
+            <Link href={'#'}>Contact Us</Link>
+          </Stack>
 
-                        <div className={styles.footer_column}>
+          <Stack align={'flex-start'}>
+            <ListHeader><b>Navigation</b></ListHeader>
+            <Link href={'#'}>Home</Link>
+            <Link href={'#'}>Create an account</Link>
+            <Link href={'#'}>Login with us</Link>
+          </Stack>
 
-                            <h6 className="text-uppercase fw-bold">About us</h6>
-                            <p>
-                            Here you can use rows and columns to organize your footer
-                            content. Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit.
-                            </p>
+          <Stack align={'flex-start'}>
+            <ListHeader><b>Legal</b></ListHeader>
+            <Link href={'#'}>Cookies Policy</Link>
+            <Link href={'#'}>Privacy Policy</Link>
+            <Link href={'#'}>Terms of Service</Link>
+          </Stack>
 
-                        </div>
+          <Stack align={'flex-start'}>
+              {/* This is where we'll implrement Install button for PWA */}
+              <Button colorScheme='green'>Install App</Button>
+          </Stack>
+        </SimpleGrid>
+      </Container>
 
-
-                        <div className={styles.footer_column}>
-
-                            <div className={styles.useful_links }>
-
-                            <h6 className="text-uppercase fw-bold">Useful links</h6>
-
-                            <p>
-                                <Link href="/"><a className={styles.footer_link}>Home</a></Link>
-                            </p>
-
-                            <p>
-                                <Link href="/"><a className={styles.footer_link}>Events</a></Link>
-                            </p>
-
-                            <p>
-                                <Link href="/"><a className={styles.footer_link}>News</a></Link>
-                            </p>
-
-                            <p>
-                                <Link href="/"><a className={styles.footer_link}>Contact</a></Link>
-                            </p>
-                            </div>
-
-                        </div>
-
-
-                        <div className={styles.footer_column}>
-
-                            <h6 className="text-uppercase fw-bold">About us</h6>
-                            
-                            <p>
-                            Here you can use rows and columns to organize your footer
-                            content. Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div className={"container"}>
-
-                    <div className={styles.media_title}>
-                            <h6 className={"text-uppercase fw-bold"}>Follow us</h6>
-                    </div>
-
-                </div>
-
-                <div className={"container"}>
-                    <div className={styles.media_section}>
-
-                    <Link href="/">
-                        <a className={styles.media_icon}>
-                            <i className="fab fa-facebook-f"></i>
-                        </a>
-                    </Link>
-
-                    <Link href="/">
-                        <a className={styles.media_icon}>
-                            <i className="fab fa-twitter"></i>
-                        </a>
-                    </Link>
-
-                    <Link href="/">
-                        <a className={styles.media_icon}>
-                            <i className="fab fa-google"></i>
-                        </a>
-                    </Link>
-
-                    <Link href="/">
-                        <a className={styles.media_icon}>
-                            <i className="fab fa-instagram"></i>
-                        </a>
-                    </Link>
-
-                    <Link href="/">
-                        <a className={styles.media_icon}>
-                            <i className="fab fa-linkedin"></i>
-                        </a>
-                    </Link>
-
-                    <Link href="/">
-                        <a className={styles.media_icon}>
-                            <i className="fab fa-github"></i>
-                        </a>
-                    </Link>
-
-                    </div>
-                </div>
-
-
-                <div className={"text-center p-3 " + styles.copyright}>
-                    © Copyright 2022&nbsp;&nbsp;
-
-                    <Link href="/"><a className={styles.copyright_text}>BUET CSE FEST</a></Link>
-
-                    {/* <a className="text-white" href="https://mdbootstrap.com/">BUET CSE FEST</a> */}
-                
-                </div>
-
-            </footer>
-
-     
-        
-        </> 
-    );
+      <Box
+        borderTopWidth={1}
+        borderStyle={'solid'}
+        borderColor={useColorModeValue('gray.200', 'gray.700')}>
+        <Container
+          as={Stack}
+          maxW={'6xl'}
+          py={4}
+          direction={{ base: 'column', md: 'row' }}
+          spacing={4}
+          justify={{ md: 'space-between' }}
+          align={{ md: 'center' }}>
+          <Text>© 2022 Chakra Templates. All rights reserved</Text>
+          <Stack direction={'row'} spacing={6}>
+            <SocialButton label={'Twitter'} href={'#'}>
+              <FaTwitter />
+            </SocialButton>
+            <SocialButton label={'YouTube'} href={'#'}>
+              <FaYoutube />
+            </SocialButton>
+            <SocialButton label={'Instagram'} href={'#'}>
+              <FaInstagram />
+            </SocialButton>
+          </Stack>
+        </Container>
+      </Box>
+    </Box>
+  );
 }
- 
-export default Footer;

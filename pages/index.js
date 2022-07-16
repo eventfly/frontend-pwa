@@ -29,13 +29,10 @@ export default function Home() {
 
 
   return (
-      <>
-
-        <FormTitle title="Ongoing Events" />
-
+      <div>
+        <h1 className="h1">Newsfeed</h1>
         <EventCard event={events[0]}/>
         <EventCard event={events[1]}/>
-
-      </>
+      </div>
   )
 }
