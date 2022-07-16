@@ -10,7 +10,7 @@ const FormSelect = ({id, label, options, onChange}) => {
 
                 <label htmlFor={id} className={styles.label}>{label}</label>
 
-                <select id={id} className={"form-select"} onChange={onChange}>
+                <select id={id} className={"form-select"} onChange={e=> onChange(e.target.value)}>
                     
                     <option defaultValue> Choose... </option>
 

@@ -1,7 +1,7 @@
 import styles from '../../styles/Form.module.css'
 
 
-const FormInput = ({id, inputType, label, placeholder}) => {
+const FormInput = ({id, inputType, label, placeholder, value, onChange}) => {
     return ( 
         <>
 
@@ -9,7 +9,10 @@ const FormInput = ({id, inputType, label, placeholder}) => {
                 <label htmlFor={id} className={styles.label}>{label}</label>
                 <input type={inputType} 
                     className={"form-control"} 
-                    id={id} placeholder={placeholder} />
+                    id={id} placeholder={placeholder}
+                    value={value}
+                    onChange={e=> onChange(e.target.value)} 
+                />
             </div>
         
         </> 
