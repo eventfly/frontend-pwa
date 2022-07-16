@@ -23,6 +23,24 @@ a {
   flex-wrap: wrap;
  } */
 
+.no_auth_page_style{
+  padding-top: 150px;
+  padding-bottom: 80px;
+  background-color: white;
+}
+
+
+.page_style{
+  padding-top: 50px;
+  padding-bottom: 80px;
+  background-color: #eceef1;
+}
+
+.event_page_style{
+  padding-bottom: 80px;
+  background-color: #eceef1;
+} 
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -3,9 +3,35 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import EventCard from '../components/EventCard'
 import FormTitle from "../components/Form/FormTitle";
+import { useRouter} from 'next/router'
+import {useState, useEffect} from 'react'
+
+
+
+export async function getServerSideProps() {
+
+  let isAuth = null
+
+  // if(!isAuth){
+
+  //     return {
+  //         redirect: {
+  //             destination: '/login',
+  //             permanent: false,
+  //         },
+  //     }
+  // }
+
+  return {
+    props: {  }
+  }
+}
+
 
 
 export default function Home() {
+
+  const router = useRouter();
 
   let events = [
     {
@@ -27,10 +53,18 @@ export default function Home() {
     }
   ]
 
+  // useEffect(()=>{
+  //     let isAuth = localStorage.getItem('user')
+
+  //     if (!isAuth) {
+  //       router.push("/login")
+  //     }
+  // });
+
 
   return (
-      <div>
-        <h1 className="h1">Newsfeed</h1>
+      <div className="page_style">
+        <FormTitle title="Newsfeed" />
         <EventCard event={events[0]}/>
         <EventCard event={events[1]}/>
       </div>

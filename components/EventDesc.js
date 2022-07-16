@@ -8,7 +8,7 @@ const EventDesc = () => {
 
             <div className={styles.desc_container}>
 
-                <h1 className={styles.title}>Event Description</h1>
+                <h1 className={styles.title + " h1"}>Event Description</h1>
 
                 <div className={styles.content}>
 

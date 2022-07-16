@@ -21,7 +21,7 @@ const Login = () => {
 
     return ( 
 
-        <>
+        <div className="no_auth_page_style">
 
             <FormTitle title="Login" />
 
@@ -48,7 +48,7 @@ const Login = () => {
             </form>
 
 
-        </>
+        </div>
 
     );
 }

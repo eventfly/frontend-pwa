@@ -15,7 +15,7 @@ const SponsorContainer = ({sponsors}) => {
                         We Are Supported by Awesome Companies 
                     </div>
 
-                    <h1 className={styles.title}>
+                    <h1 className={styles.title + " h1"}>
                         Our Sponsors
                     </h1>
                 </div>

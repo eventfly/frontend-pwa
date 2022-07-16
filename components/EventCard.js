@@ -20,7 +20,7 @@ const EventCard = ({event}) => {
                     </Link>
                     
                     
-                    <Card.Text>
+                    <Card.Text className={styles.description}>
                         {event.description}
                     </Card.Text>
                 </Card.ImgOverlay>

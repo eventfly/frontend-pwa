@@ -4,10 +4,10 @@ import Footer from "../components/Footer";
 const Layout = ({ children }) => {
   return (
     <div>
-		<SideNavBar>
-			{ children }
-			<Footer/>
-    	</SideNavBar>
+      <SideNavBar>
+        { children }
+        <Footer/>
+      </SideNavBar>
     </div>
   );
 }

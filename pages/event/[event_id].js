@@ -71,14 +71,14 @@ const EventDetails = () => {
 
     return ( 
 
-        <>
-            
+        <div className="event_page_style">
+
             <ImageHeader />
             <EventDesc />
             <SponsorContainer sponsors={sponsors} />
             <FAQ faqs={faqs} />
         
-        </>
+        </div>
 
     );
 }
