@@ -1,6 +1,7 @@
 import styles from '../../styles/Form.module.css'
 
-const FormSelect = ({id, label, options}) => {
+const FormSelect = ({id, label, options, onChange}) => {
+
     return ( 
 
         <>
@@ -9,7 +10,7 @@ const FormSelect = ({id, label, options}) => {
 
                 <label htmlFor={id} className={styles.label}>{label}</label>
 
-                <select id={id} className={"form-select"}>
+                <select id={id} className={"form-select"} onChange={onChange}>
                     
                     <option defaultValue> Choose... </option>
 

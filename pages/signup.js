@@ -17,10 +17,24 @@ const Signup = () => {
         }
     ]
 
+    const startDate = new Date();
+
+    const handleDOB = (e) =>{
+        console.log(e)
+    }
+
     const handleSubmit = (e) =>{
         e.preventDefault();
         console.log("hello world");
     }
+
+    const handleGender = (e) =>{
+        e.preventDefault();
+
+        let {name, value} = e.target;
+        console.log(value)
+    }
+
 
     return ( 
 
@@ -34,8 +48,12 @@ const Signup = () => {
             <FormInput id="email" inputType="email" label="Email" placeholder="Enter email" />
             <FormInput id="password" inputType="password" label="Password" placeholder="Enter password" />
 
-            <FormSelect id="gender" label="Gender" options={options}/>
-            <FormDatePicker id="dob" />
+            <FormSelect id="gender" 
+                label="Gender" 
+                options={options}
+                onChange={handleGender}
+            />
+            <FormDatePicker id="dob" startDate={startDate} onChange={handleDOB}/>
 
             <FormButton type="submit" buttonText="Sign up" />
 

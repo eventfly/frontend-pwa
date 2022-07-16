@@ -3,9 +3,9 @@ import styles from '../../styles/Form.module.css'
 import DatePicker from "react-datepicker";
 import {useState} from 'react'
 
-const FormDatePicker = ({id}) => {
+const FormDatePicker = ({id, startDate, onChange}) => {
 
-    const [startDate, setStartDate] = useState(new Date());
+    // const [startDate, setStartDate] = useState(new Date());
 
     return ( 
 
@@ -17,7 +17,8 @@ const FormDatePicker = ({id}) => {
                 <DatePicker
                     selected={startDate}
                     className={styles.datepicker_style}
-                    onChange={(date) => setStartDate(date)}
+                    onChange={onChange}
+                    // onChange={(date) => setStartDate(date)}
                     popperPlacement="bottom" 
                 />
 
