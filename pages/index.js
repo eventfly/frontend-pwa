@@ -13,6 +13,7 @@ export default function Home() {
       'image': 'event1.jpg',
       'title': 'Chicago Art Exhibition 2022',
       'date': 'Dec 12,2021',
+      'url': '1',
       'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
     },
 
@@ -21,6 +22,7 @@ export default function Home() {
       'image': 'event2.jpg',
       'title': 'Chicago Art Exhibition 2022',
       'date': 'Dec 12,2021',
+      'url': '2',
       'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
     }
   ]
@@ -29,7 +31,8 @@ export default function Home() {
   return (
       <>
 
-        <FormTitle title="Login" />
+        <FormTitle title="Ongoing Events" />
+
         <EventCard event={events[0]}/>
         <EventCard event={events[1]}/>
 

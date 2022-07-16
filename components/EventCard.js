@@ -1,7 +1,4 @@
 import styles from '../styles/EventCard.module.css'
-//import avatar1 from '../images/background.jpg'
-import avatar1 from '../images/avatar_1.jpg'
-// import Image from 'next/image'
 import Link from 'next/link'
 import {Card} from 'react-bootstrap';
 
@@ -17,14 +14,18 @@ const EventCard = ({event}) => {
 
                 <Card.ImgOverlay className={styles.overlay}>
                     <Card.Text className={styles.date}> {event.date} </Card.Text>
+                    
+                    <Link href={"/event/" + event.url}>
                     <Card.Title className={styles.title}>{event.title}</Card.Title>
+                    </Link>
+                    
+                    
                     <Card.Text>
                         {event.description}
                     </Card.Text>
                 </Card.ImgOverlay>
             
             </Card>
-
 
         </>
 
