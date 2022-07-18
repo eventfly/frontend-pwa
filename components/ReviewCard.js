@@ -16,12 +16,12 @@ export default function ReviewCard ({ review }) {
 
 		for (var i=0; i < review.stars; i++) {
 			starList.push (
-				<StarIcon color={'green.500'}/>
+				<StarIcon color={'green.500'} key={i} />
 			);
 		}
 		for (var i=0; i < TOTAL_STARS - review.stars; i++) {
 			starList.push (
-				<StarIcon color={'green.200'}/>
+				<StarIcon color={'green.200'} key={i+review.stars} />
 			);
 		}
 		return starList;
