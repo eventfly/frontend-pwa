@@ -3,73 +3,51 @@ import { ChakraProvider } from "@chakra-ui/react";
 import Layout from '../layouts/Default';
 import NoAuthLayout from '../layouts/NoAuth';
 import { useEffect } from "react";
+import buildClient from '../api/build-client';
 
-import { SessionProvider, useSession, signIn } from 'next-auth/react';
+import axios from 'axios';
 
 
-function Auth({ children }) {
-	const { data: session, status } = useSession()
-	const isUser = !!session?.user
+function MyApp({ Component, pageProps, currentUser }) {
 
-	useEffect(() => {
+	console.log(currentUser)
 
-	  if (status === "loading") return
-	  if (!isUser){
-		return {
-			redirect: {
-				destination: '/login',
-				permanent: false,
-			}
-		}
-	  }
-	
-	}, [isUser, status])
-  
-	if (isUser) {
-	  return children
+	if (currentUser !== null) {
+		return (
+
+
+			<ChakraProvider>
+				<Layout currentUser={currentUser}>
+					<Component {...pageProps} />
+				</Layout>
+			</ChakraProvider>
+
+		)
 	}
-  
-	// Session is being fetched, or no user.
-	// If no user, useEffect() will redirect.
-	return <div>Loading...</div>
-  }
-
-
-
-function MyApp({ Component, pageProps }) {
-
-	// let isAuth = null
-
-	// useEffect(() => {
-
-	// 	isAuth = localStorage.getItem('username')
-	
-	// })
-
-	return(
-		
-
-		<ChakraProvider>
-			<Layout>
+	else {
+		return (
+			<NoAuthLayout>
 				<Component {...pageProps} />
-			</Layout>
-		</ChakraProvider>
+			</NoAuthLayout>
+		)
+	}
 
-	)
-	// else{
-	// 	return(
-	// 		<NoAuthLayout>
-	// 			<Component {...pageProps} />
-	// 		</NoAuthLayout>
-	// 	)
-	// }
+}
+
+MyApp.getInitialProps = async (appContext) => {
+	const client = buildClient(appContext.ctx);
+	const { data } = await client.get("/api/auth/users/currentuser");
+
+	// const {data} = await axios.get('http://auth:3000/api/auth/users/currentuser');
+
+	let pageProps = {}
+
+	if (appContext.Component.getInitialProps) {
+		pageProps = await appContext.Component.getInitialProps(appContext.ctx);
+	}
 
 
-	// <ChakraProvider>
-	// 	<Layout>
-	// 		<Component {...pageProps} />
-	// 	</Layout>
-	// </ChakraProvider>
+	return { pageProps, ...data }
 }
 
 export default MyApp
