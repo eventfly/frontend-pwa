@@ -8,9 +8,13 @@ import buildClient from '../api/build-client';
 import axios from 'axios';
 
 
-function MyApp({ Component, pageProps, currentUser }) {
+function MyApp({ Component, pageProps}) {
 
-	console.log(currentUser)
+	const currentUser = {
+		_id: '5f4b8f9b9c8f8b3f4c8b4b8b',
+		name: 'John Doe',
+		email: 'john@doe.com'
+	}
 
 	if (currentUser !== null) {
 		return (
@@ -34,20 +38,5 @@ function MyApp({ Component, pageProps, currentUser }) {
 
 }
 
-MyApp.getInitialProps = async (appContext) => {
-	const client = buildClient(appContext.ctx);
-	const { data } = await client.get("/api/auth/users/currentuser");
-
-	// const {data} = await axios.get('http://auth:3000/api/auth/users/currentuser');
-
-	let pageProps = {}
-
-	if (appContext.Component.getInitialProps) {
-		pageProps = await appContext.Component.getInitialProps(appContext.ctx);
-	}
-
-
-	return { pageProps, ...data }
-}
 
 export default MyApp
