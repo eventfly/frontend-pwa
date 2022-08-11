@@ -3,28 +3,28 @@ import Link from 'next/link'
 import {Card} from 'react-bootstrap';
 import {Flex, Avatar, Box, Text, Spacer, Button} from "@chakra-ui/react";
 
-const PostCard = ({event}) => {
+const PostCard = ({post}) => {
     return ( 
 
         <>
 
              <Card className={"bg-dark text-white " + styles.postCard}> 
-                <Flex>
-                    <Avatar src={event.image} />
+                <Flex className={styles.postHeader}>
+                    <Avatar src={post.image} />
                     <Box ml='3'>
                         <Text fontWeight='bold'>
-                        Segun Adebayo
+                        {post.name}
                        
                         </Text>
-                        <Text fontSize='sm'>UI Engineer</Text>
+                        <Text fontSize='sm'> {post.role}</Text>
                     </Box>
                 </Flex>
 
-                <Box>
-                    Lorem ipsum post Lorem ipsum post Lorem ipsum post
+                <Box className={styles.postDescription}>
+                    {post.description}
                 </Box>
 
-                <Card.Img src={event.image} alt="Card image" className={styles.postBanner} /> 
+                <Card.Img src={post.image} alt="Card image" className={styles.postBanner} /> 
 
                 <Flex direction='row' >
                     <Box className={styles.buttonContainer} align='center'>

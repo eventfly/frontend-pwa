@@ -14,7 +14,6 @@
 .postBanner{
     /* display: none; */
     height: 300px;
-    opacity: 0.15;
     object-fit: cover;
 }
 
@@ -40,6 +39,14 @@
 
 .description{
     font-size: 1rem;
+}
+
+.postHeader{
+    padding: 10px;
+}
+
+.postDescription{
+    padding: 10px;
 }
 
 

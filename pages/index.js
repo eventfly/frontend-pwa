@@ -54,6 +54,24 @@ export default function Home() {
     }
   ]
 
+  let posts = [
+    {
+      'id': 1,
+      'name' : 'Purba',
+      'role': 'Organizer',
+      'image': 'event1.jpg',
+      'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+    },
+
+    {
+      'id': 2,
+      'name' : 'Rifat',
+      'role': 'Organizer',
+      'image': 'event2.jpg',
+      'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+    }
+  ]
+
   // useEffect(()=>{
   //     let isAuth = localStorage.getItem('user')
 
@@ -69,8 +87,8 @@ export default function Home() {
         <EventCard event={events[0]}/>
         <EventCard event={events[1]}/>
 
-        <PostCard event={events[0]}/>
-        <PostCard event={events[1]}/>
+        <PostCard post={posts[0]}/>
+        <PostCard post={posts[1]}/>
       </div>
   )
 }
