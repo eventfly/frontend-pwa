@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import EventCard from '../components/EventCard'
+import PostCard from '../components/PostCard'
 import FormTitle from "../components/Form/FormTitle";
 import { useRouter} from 'next/router'
 import {useState, useEffect} from 'react'
@@ -67,6 +68,9 @@ export default function Home() {
         <FormTitle title="Newsfeed" />
         <EventCard event={events[0]}/>
         <EventCard event={events[1]}/>
+
+        <PostCard event={events[0]}/>
+        <PostCard event={events[1]}/>
       </div>
   )
 }
