@@ -86,9 +86,6 @@ export default function Home() {
         <FormTitle title="Newsfeed" />
         <EventCard event={events[0]}/>
         <EventCard event={events[1]}/>
-
-        <PostCard post={posts[0]}/>
-        <PostCard post={posts[1]}/>
       </div>
   )
 }

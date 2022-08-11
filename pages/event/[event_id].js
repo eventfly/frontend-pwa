@@ -6,6 +6,7 @@ import ImageHeader from '../../components/ImageHeader'
 import SponsorContainer from '../../components/SponsorContainer'
 import EventDesc from '../../components/EventDesc'
 import FAQ from '../../components/FAQ'
+import EventNewsFeed from '../../components/EventNewsFeed'
 
 
 const EventDetails = () => {
@@ -14,6 +15,80 @@ const EventDetails = () => {
 
     const [event, setEvent] = useState(null);
     const [loaded, setLoaded] = useState(false);
+
+    let posts = [
+        {
+          'id': 1,
+          'name' : 'Purba',
+          'role': 'Organizer',
+          'image': '../event1.jpg',
+          'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+        },
+    
+        {
+          'id': 2,
+          'name' : 'Rifat',
+          'role': 'Organizer',
+          'image': '../event2.jpg',
+          'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+        }
+      ]
+
+      let polls = [
+        {
+          'id': 1,
+          'question': 'Why are you?',
+          'options': [
+            'human', 'bird', 'plane'
+          ]
+        },
+    
+        {
+          'id': 2,
+          'question': 'Why are you?',
+          'options': [
+            'human', 'bird', 'plane'
+          ]
+        }
+      ]
+
+      let quizzes = [
+        {
+          'id': 1,
+          'questions': [
+            {
+                'question': 'why not?',
+                'options': [
+                    'human', 'bird', 'plane'
+                ]
+            },
+            {
+                'question': 'why dees?',
+                'options': [
+                    'bird', 'plane'
+                ]
+            }
+          ]
+        },
+    
+        {
+          'id': 2,
+          'questions': [
+            {
+                'question': 'why dees?',
+                'options': [
+                    'bird', 'plane'
+                ]
+            },
+            {
+                'question': 'why not?',
+                'options': [
+                    'human', 'bird', 'plane'
+                ]
+            }
+          ]
+        }
+      ]
 
     let sponsors = [
         {
@@ -75,6 +150,7 @@ const EventDetails = () => {
 
             <ImageHeader />
             <EventDesc />
+            <EventNewsFeed posts={posts} polls={polls} quizzes={quizzes}/>
             <SponsorContainer sponsors={sponsors} />
             <FAQ faqs={faqs} />
         
