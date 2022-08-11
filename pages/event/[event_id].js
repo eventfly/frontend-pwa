@@ -15,22 +15,32 @@ const EventDetails = () => {
 
     const [event, setEvent] = useState(null);
     const [loaded, setLoaded] = useState(false);
+    let [comment, setComment] = useState('')
+
+    let handleCommentChange = (e) => {
+      let inputComment = e.target.value
+      setComment(inputComment)
+    }
 
     let posts = [
         {
           'id': 1,
           'name' : 'Purba',
           'role': 'Organizer',
-          'image': '../event1.jpg',
-          'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+          'profilePic': '../event1.jpg',
+          'date': 'Dec 12,2021',
+          'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+          'image': '../event2.jpg'
         },
     
         {
           'id': 2,
           'name' : 'Rifat',
           'role': 'Organizer',
-          'image': '../event2.jpg',
-          'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
+          'profilePic': '../event2.jpg',
+          'date': 'Dec 12,2021',
+          'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+          'image': '../event1.jpg'
         }
       ]
 

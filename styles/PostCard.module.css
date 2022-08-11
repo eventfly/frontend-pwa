@@ -49,6 +49,24 @@
     padding: 10px;
 }
 
+.textAreaContainer{
+    width: 100%;
+}
 
 
+.postCommentArea{
+    padding: 10px;
+    min-height: 5px;
+    size: sm;
+}
 
+.textButtonArea{
+    width: 100%;
+    padding: 10px;
+    justify-content : flex-end;
+    
+}
+
+.textButtonContainer{
+    width: 25%;
+}
