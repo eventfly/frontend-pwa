@@ -26,7 +26,7 @@ const PostCard = ({post}) => {
 
                 <Card.Img src={post.image} alt="Card image" className={styles.postBanner} /> 
 
-                <Flex direction='row' >
+                <Flex className={styles.postButtonArea} direction='row' >
                     <Box className={styles.buttonContainer} align='center'>
                         <Button colorScheme='teal' variant='ghost' width='100%'>
                             Like
@@ -43,7 +43,7 @@ const PostCard = ({post}) => {
                     <Avatar src={post.profilePic} />
                     <Spacer />
                     <Box ml='3'className={styles.textAreaContainer} >
-                        <Textarea className={styles.postCommentArea} placeholder='Write a comment...' />  
+                        <Textarea className={styles.postArea} placeholder='Write a comment...' />  
                         
                     </Box>
                     <Spacer />

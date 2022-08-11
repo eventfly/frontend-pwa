@@ -8,7 +8,7 @@ const QuizCard = ({quiz}) => {
 
         <>
 
-             <Card className={"bg-dark text-white " + styles.postCard}>
+             <Card className={"bg-dark text-white " + styles.quizCard}>
 
                 {
                     quiz.questions.map(

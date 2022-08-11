@@ -51,22 +51,35 @@
 
 .textAreaContainer{
     width: 100%;
+    background-color: rgb(53, 52, 52);
+    min-height: 5px;
+    size: sm;
 }
 
 
 .postCommentArea{
     padding: 10px;
-    min-height: 5px;
-    size: sm;
+}
+
+.postArea{
+    padding: 10px;
 }
 
 .textButtonArea{
     width: 100%;
-    padding: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
     justify-content : flex-end;
     
 }
 
 .textButtonContainer{
     width: 25%;
+}
+
+.postButtonArea{
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
 }
