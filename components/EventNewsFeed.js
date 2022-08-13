@@ -1,6 +1,6 @@
 import styles from '../styles/EventNewsFeed.module.css'
 import Link from 'next/link'
-import { Tabs, TabList, TabPanels, Tab, TabPanel, StylesProvider } from '@chakra-ui/react'
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import {Card} from 'react-bootstrap';
 import PostCard from './PostCard';
 import PollCard from './PollCard';
