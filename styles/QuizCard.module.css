@@ -1,64 +1,26 @@
-.post_container{
-    margin-top: 100px;
-}
-
 .quizCard{
     width: 50%;
     /* margin-left: 15%; */
     /* margin-right: 15%; */
     margin: 0 auto;
-    margin-bottom: 75px;
-    margin-top: 75px;
-}
-
-.postBanner{
-    /* display: none; */
-    height: 300px;
-    object-fit: cover;
-}
-
-.buttonContainer {
-    width: 50%;
-}
-
-.title{
-    font-size: 1.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    margin-bottom: 15px;
-}
-.title:hover{
-    color: rgb(60, 60, 227);
-}
-
-.overlay{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    margin-bottom: 7.5%;
+    margin-top: 7.5%;
 }
 
 .quizQuestion{
     font-size: 1.2rem;
-    padding: 10px;
+    padding: 1%;
     background-color: black;
     color: rgb(4, 175, 175);
-    border-radius: 7px;
+    border-radius: 0.7%;
 } 
 
-.postHeader{
-    padding: 10px;
-}
-
-.postDescription{
-    padding: 10px;
-}
-
 .quizOptionsContainer{
-    padding: 10px;
+    padding: 1%;
     background-color: #aaa;
     background-color: rgb(53, 52, 52);
     color: white;
-    border-radius: 7px;
+    border-radius: 0.7%;
 }
 
 

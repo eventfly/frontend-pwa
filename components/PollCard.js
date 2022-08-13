@@ -12,9 +12,6 @@ const PollCard = ({poll}) => {
                 <Box className={styles.pollQuestion}>
                     {poll.question}
                 </Box>
-
-                {/* <Card.Img src={poll.image} alt="Card image" className={styles.postBanner} /> */}
-
                 <Stack className={styles.pollOptionsContainer}>
                     {
                         poll.options.map(
