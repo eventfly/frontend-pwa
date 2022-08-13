@@ -10,16 +10,15 @@
 .quizQuestion{
     font-size: 1.2rem;
     padding: 1%;
-    background-color: black;
+    background-color: rgb(53, 52, 52);
     color: rgb(4, 175, 175);
     border-radius: 0.7%;
 } 
 
 .quizOptionsContainer{
     padding: 1%;
-    background-color: #aaa;
-    background-color: rgb(53, 52, 52);
-    color: white;
+    background-color: white;
+    color: rgb(53, 52, 52);
     border-radius: 0.7%;
 }
 

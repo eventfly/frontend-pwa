@@ -53,7 +53,7 @@ const EventDetails = () => {
       let polls = [
         {
           'id': 1,
-          'question': 'Why are you?',
+          'question': 'Why are you?wwwwwwwwwwwwwwwwwwwwwwwww wwwwwwwwwwwwwwwwwwwwwwwww?',
           'options': [
             'human', 'bird', 'plane'
           ]
