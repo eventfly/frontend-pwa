@@ -22,7 +22,7 @@ const QuizCard = ({quiz}) => {
                                 
                                 <RadioGroup>
                                     <Stack className={styles.quizOptionsContainer}>
-                                    {
+                                    {   
                                         question.options.map(
                                             (option, index) => (
                                             <>

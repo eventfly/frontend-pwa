@@ -12,11 +12,11 @@ const EventNewsFeed = ({posts, polls, quizzes}) => {
 
         <>
 
-            <Tabs isFitted variant='enclosed'>
-                <TabList className={styles.eventNewsFeedTab} mb='1em'>
-                    <Tab>Posts</Tab>
-                    <Tab>Polls</Tab>
-                    <Tab>Quizzes</Tab>
+            <Tabs size="lg" isFitted variant='enclosed' >
+                <TabList className={styles.eventNewsFeedTab} >
+                    <Tab _selected={{fontSize:"x-large", bgColor:'green'}}>Posts</Tab>
+                    <Tab _selected={{fontSize:"x-large", bgColor:'green'}}>Polls</Tab>
+                    <Tab _selected={{fontSize:"x-large", bgColor:'green'}}>Quizzes</Tab>
                 </TabList>
                 <TabPanels>
                     <TabPanel>

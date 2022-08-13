@@ -39,11 +39,40 @@ const PostCard = ({post}) => {
                         </Button>
                     </Box>
                 </Flex>
+                {post.comments.length > 0 &&
+                    <>
+                        {
+                            post.comments.map(
+                                (comment) => (
+                                    <Flex className={styles.getCommentArea}>
+                                        <Avatar src={post.profilePic} />
+                                        <Spacer />
+                                        <Box ml='3'className={styles.textBoxContainer} direction = "column">
+                                                
+                                                <Text className={styles.textNameContainer}>
+                                                    {post.name}
+                                                </Text>
+                                                <Text className={styles.textContainer}>
+                                                    {comment}
+                                                </Text>
+                                        
+                                        </Box>
+                                        <Spacer />
+                                    </Flex>
+                                )
+                            )
+                        }
+                    </>
+                }
+{/*                 
+                {post.comments.length > 0 && <Flex>
+                    Comment ase
+                </Flex>} */}
                 <Flex className={styles.postCommentArea} direction='row'>
                     <Avatar src={post.profilePic} />
                     <Spacer />
                     <Box ml='3'className={styles.textAreaContainer} >
-                        <Textarea className={styles.postArea} placeholder='Write a comment...' />  
+                        <Textarea className={styles.postArea} borderRadius='20px' placeholder='Write a comment...' />  
                         
                     </Box>
                     <Spacer />
