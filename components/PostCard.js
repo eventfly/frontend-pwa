@@ -88,10 +88,11 @@ const PostCard = ({post}) => {
                     
                 </Flex>
                 <Flex className={styles.textButtonArea} >
-                    
-                    <Button className={styles.textButtonContainer} colorScheme='teal' variant='ghost' >
-                        Comment now!
-                    </Button>
+                    <Box className={styles.textButtonContainer} align='center'>
+                        <Button colorScheme='teal' variant='ghost' width='100%'>
+                            Comment!
+                        </Button>
+                    </Box>
     
                 </Flex>
                 
