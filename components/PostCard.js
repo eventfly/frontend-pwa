@@ -81,7 +81,7 @@ const PostCard = ({post}) => {
                     <Avatar src={post.profilePic} />
                     <Spacer />
                     <Box ml='3'className={styles.textAreaContainer} >
-                        <Textarea className={styles.postArea} placeholder='Write a comment...' />  
+                        <Textarea className={styles.postArea} borderRadius='10px' placeholder='Write a comment...' />  
                         
                     </Box>
                     <Spacer />
