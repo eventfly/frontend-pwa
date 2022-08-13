@@ -8,7 +8,7 @@ const PollCard = ({poll}) => {
 
         <>
 
-                <Card className={"bg-dark text-white " + styles.pollCard}> 
+            <Card className={"bg-dark text-white " + styles.pollCard}> 
                 <Box className={styles.pollQuestion}>
                     {poll.question}
                 </Box>

@@ -14,9 +14,9 @@ const EventNewsFeed = ({posts, polls, quizzes}) => {
 
             <Tabs size="lg" isFitted variant='enclosed' >
                 <TabList className={styles.eventNewsFeedTab} >
-                    <Tab _selected={{fontSize:"x-large", bgColor:'green'}}>Posts</Tab>
-                    <Tab _selected={{fontSize:"x-large", bgColor:'green'}}>Polls</Tab>
-                    <Tab _selected={{fontSize:"x-large", bgColor:'green'}}>Quizzes</Tab>
+                    <Tab _selected={{fontSize:"x-large", bgColor:'green', color:'white'}} _hover={{fontSize:"x-large"}}>Posts</Tab>
+                    <Tab _selected={{fontSize:"x-large", bgColor:'green', color:'white'}} _hover={{fontSize:"x-large"}}>Polls</Tab>
+                    <Tab _selected={{fontSize:"x-large", bgColor:'green', color:'white'}} _hover={{fontSize:"x-large"}}>Quizzes</Tab>
                 </TabList>
                 <TabPanels>
                     <TabPanel>

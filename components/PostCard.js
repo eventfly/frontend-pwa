@@ -1,30 +1,43 @@
 import styles from '../styles/PostCard.module.css'
 import Link from 'next/link'
 import {Card} from 'react-bootstrap';
-import {Flex, Avatar, Box, Text, Spacer, Button, Textarea} from "@chakra-ui/react";
+import {Image, Flex, Avatar, Box, Text, Spacer, Button, Textarea} from "@chakra-ui/react";
 
 const PostCard = ({post}) => {
     return ( 
 
         <>
 
-             <Card className={"bg-dark text-white " + styles.postCard}> 
+            <Card className={"bg-dark text-white " + styles.postCard}> 
                 <Flex className={styles.postHeader}>
                     <Avatar src={post.profilePic} />
                     <Box ml='3'>
                         <Text fontWeight='bold'>
-                        {post.name}
-                       
+                            {post.name}
                         </Text>
-                        <Text fontSize='sm'> {post.role}</Text>
+                        <Text fontSize='sm'> 
+                            {post.role} &bull; {post.date}
+                        </Text>
                     </Box>
                 </Flex>
 
-                <Box className={styles.postDescription}>
-                    {post.description}
-                </Box>
+                {post.description != '' &&
+                    <>
+                        <Box className={styles.postDescription}>
+                            {post.description}
+                        </Box>
+                    </>
 
-                <Card.Img src={post.image} alt="Card image" className={styles.postBanner} /> 
+                }
+
+                {post.image != '' &&
+                    <>
+                        <Image src={post.image} alt="image" className={styles.postBanner}/>
+                    </>
+
+                }
+
+                 
 
                 <Flex className={styles.postButtonArea} direction='row' >
                     <Box className={styles.buttonContainer} align='center'>
@@ -64,10 +77,6 @@ const PostCard = ({post}) => {
                         }
                     </>
                 }
-{/*                 
-                {post.comments.length > 0 && <Flex>
-                    Comment ase
-                </Flex>} */}
                 <Flex className={styles.postCommentArea} direction='row'>
                     <Avatar src={post.profilePic} />
                     <Spacer />
@@ -87,7 +96,7 @@ const PostCard = ({post}) => {
                 </Flex>
                 
             
-             </Card> 
+            </Card> 
 
         </>
 

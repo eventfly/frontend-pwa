@@ -8,7 +8,7 @@ const QuizCard = ({quiz}) => {
 
         <>
 
-             <Card className={"bg-dark text-white " + styles.quizCard}>
+            <Card className={"bg-dark text-white " + styles.quizCard}>
 
                 {
                     quiz.questions.map(
@@ -41,14 +41,10 @@ const QuizCard = ({quiz}) => {
                         )
                     )
                 }
+            
                 
                 
-
-                {/* <Card.Img src={poll.image} alt="Card image" className={styles.postBanner} /> */}
-
-                
-                
-             </Card> 
+            </Card> 
         </>
 
     );
