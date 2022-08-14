@@ -59,7 +59,8 @@ const QuizCard = ({quiz}) => {
                                     </>
                                 )
                             )
-                        }           
+                        }
+                        <Button colorScheme='teal'  width='100%'>Submit</Button>           
                         </PopoverBody>
                     </PopoverContent>
                 </Popover>

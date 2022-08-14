@@ -41,6 +41,7 @@ const PollCard = ({poll}) => {
                                 )
                             }                   
                         </Stack>
+                        <Button colorScheme='teal' width='100%'>Submit</Button>
                         </PopoverBody>
                     </PopoverContent>
                 </Popover>
