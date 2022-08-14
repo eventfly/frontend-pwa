@@ -2,10 +2,10 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import EventCard from '../components/EventCard'
-import PostCard from '../components/PostCard'
 import FormTitle from "../components/Form/FormTitle";
 import { useRouter} from 'next/router'
 import {useState, useEffect} from 'react'
+import {Container, VStack } from '@chakra-ui/react'
 
 
 
@@ -84,8 +84,17 @@ export default function Home() {
   return (
       <div className="page_style">
         <FormTitle title="Newsfeed" />
-        <EventCard event={events[0]}/>
-        <EventCard event={events[1]}/>
+        <VStack>
+          <Container maxW='md' >
+              {
+                  events.map(
+                      (event) => (
+                        <EventCard event={event}/>
+                      )
+                  )
+              } 
+          </Container>
+        </VStack>
       </div>
   )
 }

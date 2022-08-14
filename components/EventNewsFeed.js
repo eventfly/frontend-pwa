@@ -1,6 +1,6 @@
 import styles from '../styles/EventNewsFeed.module.css'
 import Link from 'next/link'
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+import {Container, Tabs, TabList, TabPanels, Tab, TabPanel, VStack } from '@chakra-ui/react'
 import {Card} from 'react-bootstrap';
 import PostCard from './PostCard';
 import PollCard from './PollCard';
@@ -20,16 +20,23 @@ const EventNewsFeed = ({posts, polls, quizzes}) => {
                 </TabList>
                 <TabPanels>
                     <TabPanel>
-                        {
-                            posts.map(
-                                (post) => (
-                                    <PostCard post={post}/>
+                    <VStack>
+                        <Container maxW='md' >
+                            {
+                                posts.map(
+                                    (post) => (
+                                        <PostCard post={post}/>
+                                    )
                                 )
-                            )
-                        }
+                            } 
+                        </Container>
+                    </VStack>
+                        
                         
                     </TabPanel>
                     <TabPanel>
+                    <VStack>
+                        <Container maxW='md' >
                         {
                             polls.map(
                                 (poll) => (
@@ -37,8 +44,12 @@ const EventNewsFeed = ({posts, polls, quizzes}) => {
                                 )
                             )
                         }
+                        </Container>
+                    </VStack>
                     </TabPanel>
                     <TabPanel>
+                    <VStack>
+                        <Container maxW='md' >
                         {
                             quizzes.map(
                                 (quiz) => (
@@ -46,6 +57,8 @@ const EventNewsFeed = ({posts, polls, quizzes}) => {
                                 )
                             )
                         }
+                        </Container>
+                    </VStack>
                     </TabPanel>
                 </TabPanels>
             </Tabs>

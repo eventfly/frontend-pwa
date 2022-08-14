@@ -1,6 +1,4 @@
 import styles from '../styles/QuizCard.module.css'
-import Link from 'next/link'
-import {Card} from 'react-bootstrap';
 import {Stack, RadioGroup, Radio, Checkbox, Avatar, Box, Text, Spacer, Button} from "@chakra-ui/react";
 import {
     Popover, PopoverTrigger,PopoverContent,PopoverHeader,PopoverBody,
@@ -12,7 +10,7 @@ const QuizCard = ({quiz}) => {
 
         <>
 
-            <Card className={"bg-dark text-white " + styles.quizCard}>
+            <Box className={"bg-dark text-white " + styles.quizCard}>
 
                 <Popover>
                     <Stack direction='column'>
@@ -99,7 +97,7 @@ const QuizCard = ({quiz}) => {
             
                 
                 
-            </Card> 
+            </Box> 
         </>
 
     );

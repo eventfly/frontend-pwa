@@ -1,14 +1,13 @@
 import styles from '../styles/PostCard.module.css'
-import Link from 'next/link'
-import {Card} from 'react-bootstrap';
-import {Image, Flex, Avatar, Box, Text, Spacer, Button, Textarea} from "@chakra-ui/react";
+import {Container, Image, Flex, Avatar, Box, Text, Spacer, Button, Textarea} from "@chakra-ui/react";
 
 const PostCard = ({post}) => {
     return ( 
 
         <>
+        
 
-            <Card className={"bg-dark text-white " + styles.postCard}> 
+            <Box className={"bg-dark text-white " + styles.postCard}> 
                 <Flex className={styles.postHeader}>
                     <Avatar src={post.profilePic} />
                     <Box ml='3'>
@@ -32,7 +31,7 @@ const PostCard = ({post}) => {
 
                 {post.image != '' &&
                     <>
-                        <Image src={post.image} alt="image" className={styles.postBanner}/>
+                        <Image src={post.image} alt="image" className={styles.postBanner} width='100%'/>
                     </>
 
                 }
@@ -97,7 +96,7 @@ const PostCard = ({post}) => {
                 </Flex>
                 
             
-            </Card> 
+            </Box> 
 
         </>
 
