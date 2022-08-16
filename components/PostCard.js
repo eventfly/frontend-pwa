@@ -1,5 +1,8 @@
 import styles from '../styles/PostCard.module.css'
-import {Container, Image, Flex, Avatar, Box, Text, Spacer, Button, Textarea} from "@chakra-ui/react";
+import {Stack, Image, Flex, Avatar, Box, Text, Spacer, Button, Textarea, Center} from "@chakra-ui/react";
+import {
+    Popover, PopoverTrigger,PopoverContent,PopoverArrow,
+  } from '@chakra-ui/react'
 
 const PostCard = ({post}) => {
     return ( 
@@ -56,6 +59,7 @@ const PostCard = ({post}) => {
                         {
                             post.comments.map(
                                 (comment) => (
+                                    <>
                                     <Flex className={styles.getCommentArea}>
                                         <Avatar src={post.profilePic} />
                                         <Spacer />
@@ -67,10 +71,52 @@ const PostCard = ({post}) => {
                                                 <Text className={styles.textContainer}>
                                                     {comment}
                                                 </Text>
+                                                
                                         
                                         </Box>
+                                        
                                         <Spacer />
+                                        <Center>
+                                        <Popover>
+                                        <PopoverTrigger>
+                                            <Button colorScheme='teal' variant='ghost' width='25%' size='xs' alignContent='center'>
+                                                ...
+                                            </Button>
+                                        </PopoverTrigger>
+                                        <PopoverContent backgroundColor='#292928'>
+                                            <PopoverArrow />
+                                            <Stack direction='column'>
+                                            <Button colorScheme='teal' variant='ghost' width='100%' size='sm'>
+                                                Edit
+                                            </Button>
+                                            <Button colorScheme='teal' variant='ghost' width='100%' size='sm'>
+                                                Delete
+                                            </Button>
+                                            </Stack>
+                                        </PopoverContent>
+                                        </Popover>
+                                            
+                                            
+                                        </Center>
+                                            
                                     </Flex>
+                                    <Flex justifyContent='flex-end'>
+                                        <Stack direction='row'>
+                                            <Button colorScheme='teal' variant='link' width='25%' size='xs'>
+                                                Like
+                                            </Button>
+                                            <Button colorScheme='teal' variant='link' width='25%' size='xs'>
+                                                Reply
+                                            </Button>
+                                            <Center>
+                                                <Text fontSize='xs' >
+                                                    Time
+                                                </Text>
+                                            </Center>
+                                            
+                                        </Stack>
+                                    </Flex>
+                                    </>
                                 )
                             )
                         }
