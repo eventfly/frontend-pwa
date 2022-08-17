@@ -18,8 +18,11 @@ const EventNewsFeed = ({posts}) => {
                         <Container maxW='2xl' >
                             {
                                 posts.map(
-                                    (post) => (
-                                        <PostCard post={post}/>
+                                    (post,i) => (
+                                        <div key={i}>
+                                            <PostCard post={post}/>  
+                                        </div>
+                                        
                                     )
                                 )
                             } 

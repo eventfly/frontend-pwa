@@ -22,8 +22,8 @@ const QuizCard = ({post}) => {
                     <PopoverBody>
                     {
                         post.questions.map(
-                            (question, index) => (
-                                <>
+                            (question, i) => (
+                                <div key={i}>
                                 {/* { console.log(`outer ${index}`)} */}
 
                                     <Box className={styles.quizQuestion}>
@@ -34,20 +34,20 @@ const QuizCard = ({post}) => {
                                         <Stack className={styles.quizOptionsContainer}>
                                         {   
                                             question.answers.map(
-                                                (answer, index) => (
-                                                <>
+                                                (answer, j) => (
+                                                <div key={j}>
                                                     {/* { console.log(`    inner ${index}`)} */}
 
                                                 <Radio>
                                                     {answer.answer}
                                                 </Radio>
-                                                </>
+                                                </div>
                                                 )
                                             )
                                         }                   
                                         </Stack>
                                     </RadioGroup>                        
-                                </>
+                                </div>
                             )
                         )
                     }

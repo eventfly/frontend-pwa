@@ -22,12 +22,12 @@ const PollCard = ({post}) => {
                     <Stack className={styles.pollOptionsContainer}>
                         {
                             post.poll_options.map(
-                                (options) => (
-                                <>
-                                <Checkbox>
-                                    {options.option}
-                                </Checkbox>
-                                </>
+                                (options,i) => (
+                                <div key={i}>
+                                    <Checkbox>
+                                        {options.option}
+                                    </Checkbox>
+                                </div>
                                 )
                             )
                         }                   

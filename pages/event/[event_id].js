@@ -232,7 +232,7 @@ const EventDetails = () => {
           'content': 'Take the quiz!',
           'created_at': 'Dec 12,2020',
           'updated_at': 'Dec 12,2021',
-          'like_count': 5,
+          'like_count': 1,
           'view_count': 10,
           'is_deleted': false,
           'medias':[
@@ -277,7 +277,7 @@ const EventDetails = () => {
               'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
               'created_at': 'Dec 12,2020',
               'updated_at': 'Dec 12,2021',
-              'like_count': 5,
+              'like_count': 0,
               'is_deleted': false
             },
             {

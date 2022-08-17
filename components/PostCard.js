@@ -4,15 +4,18 @@ import {
     Popover, PopoverTrigger,PopoverContent,PopoverHeader,PopoverBody,
     PopoverFooter,PopoverArrow,PopoverCloseButton,PopoverAnchor,
 } from '@chakra-ui/react'
-import {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react';
+import { postData } from '../services/HttpService';
+import {storeData_Local} from '../services/StorageService';
 import PollCard from './PollCard';
 import QuizCard from './QuizCard';
 
 
+
 const PostCard = ({post}) => {
     const [comment, setComment] = useState('');
-    const [postLike, setPostLike] = useState(0);
-    const [commentLike, setCommentLike] = useState(0);
+    const [postLike, setPostLike] = useState(post.like_count);
+    const [commentLike, setCommentLike] = useState([]);
 
     const handleCommentChange = (e) => {
       let inputComment = e.target.value;
@@ -20,7 +23,19 @@ const PostCard = ({post}) => {
     }
 
     const handlePostLikeCount = () => {
+        setPostLike(postLike + 1);
 
+        const postUrl = '';
+        const payload = {
+            id: post._id,
+            likeCount: postLike
+        }
+
+        postData(postUrl, payload)
+        .then((data) => {
+            console.log("Response data:", data);
+            storeData_Local("token", data.token);
+        });
     }
 
     const handleCommentLikeCount = () => {
@@ -58,8 +73,8 @@ const PostCard = ({post}) => {
                             <>
                                 {   
                                     post.medias.map(
-                                        (media) => (
-                                            <>
+                                        (media, i) => (
+                                            <div key={i}>
                                                 <Image src={media.url} alt="image" className={styles.postBanner} width='100%'/>
                                                 <Spacer/>
                                                 {media.caption != '' &&
@@ -71,7 +86,7 @@ const PostCard = ({post}) => {
                                                         </Box>
                                                     </>
                                                 }
-                                            </>
+                                            </div>
                                         )
                                     )
 
@@ -92,7 +107,22 @@ const PostCard = ({post}) => {
                             </>
 
                         }
-                        
+
+                        <Flex className={styles.postButtonArea} direction='row' >
+                            <Box className={styles.buttonContainer} align='left'>
+                                {post.like_count > 0 &&
+                                    <>
+                                        {post.like_count} {post.like_count > 1 ? 'likes' : 'like'}
+                                    </>
+
+                                }
+                                
+                            </Box>
+                            <Spacer />
+                            <Box className={styles.buttonContainer} align='right'>
+                                comments
+                            </Box>
+                        </Flex>
                         
 
                         <Flex className={styles.postButtonArea} direction='row' >
@@ -112,8 +142,8 @@ const PostCard = ({post}) => {
                             <>
                                 {
                                     post.comments.map(
-                                        (comment) => (
-                                            <>
+                                        (comment, i) => (
+                                            <div key={i}>
                                             {comment.is_deleted != true &&
                                                 <>
                                                     <Flex className={styles.getCommentArea}>
@@ -128,6 +158,15 @@ const PostCard = ({post}) => {
                                                                     {comment.content}
                                                                 </Text>
                                                         </Box>
+                                                        {comment.like_count > 0 &&
+                                                            <>
+                                                                <Box backgroundColor='gray' width='10%' size='xs' alignSelf='flex-end' borderRadius='20px' align='center'>
+                                                                    {comment.like_count}
+                                                                </Box>
+                                                            </>
+
+                                                        }
+                                                        
                                                         
                                                         <Spacer />
                                                         <Center>
@@ -170,7 +209,7 @@ const PostCard = ({post}) => {
                                                     </Flex>
                                                 </>
                                             }
-                                            </>
+                                            </div>
                                             
                                         )
                                     )
