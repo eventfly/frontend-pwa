@@ -42,7 +42,7 @@ import Link from "next/link";
 const LinkItems = [
   {
     name: "Home",
-    link: "",
+    link: "/",
     icon: FiHome
   },
   {
@@ -105,11 +105,15 @@ const SidebarContent = ({ onClose, ...rest }) => {
         </Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
-      {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
-          <Link href={"/"}>{link.name}</Link>
-        </NavItem>
-      ))}
+      {
+        LinkItems.map((each) => (
+          <Link href={ each.link }>
+              <NavItem key={ each.name } icon={ each.icon }>
+              { each.name }
+              </NavItem>
+          </Link>
+        ))
+      }
     </Box>
   );
 };
