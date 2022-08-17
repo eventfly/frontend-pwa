@@ -32,6 +32,7 @@ import {
   FiMenu,
   FiBell,
   FiChevronDown,
+  FiSearch,
 } from 'react-icons/fi';
 
 import { IconType } from 'react-icons';
@@ -39,12 +40,23 @@ import { ReactText } from 'react';
 import Link from "next/link";
 
 const LinkItems = [
-  { name: 'Home', icon: FiHome },
-  { name: 'Trending', icon: FiTrendingUp },
-  { name: 'Explore', icon: FiCompass },
-  { name: 'Favourites', icon: FiStar },
-  { name: 'Settings', icon: FiSettings },
+  {
+    name: "Home",
+    link: "",
+    icon: FiHome
+  },
+  {
+    name: "Search",
+    link: "search",
+    icon: FiSearch
+  },
+  {
+    name: "Settings",
+    link: "settings",
+    icon: FiSettings
+  }
 ];
+
 
 export default function SideNavBar({ children, currentUser }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
