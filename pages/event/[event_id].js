@@ -15,22 +15,6 @@ const EventDetails = () => {
 
     const [event, setEvent] = useState(null);
     const [loaded, setLoaded] = useState(false);
-    const [comment, setComment] = useState('');
-    const [postLike, setPostLike] = useState(0);
-    const [commentLike, setCommentLike] = useState(0);
-
-    const handleCommentChange = (e) => {
-      let inputComment = e.target.value;
-      setComment(inputComment)
-    }
-
-    const handlePostLikeCount = () => {
-
-    }
-
-    const handleCommentLikeCount = () => {
-
-    }
 
     const getEventData = ()=> {
       const { event_id } = router.query;
@@ -364,7 +348,7 @@ const EventDetails = () => {
 
             <ImageHeader />
             <EventDesc />
-            <EventNewsFeed posts={posts} handleCommentChange={handleCommentChange} handleCommentLikeCount={handleCommentLikeCount} handlePostLikeCount={handlePostLikeCount}/>
+            <EventNewsFeed posts={posts} />
             <SponsorContainer sponsors={sponsors} />
             <FAQ faqs={faqs} />
         

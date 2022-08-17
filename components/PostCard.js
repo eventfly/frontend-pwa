@@ -3,12 +3,29 @@ import {Stack, Image, Flex, Avatar, Box, Text, Spacer, Button, Textarea, Center,
 import {
     Popover, PopoverTrigger,PopoverContent,PopoverHeader,PopoverBody,
     PopoverFooter,PopoverArrow,PopoverCloseButton,PopoverAnchor,
-  } from '@chakra-ui/react'
+} from '@chakra-ui/react'
+import {useState, useEffect} from 'react'
 import PollCard from './PollCard';
 import QuizCard from './QuizCard';
 
 
-const PostCard = ({post, handleCommentChange, handleCommentLikeCount, handlePostLikeCount}) => {
+const PostCard = ({post}) => {
+    const [comment, setComment] = useState('');
+    const [postLike, setPostLike] = useState(0);
+    const [commentLike, setCommentLike] = useState(0);
+
+    const handleCommentChange = (e) => {
+      let inputComment = e.target.value;
+      setComment(inputComment)
+    }
+
+    const handlePostLikeCount = () => {
+
+    }
+
+    const handleCommentLikeCount = () => {
+
+    }
     return ( 
         <>
             {post.is_deleted != true &&

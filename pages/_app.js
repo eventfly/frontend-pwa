@@ -3,7 +3,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import Layout from '../layouts/Default';
 import NoAuthLayout from '../layouts/NoAuth';
 import { useEffect } from "react";
-import buildClient from '../api/build-client';
+// import buildClient from '../api/client';
 
 import axios from 'axios';
 
