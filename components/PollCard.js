@@ -43,3 +43,7 @@ const PollCard = ({post}) => {
 }
  
 export default PollCard;
+
+
+
+   

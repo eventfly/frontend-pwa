@@ -1,30 +1,29 @@
 import styles from "../styles/EventCard.module.css";
-import Link from "next/link";
-import { Card } from "react-bootstrap";
+import {Stack, Checkbox, Avatar, Box, Text, Spacer, Button, Link} from "@chakra-ui/react";
 
 const EventCard = ({ event }) => {
     return (
-        <Card className={"bg-dark text-white " + styles.eventCard}>
-            <Card.Img
-                src={event.image}
-                alt="Card image"
-                className={styles.eventBanner}
-            />
+        <Box className={"bg-dark text-white " + styles.eventCard} backgroundImage={event.image}>
 
-            <Card.ImgOverlay className={styles.overlay}>
-                <Card.Text className={styles.date}> {event.date} </Card.Text>
-
-                <Link href={"/event/" + event.url}>
-                    <Card.Title className={styles.title}>
-                        {event.title}
-                    </Card.Title>
+            <Stack direction='column'>
+                <Spacer/>
+                <Spacer/>
+                <Spacer/>
+                <Text fontSize='sm'>
+                    {event.date}
+                </Text>
+                <Link href={"/event/" + event.url} fontSize='xx-large'>
+                    {event.title}
                 </Link>
-
-                <Card.Text className={styles.description}>
+                <Text >
                     {event.description}
-                </Card.Text>
-            </Card.ImgOverlay>
-        </Card>
+                </Text>
+
+            </Stack>
+            
+        
+            
+        </Box>
     );
 };
 

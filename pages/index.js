@@ -85,7 +85,7 @@ export default function Home() {
       <div className="page_style">
         <FormTitle title="Newsfeed" />
         <VStack>
-          <Container maxW='md' >
+          <Container maxW='2xl' >
               {
                   events.map(
                       (event) => (
