@@ -15,13 +15,13 @@ const PostCard = ({post, handleCommentChange, handleCommentLikeCount, handlePost
                 <>
                     <Box className={"bg-dark text-white " + styles.postCard}> 
                         <Flex className={styles.postHeader}>
-                            <Avatar src={post.creator.creator_avatar} />
+                            <Avatar src={post.creator.avatar} />
                             <Box ml='3'>
                                 <Text fontWeight='bold'>
-                                    {post.creator.creator_name}
+                                    {post.creator.name}
                                 </Text>
                                 <Text fontSize='sm'> 
-                                    {post.creator.creator_role} &bull; {post.created_at}
+                                    {post.creator.role} &bull; {post.created_at}
                                 </Text>
                             </Box>
                         </Flex>
@@ -100,12 +100,12 @@ const PostCard = ({post, handleCommentChange, handleCommentLikeCount, handlePost
                                             {comment.is_deleted != true &&
                                                 <>
                                                     <Flex className={styles.getCommentArea}>
-                                                        <Avatar src={comment.creator.creator_avatar} />
+                                                        <Avatar src={comment.creator.avatar} />
                                                         <Spacer />
                                                         <Box ml='3'className={styles.textBoxContainer} direction = "column">
                                                                 
                                                                 <Text className={styles.textNameContainer}>
-                                                                    {comment.creator.creator_name}
+                                                                    {comment.creator.name}
                                                                 </Text>
                                                                 <Text className={styles.textContainer}>
                                                                     {comment.content}
