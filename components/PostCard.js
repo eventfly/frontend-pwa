@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react'
 import {useState, useEffect} from 'react';
 import { postData } from '../services/HttpService';
-import {storeData_Local} from '../services/StorageService';
+import {getData_Local, storeData_Local} from '../services/StorageService';
 import PollCard from './PollCard';
 import QuizCard from './QuizCard';
 
@@ -14,28 +14,44 @@ import QuizCard from './QuizCard';
 
 const PostCard = ({post}) => {
     const [comment, setComment] = useState('');
-    const [postLike, setPostLike] = useState(post.like_count);
-    const [commentLike, setCommentLike] = useState([]);
 
     const handleCommentChange = (e) => {
-      let inputComment = e.target.value;
-      setComment(inputComment)
-    }
+        let inputComment = e.target.value;
 
-    const handlePostLikeCount = () => {
-        setPostLike(postLike + 1);
+        const userID = getData_Local(""); //need to assign userID in StorageService
+        setComment(inputComment)
 
-        const postUrl = '';
+        const commentUrl = '';
         const payload = {
-            id: post._id,
-            likeCount: postLike
+            postID: post._id,
+            userID: userID,
+            comment: comment
         }
 
-        postData(postUrl, payload)
+        postData(commentUrl, payload)
         .then((data) => {
             console.log("Response data:", data);
             storeData_Local("token", data.token);
+        }).catch((err) => {
+            console.log(err);
         });
+
+    }
+
+    const handlePostLikeCount = () => {
+        // setPostLike(postLike + 1);
+
+        // const postUrl = '';
+        // const payload = {
+        //     id: post._id,
+        //     likeCount: postLike
+        // }
+
+        // postData(postUrl, payload)
+        // .then((data) => {
+        //     console.log("Response data:", data);
+        //     storeData_Local("token", data.token);
+        // });
     }
 
     const handleCommentLikeCount = () => {
@@ -120,7 +136,12 @@ const PostCard = ({post}) => {
                             </Box>
                             <Spacer />
                             <Box className={styles.buttonContainer} align='right'>
-                                comments
+                                {post.comments.length > 0 &&
+                                    <>
+                                        {post.comments.length} {post.comments.length > 1 ? 'comments' : 'comment'}
+                                    </>
+
+                                }
                             </Box>
                         </Flex>
                         
