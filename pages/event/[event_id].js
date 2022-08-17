@@ -15,12 +15,31 @@ const EventDetails = () => {
 
     const [event, setEvent] = useState(null);
     const [loaded, setLoaded] = useState(false);
-    let [comment, setComment] = useState('')
+    const [comment, setComment] = useState('');
 
-    let handleCommentChange = (e) => {
-      let inputComment = e.target.value
+    const handleCommentChange = (e) => {
+      let inputComment = e.target.value;
       setComment(inputComment)
     }
+
+    const handlePostLikeCount = () => {
+
+    }
+
+    const handleCommentLikeCount = () => {
+
+    }
+
+    const getEventData = ()=> {
+      const { event_id } = router.query;
+      console.log("event_id: ", event_id)
+    }
+
+    useEffect(()=>{
+        if (!loaded) {
+            getEventData();
+        }
+    });
 
     let posts = [
         {
@@ -33,7 +52,22 @@ const EventDetails = () => {
           'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
           'created_at': 'Dec 12,2020',
           'updated_at': 'Dec 12,2021',
-          'image': '../event2.jpg',
+          'like_count': 5,
+          'view_count': 10,
+          'is_deleted': false,
+          'medias':[
+            {
+              'url': '../event2.jpg',
+              'type':'',
+              'caption': 'coverphoto'
+            },
+            {
+              'url': '../event1.jpg',
+              'type':'',
+              'caption': 'Profile photo'
+            }
+
+          ],
           'questions': [
             {
                 'question': 'why not?',
@@ -59,7 +93,32 @@ const EventDetails = () => {
             }   
           ],
           'comments': [
-            'humanijoooooiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnniiiiiiiiiiiiiiiiiiiiiiioooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooobbbbbbbbbbbjjjj', 'bird', 'plane'
+            {
+              'creator': {
+                'creator_id': 1,
+                'creator_name': 'Purba',
+                'creator_role': 'Organizer',
+                'creator_avatar': '../event1.jpg'
+              },          
+              'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+              'created_at': 'Dec 12,2020',
+              'updated_at': 'Dec 12,2021',
+              'like_count': 5,
+              'is_deleted': false
+            },
+            {
+              'creator': {
+                'creator_id': 2,
+                'creator_name': 'Rabid',
+                'creator_role': 'Organizer',
+                'creator_avatar': '../event2.jpg'
+              },          
+              'content': 'hello.',
+              'created_at': 'Dec 12,2020',
+              'updated_at': 'Dec 12,2021',
+              'like_count': 5,
+              'is_deleted': false
+            }
           ]
         },
         {
@@ -72,13 +131,53 @@ const EventDetails = () => {
           'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
           'created_at': 'Dec 12,2020',
           'updated_at': 'Dec 12,2021',
-          'image': '../event2.jpg',
+          'like_count': 5,
+          'view_count': 10,
+          'is_deleted': false,
+          'medias':[
+            {
+              'url': '../event2.jpg',
+              'type':'',
+              'caption': ''
+            },
+            {
+              'url': '../event1.jpg',
+              'type':'',
+              'caption': ''
+            }
+
+          ],
           'questions': [
           ],
           'poll_options': [  
           ],
           'comments': [
-            'humanijoooooiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnniiiiiiiiiiiiiiiiiiiiiiioooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooobbbbbbbbbbbjjjj', 'bird', 'plane'
+            {
+              'creator': {
+                'creator_id': 1,
+                'creator_name': 'Purba',
+                'creator_role': 'Organizer',
+                'creator_avatar': '../event1.jpg'
+              },          
+              'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+              'created_at': 'Dec 12,2020',
+              'updated_at': 'Dec 12,2021',
+              'like_count': 5,
+              'is_deleted': false
+            },
+            {
+              'creator': {
+                'creator_id': 2,
+                'creator_name': 'Rabid',
+                'creator_role': 'Organizer',
+                'creator_avatar': '../event2.jpg'
+              },          
+              'content': 'hello.',
+              'created_at': 'Dec 12,2020',
+              'updated_at': 'Dec 12,2021',
+              'like_count': 5,
+              'is_deleted': false
+            }
           ]
         },
         {
@@ -91,7 +190,11 @@ const EventDetails = () => {
           'content': 'POLL QUESTION: Who are you?',
           'created_at': 'Dec 12,2020',
           'updated_at': 'Dec 12,2021',
-          'image': '',
+          'like_count': 5,
+          'view_count': 10,
+          'is_deleted': false,
+          'medias':[
+          ],
           'questions': [
           ],
           'poll_options': [
@@ -105,7 +208,32 @@ const EventDetails = () => {
             }   
           ],
           'comments': [
-            'humanijoooooiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnniiiiiiiiiiiiiiiiiiiiiiioooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooobbbbbbbbbbbjjjj', 'bird', 'plane'
+            {
+              'creator': {
+                'creator_id': 1,
+                'creator_name': 'Purba',
+                'creator_role': 'Organizer',
+                'creator_avatar': '../event1.jpg'
+              },          
+              'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+              'created_at': 'Dec 12,2020',
+              'updated_at': 'Dec 12,2021',
+              'like_count': 5,
+              'is_deleted': false
+            },
+            {
+              'creator': {
+                'creator_id': 2,
+                'creator_name': 'Rabid',
+                'creator_role': 'Organizer',
+                'creator_avatar': '../event2.jpg'
+              },          
+              'content': 'hello.',
+              'created_at': 'Dec 12,2020',
+              'updated_at': 'Dec 12,2021',
+              'like_count': 5,
+              'is_deleted': false
+            }
           ]
         },
         {
@@ -118,7 +246,11 @@ const EventDetails = () => {
           'content': 'Take the quiz!',
           'created_at': 'Dec 12,2020',
           'updated_at': 'Dec 12,2021',
-          'image': '',
+          'like_count': 5,
+          'view_count': 10,
+          'is_deleted': false,
+          'medias':[
+          ],
           'questions': [
             {
                 'question': 'why not?',
@@ -149,66 +281,35 @@ const EventDetails = () => {
           'poll_options': [
           ],
           'comments': [
-            'humanijoooooiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnniiiiiiiiiiiiiiiiiiiiiiioooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooobbbbbbbbbbbjjjj', 'bird', 'plane'
-          ]
-        }
-
-      ]
-
-      let polls = [
-        {
-          'id': 1,
-          'question': 'Why are you?wwwwwwwwwwwwwwwwwwwwwwwww wwwwwwwwwwwwwwwwwwwwwwwww?',
-          'options': [
-            'human', 'bird', 'plane'
-          ]
-        },
-    
-        {
-          'id': 2,
-          'question': 'Why are you?',
-          'options': [
-            'human', 'bird', 'plane'
-          ]
-        }
-      ]
-
-      let quizzes = [
-        {
-          'id': 1,
-          'questions': [
             {
-                'question': 'why not?',
-                'options': [
-                    'human', 'bird', 'plane'
-                ]
+              'creator': {
+                'creator_id': 1,
+                'creator_name': 'Purba',
+                'creator_role': 'Organizer',
+                'creator_avatar': '../event1.jpg'
+              },          
+              'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+              'created_at': 'Dec 12,2020',
+              'updated_at': 'Dec 12,2021',
+              'like_count': 5,
+              'is_deleted': false
             },
             {
-                'question': 'why dees?',
-                'options': [
-                    'bird', 'plane'
-                ]
-            }
-          ]
-        },
-    
-        {
-          'id': 2,
-          'questions': [
-            {
-                'question': 'why dees?',
-                'options': [
-                    'bird', 'plane'
-                ]
-            },
-            {
-                'question': 'why not?',
-                'options': [
-                    'human', 'bird', 'plane'
-                ]
+              'creator': {
+                'creator_id': 2,
+                'creator_name': 'Rabid',
+                'creator_role': 'Organizer',
+                'creator_avatar': '../event2.jpg'
+              },          
+              'content': 'hello.',
+              'created_at': 'Dec 12,2020',
+              'updated_at': 'Dec 12,2021',
+              'like_count': 5,
+              'is_deleted': true
             }
           ]
         }
+
       ]
 
     let sponsors = [
@@ -253,16 +354,6 @@ const EventDetails = () => {
         },
     ]
 
-    const getEventData = ()=> {
-        const { event_id } = router.query;
-        console.log("event_id: ", event_id)
-    }
-
-    useEffect(()=>{
-        if (!loaded) {
-            getEventData();
-        }
-    });
 
 
     return ( 
@@ -271,7 +362,7 @@ const EventDetails = () => {
 
             <ImageHeader />
             <EventDesc />
-            <EventNewsFeed posts={posts}/>
+            <EventNewsFeed posts={posts} handleCommentChange={handleCommentChange} handleCommentLikeCount={handleCommentLikeCount} handlePostLikeCount={handlePostLikeCount}/>
             <SponsorContainer sponsors={sponsors} />
             <FAQ faqs={faqs} />
         
