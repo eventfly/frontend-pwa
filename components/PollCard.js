@@ -5,61 +5,38 @@ import {
     PopoverFooter,PopoverArrow,PopoverCloseButton,PopoverAnchor,
   } from '@chakra-ui/react'
 
-const PollCard = ({poll}) => {
+const PollCard = ({post}) => {
     return ( 
 
         <>
-
-            <Box className={"bg-dark text-white " + styles.pollCard}> 
-                <Popover>
-                    <Stack direction='column'>
-                       <Box className={styles.pollQuestion}>
-                            {poll.question}
-                        </Box>
-                        <PopoverTrigger>
-                            <Button colorScheme='teal' variant='ghost'>Vote!</Button>
-                        </PopoverTrigger> 
-                    </Stack>
-                    
-                    <PopoverContent>
-                        <PopoverArrow />
-                        <PopoverCloseButton />
-                        <PopoverHeader backgroundColor='teal'>{poll.question}</PopoverHeader>
-                        <PopoverBody>
-                        <Stack className={styles.pollOptionsContainer}>
-                            {
-                                poll.options.map(
-                                    (option) => (
-                                        <>
-                                    <Checkbox>
-                                        {option}
-                                    </Checkbox>
-                                    </>
-                                    )
-                                )
-                            }                   
-                        </Stack>
-                        <Button colorScheme='teal' width='100%'>Submit</Button>
-                        </PopoverBody>
-                    </PopoverContent>
-                </Popover>
-                {/* <Box className={styles.pollQuestion}>
-                    {poll.question}
-                </Box>
-                <Stack className={styles.pollOptionsContainer}>
-                    {
-                        poll.options.map(
-                            (option) => (
+            <Popover>
+                <Stack direction='column'>
+                    <PopoverTrigger>
+                        <Button colorScheme='teal' variant='ghost'>Poll Voting!</Button>
+                    </PopoverTrigger> 
+                </Stack>
+                
+                <PopoverContent>
+                    <PopoverArrow />
+                    <PopoverBody>
+                    <Stack className={styles.pollOptionsContainer}>
+                        {
+                            post.poll_options.map(
+                                (options) => (
                                 <>
-                            <Checkbox>
-                                {option}
-                            </Checkbox>
-                            </>
+                                <Checkbox>
+                                    {options.option}
+                                </Checkbox>
+                                </>
+                                )
                             )
-                        )
-                    }                   
-                </Stack> */}
-             </Box> 
+                        }                   
+                    </Stack>
+                    <Button colorScheme='teal' width='100%'>Submit</Button>
+                    </PopoverBody>
+                </PopoverContent>
+            </Popover> 
+
         </>
 
     );

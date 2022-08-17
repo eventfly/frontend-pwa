@@ -1,8 +1,12 @@
 import styles from '../styles/PostCard.module.css'
-import {Stack, Image, Flex, Avatar, Box, Text, Spacer, Button, Textarea, Center} from "@chakra-ui/react";
+import {Stack, Image, Flex, Avatar, Box, Text, Spacer, Button, Textarea, Center, Checkbox,RadioGroup, Radio} from "@chakra-ui/react";
 import {
-    Popover, PopoverTrigger,PopoverContent,PopoverArrow,
+    Popover, PopoverTrigger,PopoverContent,PopoverHeader,PopoverBody,
+    PopoverFooter,PopoverArrow,PopoverCloseButton,PopoverAnchor,
   } from '@chakra-ui/react'
+import PollCard from './PollCard';
+import QuizCard from './QuizCard';
+
 
 const PostCard = ({post}) => {
     return ( 
@@ -12,21 +16,23 @@ const PostCard = ({post}) => {
 
             <Box className={"bg-dark text-white " + styles.postCard}> 
                 <Flex className={styles.postHeader}>
-                    <Avatar src={post.profilePic} />
+                    <Avatar src={post.creator.creator_avatar} />
                     <Box ml='3'>
                         <Text fontWeight='bold'>
-                            {post.name}
+                            {post.creator.creator_name}
                         </Text>
                         <Text fontSize='sm'> 
-                            {post.role} &bull; {post.date}
+                            {post.creator.creator_role} &bull; {post.created_at}
                         </Text>
                     </Box>
                 </Flex>
 
-                {post.description != '' &&
+                {post.content != '' &&
                     <>
                         <Box className={styles.postDescription}>
-                            {post.description}
+                            <Text fontSize='lg'> 
+                                {post.content}
+                            </Text>
                         </Box>
                     </>
 
@@ -38,7 +44,20 @@ const PostCard = ({post}) => {
                     </>
 
                 }
+                {post.poll_options.length > 0 &&
+                    <>
+                        <PollCard post={post}/>
+                                     
+                    </>
+                }
 
+                {post.questions.length > 0 &&
+                    <>
+                        <QuizCard post={post}/>
+                    </>
+
+                }
+                
                  
 
                 <Flex className={styles.postButtonArea} direction='row' >

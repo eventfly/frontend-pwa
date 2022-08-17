@@ -5,99 +5,56 @@ import {
     PopoverFooter,PopoverArrow,PopoverCloseButton,PopoverAnchor,
   } from '@chakra-ui/react'
 
-const QuizCard = ({quiz}) => {
+const QuizCard = ({post}) => {
     return ( 
 
         <>
 
-            <Box className={"bg-dark text-white " + styles.quizCard}>
+            <Popover>
+                <Stack direction='column'>
+                    <PopoverTrigger>
+                        <Button colorScheme='teal' variant='ghost'>Quiz Voting!</Button>
+                    </PopoverTrigger> 
+                </Stack>
+                
+                <PopoverContent>
+                    <PopoverArrow />
+                    <PopoverBody>
+                    {
+                        post.questions.map(
+                            (question, index) => (
+                                <>
+                                {/* { console.log(`outer ${index}`)} */}
 
-                <Popover>
-                    <Stack direction='column'>
-                       <Box fontSize="x-large" paddingLeft='1%'>
-                            Take the quiz!!!
-                        </Box>
-                        <PopoverTrigger>
-                            <Button colorScheme='teal' variant='ghost'>Vote!</Button>
-                        </PopoverTrigger> 
-                    </Stack>
-                    
-                    <PopoverContent>
-                        <PopoverArrow />
-                        <PopoverCloseButton />
-                        <PopoverHeader backgroundColor='teal'>Quiz!</PopoverHeader>
-                        <PopoverBody>
-                        {
-                            quiz.questions.map(
-                                (question, index) => (
-                                    <>
-                                    {/* { console.log(`outer ${index}`)} */}
+                                    <Box className={styles.quizQuestion}>
+                                        {question.question}
+                                    </Box>
+                                    
+                                    <RadioGroup>
+                                        <Stack className={styles.quizOptionsContainer}>
+                                        {   
+                                            question.answers.map(
+                                                (answer, index) => (
+                                                <>
+                                                    {/* { console.log(`    inner ${index}`)} */}
 
-                                        <Box className={styles.quizQuestion}>
-                                            {question.question}
-                                        </Box>
-                                        
-                                        <RadioGroup>
-                                            <Stack className={styles.quizOptionsContainer}>
-                                            {   
-                                                question.options.map(
-                                                    (option, index) => (
-                                                    <>
-                                                        {/* { console.log(`    inner ${index}`)} */}
-
-                                                    <Radio>
-                                                        {option}
-                                                    </Radio>
-                                                    </>
-                                                    )
+                                                <Radio>
+                                                    {answer.answer}
+                                                </Radio>
+                                                </>
                                                 )
-                                            }                   
-                                            </Stack>
-                                        </RadioGroup>                        
-                                    </>
-                                )
-                            )
-                        }
-                        <Button colorScheme='teal'  width='100%'>Submit</Button>           
-                        </PopoverBody>
-                    </PopoverContent>
-                </Popover>
-
-                {/* {
-                    quiz.questions.map(
-                        (question, index) => (
-                            <>
-                               
-
-                                <Box className={styles.quizQuestion}>
-                                    {question.question}
-                                </Box>
-                                
-                                <RadioGroup>
-                                    <Stack className={styles.quizOptionsContainer}>
-                                    {   
-                                        question.options.map(
-                                            (option, index) => (
-                                            <>
-                                                
-
-                                            <Radio>
-                                                {option}
-                                            </Radio>
-                                            </>
                                             )
-                                        )
-                                    }                   
-                                    </Stack>
-                                </RadioGroup>                        
-                            </>
+                                        }                   
+                                        </Stack>
+                                    </RadioGroup>                        
+                                </>
+                            )
                         )
-                    )
-                } */}
-            
-                
-                
-            </Box> 
+                    }
+                    <Button colorScheme='teal'  width='100%'>Submit</Button>           
+                    </PopoverBody>
+                </PopoverContent>
+            </Popover>
         </>
 
     );

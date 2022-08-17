@@ -24,30 +24,135 @@ const EventDetails = () => {
 
     let posts = [
         {
-          'id': 1,
-          'name' : 'Purba',
-          'role': 'Organizer',
-          'profilePic': '../event1.jpg',
-          'date': 'Dec 12,2021',
-          'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+          'creator': {
+            'creator_id': 1,
+            'creator_name': 'Purba',
+            'creator_role': 'Organizer',
+            'creator_avatar': '../event2.jpg'
+          },          
+          'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+          'created_at': 'Dec 12,2020',
+          'updated_at': 'Dec 12,2021',
           'image': '../event2.jpg',
+          'questions': [
+            {
+                'question': 'why not?',
+                'answers': [{
+                  'answer': 'human',
+                  'is_correct': true
+                },
+                {
+                  'answer': 'bird',
+                  'is_correct': false
+                }                     
+                ]
+            }
+          ],
+          'poll_options': [
+            {
+              'option': 'human',
+              'description': 'this is a human'
+            },
+            {
+              'option': 'bird',
+              'description': 'this is a bird'
+            }   
+          ],
           'comments': [
             'humanijoooooiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnniiiiiiiiiiiiiiiiiiiiiiioooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooobbbbbbbbbbbjjjj', 'bird', 'plane'
           ]
         },
-    
         {
-          'id': 2,
-          'name' : 'Rifat',
-          'role': 'Organizer',
-          'profilePic': '../event2.jpg',
-          'date': 'Dec 12,2021',
-          'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-          'image': '../event1.jpg',
+          'creator': {
+            'creator_id': 1,
+            'creator_name': 'Purba',
+            'creator_role': 'Organizer',
+            'creator_avatar': '../event2.jpg'
+          },          
+          'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+          'created_at': 'Dec 12,2020',
+          'updated_at': 'Dec 12,2021',
+          'image': '../event2.jpg',
+          'questions': [
+          ],
+          'poll_options': [  
+          ],
           'comments': [
-            'hello' , 'hi'
+            'humanijoooooiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnniiiiiiiiiiiiiiiiiiiiiiioooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooobbbbbbbbbbbjjjj', 'bird', 'plane'
+          ]
+        },
+        {
+          'creator': {
+            'creator_id': 1,
+            'creator_name': 'Purba',
+            'creator_role': 'Organizer',
+            'creator_avatar': '../event2.jpg'
+          },          
+          'content': 'POLL QUESTION: Who are you?',
+          'created_at': 'Dec 12,2020',
+          'updated_at': 'Dec 12,2021',
+          'image': '',
+          'questions': [
+          ],
+          'poll_options': [
+            {
+              'option': 'human',
+              'description': 'this is a human'
+            },
+            {
+              'option': 'bird',
+              'description': 'this is a bird'
+            }   
+          ],
+          'comments': [
+            'humanijoooooiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnniiiiiiiiiiiiiiiiiiiiiiioooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooobbbbbbbbbbbjjjj', 'bird', 'plane'
+          ]
+        },
+        {
+          'creator': {
+            'creator_id': 1,
+            'creator_name': 'Purba',
+            'creator_role': 'Organizer',
+            'creator_avatar': '../event2.jpg'
+          },          
+          'content': 'Take the quiz!',
+          'created_at': 'Dec 12,2020',
+          'updated_at': 'Dec 12,2021',
+          'image': '',
+          'questions': [
+            {
+                'question': 'why not?',
+                'answers': [{
+                  'answer': 'human',
+                  'is_correct': true
+                },
+                {
+                  'answer': 'bird',
+                  'is_correct': false
+                }                     
+                ]
+            },
+            {
+                'question': 'why though?',
+                'answers': [{
+                  'answer': 'nothing',
+                  'is_correct': true
+                },
+                {
+                  'answer': 'no',
+                  'is_correct': false
+                }                     
+                ]
+            }
+
+          ],
+          'poll_options': [
+          ],
+          'comments': [
+            'humanijoooooiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnniiiiiiiiiiiiiiiiiiiiiiioooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooobbbbbbbbbbbjjjj', 'bird', 'plane'
           ]
         }
+
       ]
 
       let polls = [
@@ -166,7 +271,7 @@ const EventDetails = () => {
 
             <ImageHeader />
             <EventDesc />
-            <EventNewsFeed posts={posts} polls={polls} quizzes={quizzes}/>
+            <EventNewsFeed posts={posts}/>
             <SponsorContainer sponsors={sponsors} />
             <FAQ faqs={faqs} />
         

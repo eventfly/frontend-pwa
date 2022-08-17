@@ -7,6 +7,13 @@
     margin-top: 7.5%;
 }
 
+.pollHeader{
+    padding: 1%;
+}
+
+.pollDescription{
+    padding: 1%;
+}
 
 .pollQuestion{
     width: 100%;
