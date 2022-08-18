@@ -10,7 +10,7 @@ function TicketCard(props)
 {
     const ticket = props.ticket;
 
-    const ticketID = ticket.id;
+    const ticketID = ticket._id;
     const ticketPrice = ticket.price;
     const purchaseTime = new Date(ticket.created_at).toDateString();
     const ticketClass = ticket.class;
@@ -58,8 +58,9 @@ function TicketCard(props)
                         }}
                     >
                         <b>Purchased: </b>{ purchaseTime } <br/>
-                        <b>Ticket Class: </b>{ ticketClass } <br/>
-                        <b>Bought By: </b>{ ticketHolderName }
+                        <b>Class: </b>{ ticketClass } <br/>
+                        <b>Bought By: </b>{ ticketHolderName } <br />
+                        <b>Price: </b>BDT { ticketPrice }
                     </chakra.p>
                 </Box>
             
@@ -75,8 +76,8 @@ function TicketCard(props)
                     bg="gray.900"
                     roundedBottom="lg"
                 >
-                    <chakra.h1 color="white" fontWeight="bold" fontSize="lg">
-                        BDT { ticketPrice }
+                    <chakra.h1 color="white" fontSize="sm">
+                        &copy; EventFly
                     </chakra.h1>
                 </Flex>
             </Box>

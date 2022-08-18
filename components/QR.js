@@ -1,12 +1,25 @@
 import QRCode from "react-qr-code";
+import { useState, useEffect } from "react";
 
-function QR({ props })
+
+function QR(props)
 {
-    // const ticketID = props.ticketID;
-    const ticketID = "62fd6351966efa640cba3a52";
+    const [ loaded, setLoaded ] = useState(false);
+    const [ ticketID, setTicketID ] = useState("");
+
+    useEffect(() => {
+        if (!loaded)
+        {
+            setTicketID(props.ticketID);
+            setLoaded(true);
+        }
+    });
 
     return (
-        <QRCode value={ticketID} />
+        loaded ?
+            <QRCode value={ ticketID } />
+        :
+           <></>
     );
 }
 
