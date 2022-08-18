@@ -4,10 +4,8 @@ import FormButton from "../components/Form/FormButton";
 import FormSelect from "../components/Form/FormSelect";
 import FormDatePicker from "../components/Form/FormDatePicker";
 import { useState } from 'react'
-import axios from 'axios'
 
 import Router from "next/router";
-import useRequest from '../hooks/use-request'
 
 const Signup = () => {
 
@@ -30,13 +28,13 @@ const Signup = () => {
 
 
 
-    const { doRequest, errors } = useRequest({
-        url: "/api/auth/users/signup",
-        method: "post",
-        body: {
-            email, password, name, gender, dob
-        }, onSuccess: () => Router.push("/")
-    })
+    // const { doRequest, errors } = useRequest({
+    //     url: "/api/auth/users/signup",
+    //     method: "post",
+    //     body: {
+    //         email, password, name, gender, dob
+    //     }, onSuccess: () => Router.push("/")
+    // })
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -46,7 +44,7 @@ const Signup = () => {
         console.log("gender: ", gender);
         console.log("dob: ", dob.toISOString());
 
-        doRequest();
+        // doRequest();
 
         let signupData = {
             email, password, name, gender, dob

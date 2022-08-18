@@ -23,7 +23,10 @@ function getJSON_Local(key)
 function isAuthenticated()
 {
     const token = localStorage.getItem("token");
-    return token && token.length > 0
+    if (token && token.length > 0) {
+        return true;
+    }
+    return false;
 }
 
 export {

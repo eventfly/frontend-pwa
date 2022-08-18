@@ -6,7 +6,6 @@ const Layout = ({ children, currentUser }) => {
     <div>
       <SideNavBar currentUser={currentUser}>
         {children}
-        <Footer />
       </SideNavBar>
     </div>
   );

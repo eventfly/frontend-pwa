@@ -15,7 +15,24 @@ async function postData(url='', data={})
     return response.json();
 }
 
+async function getData(url="")
+{
+    const response = await fetch(url, {
+        method: "GET",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+    });
+
+    return response.json();
+}
+
 
 export {
-    postData
+    postData,
+    getData
 };

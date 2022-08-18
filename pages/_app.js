@@ -2,10 +2,9 @@ import '../styles/globals.css';
 import { ChakraProvider } from "@chakra-ui/react";
 import Layout from '../layouts/Default';
 import NoAuthLayout from '../layouts/NoAuth';
-import { useEffect } from "react";
-// import buildClient from '../api/client';
+import { useEffect, useState } from "react";
 
-import axios from 'axios';
+import { isAuthenticated } from "../services/StorageService";
 
 
 function MyApp({ Component, pageProps}) {
@@ -16,25 +15,26 @@ function MyApp({ Component, pageProps}) {
 		email: 'john@doe.com'
 	}
 
-	if (currentUser !== null) {
-		return (
+	const [ isAuth, setIsAuth ] = useState(false);
 
+	useEffect(() => {
+		setIsAuth(isAuthenticated());
+	});
 
-			<ChakraProvider>
-				<Layout currentUser={currentUser}>
-					<Component {...pageProps} />
-				</Layout>
-			</ChakraProvider>
-
-		)
-	}
-	else {
-		return (
+	return (
+		isAuth ? 
+		<ChakraProvider>
+			<Layout currentUser={currentUser}>
+				<Component {...pageProps} />
+			</Layout>
+		</ChakraProvider>
+		:
+		<ChakraProvider>
 			<NoAuthLayout>
 				<Component {...pageProps} />
-			</NoAuthLayout>
-		)
-	}
+			</NoAuthLayout>	
+		</ChakraProvider>
+	);
 
 }
 
