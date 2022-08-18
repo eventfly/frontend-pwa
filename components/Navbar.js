@@ -33,6 +33,7 @@ import {
   FiBell,
   FiChevronDown,
   FiSearch,
+  FiTag,
 } from 'react-icons/fi';
 
 import { IconType } from 'react-icons';
@@ -54,6 +55,11 @@ const LinkItems = [
     name: "Settings",
     link: "settings",
     icon: FiSettings
+  },
+  {
+    name: "Ticket",
+    link: "ticket",
+    icon: FiTag
   }
 ];
 
