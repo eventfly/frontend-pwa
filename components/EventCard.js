@@ -2,29 +2,24 @@ import styles from '../styles/EventCard.module.css'
 // import Link from 'next/link'
 import {Card} from 'react-bootstrap';
 import {Image,Link, Flex, Avatar, Box, Text,Stack, Spacer, Button, Textarea} from "@chakra-ui/react";
+import { useEffect, useState } from 'react';
 
-const EventCard = ({event}) => {
-    return ( 
-        <>
+const EventCard = (props) => {
 
-            {/* <Card className={"bg-dark text-white " + styles.eventCard} >
+    const [ event, setEvent ] = useState(null);
+    const [ loaded, setLoaded ] = useState(false);
 
-                <Card.Img src={event.image} alt="Card image" className={styles.eventBanner} /> 
+    useEffect(() => {
+        if (!loaded)
+        {
+            setEvent(props.event);
+            setLoaded(true);
+            return;
+        }
+    });
 
-                 <Card.ImgOverlay className={styles.overlay}>
-                    <Card.Text className={styles.date}> {event.date} </Card.Text>
-                    
-                    <Link href={"/event/" + event.url}>
-                    <Card.Title className={styles.title}>{event.title}</Card.Title>
-                    </Link>
-                    
-                    
-                    <Card.Text className={styles.description}>
-                        {event.description}
-                    </Card.Text>
-                </Card.ImgOverlay>
-            </Card> */}
-
+    return (
+        loaded ?
             <Box className={"bg-dark text-white " + styles.eventCard} backgroundImage={event.image}>
                 <Flex className={styles.overlay}>
                         <Text>
@@ -36,13 +31,10 @@ const EventCard = ({event}) => {
                         <Text fontSize="large">
                             {event.description}
                         </Text>
-                    
                 </Flex>
-            
             </Box>
-
-        </>
-
+        :
+            <></>
     );
 }
  

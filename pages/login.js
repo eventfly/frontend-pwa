@@ -68,7 +68,8 @@ function Home()
 				duration: 1000,
 				isClosable: true,
 			});
-			router.push("/scan");
+			router.push("/");
+			return;
 		})
 		.catch((err) => {
 			console.error(err);

@@ -16,7 +16,6 @@ function EventDetails()
 	const router = useRouter();
 
 	const [ event, setEvent ] = useState(null);
-	const [ posts, setPosts ] = useState(null);
 	const [ loaded, setLoaded ] = useState(false);
 
 	useEffect(() => {
@@ -36,7 +35,6 @@ function EventDetails()
 				.then((res) => {
 					console.log("Event Info GET:", res);
 					setEvent(res);
-					setPosts(res.posts);
 					setLoaded(true);
 				})
 				.catch((err) => {
@@ -46,276 +44,275 @@ function EventDetails()
 		}
 	});
 
-	// let posts = [
-	// 	{
-	// 		'creator': {
-	// 			'id': 1,
-	// 			'name': 'Purba',
-	// 			'role': 'Organizer',
-	// 			'avatar': '../event2.jpg'
-	// 		},
-	// 		'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-	// 		'created_at': 'Dec 12,2020',
-	// 		'updated_at': 'Dec 12,2021',
-	// 		'like_count': 5,
-	// 		'view_count': 10,
-	// 		'is_deleted': false,
-	// 		'medias': [
-	// 			{
-	// 				'url': '../event2.jpg',
-	// 				'type': '',
-	// 				'caption': 'coverphoto'
-	// 			},
-	// 			{
-	// 				'url': '../event1.jpg',
-	// 				'type': '',
-	// 				'caption': 'Profile photo'
-	// 			}
+	let posts = [
+		{
+			'creator': {
+				'id': 1,
+				'name': 'Purba',
+				'role': 'Organizer',
+				'avatar': '../event2.jpg'
+			},
+			'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+			'created_at': 'Dec 12,2020',
+			'updated_at': 'Dec 12,2021',
+			'like_count': 5,
+			'view_count': 10,
+			'is_deleted': false,
+			'medias': [
+				{
+					'url': '../event2.jpg',
+					'type': '',
+					'caption': 'coverphoto'
+				},
+				{
+					'url': '../event1.jpg',
+					'type': '',
+					'caption': 'Profile photo'
+				}
 
-	// 		],
-	// 		'questions': [
-	// 			{
-	// 				'question': 'why not?',
-	// 				'answers': [{
-	// 					'answer': 'human',
-	// 					'is_correct': true
-	// 				},
-	// 				{
-	// 					'answer': 'bird',
-	// 					'is_correct': false
-	// 				}
-	// 				]
-	// 			}
-	// 		],
-	// 		'poll_options': [
-	// 			{
-	// 				'option': 'human',
-	// 				'description': 'this is a human'
-	// 			},
-	// 			{
-	// 				'option': 'bird',
-	// 				'description': 'this is a bird'
-	// 			}
-	// 		],
-	// 		'comments': [
-	// 			{
-	// 				'creator': {
-	// 					'id': 1,
-	// 					'name': 'Purba',
-	// 					'role': 'Organizer',
-	// 					'avatar': '../event1.jpg'
-	// 				},
-	// 				'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-	// 				'created_at': 'Dec 12,2020',
-	// 				'updated_at': 'Dec 12,2021',
-	// 				'like_count': 5,
-	// 				'is_deleted': false
-	// 			},
-	// 			{
-	// 				'creator': {
-	// 					'id': 2,
-	// 					'name': 'Rabid',
-	// 					'role': 'Organizer',
-	// 					'avatar': '../event2.jpg'
-	// 				},
-	// 				'content': 'hello.',
-	// 				'created_at': 'Dec 12,2020',
-	// 				'updated_at': 'Dec 12,2021',
-	// 				'like_count': 5,
-	// 				'is_deleted': false
-	// 			}
-	// 		]
-	// 	},
-	// 	{
-	// 		'creator': {
-	// 			'id': 1,
-	// 			'name': 'Purba',
-	// 			'role': 'Organizer',
-	// 			'avatar': '../event2.jpg'
-	// 		},
-	// 		'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-	// 		'created_at': 'Dec 12,2020',
-	// 		'updated_at': 'Dec 12,2021',
-	// 		'like_count': 5,
-	// 		'view_count': 10,
-	// 		'is_deleted': false,
-	// 		'medias': [
-	// 			{
-	// 				'url': '../event2.jpg',
-	// 				'type': '',
-	// 				'caption': ''
-	// 			},
-	// 			{
-	// 				'url': '../event1.jpg',
-	// 				'type': '',
-	// 				'caption': ''
-	// 			}
+			],
+			'questions': [
+				{
+					'question': 'why not?',
+					'answers': [{
+						'answer': 'human',
+						'is_correct': true
+					},
+					{
+						'answer': 'bird',
+						'is_correct': false
+					}
+					]
+				}
+			],
+			'poll_options': [
+				{
+					'option': 'human',
+					'description': 'this is a human'
+				},
+				{
+					'option': 'bird',
+					'description': 'this is a bird'
+				}
+			],
+			'comments': [
+				{
+					'creator': {
+						'id': 1,
+						'name': 'Purba',
+						'role': 'Organizer',
+						'avatar': '../event1.jpg'
+					},
+					'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+					'created_at': 'Dec 12,2020',
+					'updated_at': 'Dec 12,2021',
+					'like_count': 5,
+					'is_deleted': false
+				},
+				{
+					'creator': {
+						'id': 2,
+						'name': 'Rabid',
+						'role': 'Organizer',
+						'avatar': '../event2.jpg'
+					},
+					'content': 'hello.',
+					'created_at': 'Dec 12,2020',
+					'updated_at': 'Dec 12,2021',
+					'like_count': 5,
+					'is_deleted': false
+				}
+			]
+		},
+		{
+			'creator': {
+				'id': 1,
+				'name': 'Purba',
+				'role': 'Organizer',
+				'avatar': '../event2.jpg'
+			},
+			'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+			'created_at': 'Dec 12,2020',
+			'updated_at': 'Dec 12,2021',
+			'like_count': 5,
+			'view_count': 10,
+			'is_deleted': false,
+			'medias': [
+				{
+					'url': '../event2.jpg',
+					'type': '',
+					'caption': ''
+				},
+				{
+					'url': '../event1.jpg',
+					'type': '',
+					'caption': ''
+				}
 
-	// 		],
-	// 		'questions': [
-	// 		],
-	// 		'poll_options': [
-	// 		],
-	// 		'comments': [
-	// 			{
-	// 				'creator': {
-	// 					'id': 1,
-	// 					'name': 'Purba',
-	// 					'role': 'Organizer',
-	// 					'avatar': '../event1.jpg'
-	// 				},
-	// 				'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-	// 				'created_at': 'Dec 12,2020',
-	// 				'updated_at': 'Dec 12,2021',
-	// 				'like_count': 5,
-	// 				'is_deleted': false
-	// 			},
-	// 			{
-	// 				'creator': {
-	// 					'id': 2,
-	// 					'name': 'Rabid',
-	// 					'role': 'Organizer',
-	// 					'avatar': '../event2.jpg'
-	// 				},
-	// 				'content': 'hello.',
-	// 				'created_at': 'Dec 12,2020',
-	// 				'updated_at': 'Dec 12,2021',
-	// 				'like_count': 5,
-	// 				'is_deleted': false
-	// 			}
-	// 		]
-	// 	},
-	// 	{
-	// 		'creator': {
-	// 			'id': 1,
-	// 			'name': 'Purba',
-	// 			'role': 'Organizer',
-	// 			'avatar': '../event2.jpg'
-	// 		},
-	// 		'content': 'POLL QUESTION: Who are you?',
-	// 		'created_at': 'Dec 12,2020',
-	// 		'updated_at': 'Dec 12,2021',
-	// 		'like_count': 5,
-	// 		'view_count': 10,
-	// 		'is_deleted': false,
-	// 		'medias': [
-	// 		],
-	// 		'questions': [
-	// 		],
-	// 		'poll_options': [
-	// 			{
-	// 				'option': 'human',
-	// 				'description': 'this is a human'
-	// 			},
-	// 			{
-	// 				'option': 'bird',
-	// 				'description': 'this is a bird'
-	// 			}
-	// 		],
-	// 		'comments': [
-	// 			{
-	// 				'creator': {
-	// 					'id': 1,
-	// 					'name': 'Purba',
-	// 					'role': 'Organizer',
-	// 					'avatar': '../event1.jpg'
-	// 				},
-	// 				'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-	// 				'created_at': 'Dec 12,2020',
-	// 				'updated_at': 'Dec 12,2021',
-	// 				'like_count': 5,
-	// 				'is_deleted': false
-	// 			},
-	// 			{
-	// 				'creator': {
-	// 					'id': 2,
-	// 					'name': 'Rabid',
-	// 					'role': 'Organizer',
-	// 					'avatar': '../event2.jpg'
-	// 				},
-	// 				'content': 'hello.',
-	// 				'created_at': 'Dec 12,2020',
-	// 				'updated_at': 'Dec 12,2021',
-	// 				'like_count': 5,
-	// 				'is_deleted': false
-	// 			}
-	// 		]
-	// 	},
-	// 	{
-	// 		'creator': {
-	// 			'id': 1,
-	// 			'name': 'Purba',
-	// 			'role': 'Organizer',
-	// 			'avatar': '../event2.jpg'
-	// 		},
-	// 		'content': 'Take the quiz!',
-	// 		'created_at': 'Dec 12,2020',
-	// 		'updated_at': 'Dec 12,2021',
-	// 		'like_count': 1,
-	// 		'view_count': 10,
-	// 		'is_deleted': false,
-	// 		'medias': [
-	// 		],
-	// 		'questions': [
-	// 			{
-	// 				'question': 'why not?',
-	// 				'answers': [{
-	// 					'answer': 'human',
-	// 					'is_correct': true
-	// 				},
-	// 				{
-	// 					'answer': 'bird',
-	// 					'is_correct': false
-	// 				}
-	// 				]
-	// 			},
-	// 			{
-	// 				'question': 'why though?',
-	// 				'answers': [{
-	// 					'answer': 'nothing',
-	// 					'is_correct': true
-	// 				},
-	// 				{
-	// 					'answer': 'no',
-	// 					'is_correct': false
-	// 				}
-	// 				]
-	// 			}
+			],
+			'questions': [
+			],
+			'poll_options': [
+			],
+			'comments': [
+				{
+					'creator': {
+						'id': 1,
+						'name': 'Purba',
+						'role': 'Organizer',
+						'avatar': '../event1.jpg'
+					},
+					'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+					'created_at': 'Dec 12,2020',
+					'updated_at': 'Dec 12,2021',
+					'like_count': 5,
+					'is_deleted': false
+				},
+				{
+					'creator': {
+						'id': 2,
+						'name': 'Rabid',
+						'role': 'Organizer',
+						'avatar': '../event2.jpg'
+					},
+					'content': 'hello.',
+					'created_at': 'Dec 12,2020',
+					'updated_at': 'Dec 12,2021',
+					'like_count': 5,
+					'is_deleted': false
+				}
+			]
+		},
+		{
+			'creator': {
+				'id': 1,
+				'name': 'Purba',
+				'role': 'Organizer',
+				'avatar': '../event2.jpg'
+			},
+			'content': 'POLL QUESTION: Who are you?',
+			'created_at': 'Dec 12,2020',
+			'updated_at': 'Dec 12,2021',
+			'like_count': 5,
+			'view_count': 10,
+			'is_deleted': false,
+			'medias': [
+			],
+			'questions': [
+			],
+			'poll_options': [
+				{
+					'option': 'human',
+					'description': 'this is a human'
+				},
+				{
+					'option': 'bird',
+					'description': 'this is a bird'
+				}
+			],
+			'comments': [
+				{
+					'creator': {
+						'id': 1,
+						'name': 'Purba',
+						'role': 'Organizer',
+						'avatar': '../event1.jpg'
+					},
+					'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+					'created_at': 'Dec 12,2020',
+					'updated_at': 'Dec 12,2021',
+					'like_count': 5,
+					'is_deleted': false
+				},
+				{
+					'creator': {
+						'id': 2,
+						'name': 'Rabid',
+						'role': 'Organizer',
+						'avatar': '../event2.jpg'
+					},
+					'content': 'hello.',
+					'created_at': 'Dec 12,2020',
+					'updated_at': 'Dec 12,2021',
+					'like_count': 5,
+					'is_deleted': false
+				}
+			]
+		},
+		{
+			'creator': {
+				'id': 1,
+				'name': 'Purba',
+				'role': 'Organizer',
+				'avatar': '../event2.jpg'
+			},
+			'content': 'Take the quiz!',
+			'created_at': 'Dec 12,2020',
+			'updated_at': 'Dec 12,2021',
+			'like_count': 1,
+			'view_count': 10,
+			'is_deleted': false,
+			'medias': [
+			],
+			'questions': [
+				{
+					'question': 'why not?',
+					'answers': [{
+						'answer': 'human',
+						'is_correct': true
+					},
+					{
+						'answer': 'bird',
+						'is_correct': false
+					}
+					]
+				},
+				{
+					'question': 'why though?',
+					'answers': [{
+						'answer': 'nothing',
+						'is_correct': true
+					},
+					{
+						'answer': 'no',
+						'is_correct': false
+					}
+					]
+				}
 
-	// 		],
-	// 		'poll_options': [
-	// 		],
-	// 		'comments': [
-	// 			{
-	// 				'creator': {
-	// 					'id': 1,
-	// 					'name': 'Purba',
-	// 					'role': 'Organizer',
-	// 					'avatar': '../event1.jpg'
-	// 				},
-	// 				'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-	// 				'created_at': 'Dec 12,2020',
-	// 				'updated_at': 'Dec 12,2021',
-	// 				'like_count': 0,
-	// 				'is_deleted': false
-	// 			},
-	// 			{
-	// 				'creator': {
-	// 					'id': 2,
-	// 					'name': 'Rabid',
-	// 					'role': 'Organizer',
-	// 					'avatar': '../event2.jpg'
-	// 				},
-	// 				'content': 'hello.',
-	// 				'created_at': 'Dec 12,2020',
-	// 				'updated_at': 'Dec 12,2021',
-	// 				'like_count': 5,
-	// 				'is_deleted': true
-	// 			}
-	// 		]
-	// 	}
-
-	// ]
+			],
+			'poll_options': [
+			],
+			'comments': [
+				{
+					'creator': {
+						'id': 1,
+						'name': 'Purba',
+						'role': 'Organizer',
+						'avatar': '../event1.jpg'
+					},
+					'content': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+					'created_at': 'Dec 12,2020',
+					'updated_at': 'Dec 12,2021',
+					'like_count': 0,
+					'is_deleted': false
+				},
+				{
+					'creator': {
+						'id': 2,
+						'name': 'Rabid',
+						'role': 'Organizer',
+						'avatar': '../event2.jpg'
+					},
+					'content': 'hello.',
+					'created_at': 'Dec 12,2020',
+					'updated_at': 'Dec 12,2021',
+					'like_count': 5,
+					'is_deleted': true
+				}
+			]
+		}
+	];
 
 	let sponsors = [
 		{
