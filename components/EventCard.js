@@ -5,7 +5,6 @@ import {Image,Link, Flex, Avatar, Box, Text,Stack, Spacer, Button, Textarea} fro
 
 const EventCard = ({event}) => {
     return ( 
-
         <>
 
             {/* <Card className={"bg-dark text-white " + styles.eventCard} >

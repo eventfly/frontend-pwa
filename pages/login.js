@@ -11,7 +11,6 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import FormTitle from "../components/Form/FormTitle";
 import CONFIG from "../config/config.json";
 import { getData, postData } from "../services/HttpService";
 import { getData_Local, isAuthenticated, storeData_Local, storeJSON_Local } from "../services/StorageService";
@@ -41,14 +40,14 @@ function Home()
 				title: "Enter a valid email!",
 				description: "The email you have entered doesn't match with any email format. Please check it again and enter.",
 				status: "error",
-				duration: 8000,
+				duration: 3000,
 				isClosable: true,
 			});
 			return;
 		}
 
 		//	Now perform the sign up and store the creds in cookies
-		const signInUrl = `${CONFIG.BASE_URL.AUTH}/api/auth/org/signin`;
+		const signInUrl = `${CONFIG.BASE_URL.AUTH}/api/auth/users/signin`;
 		const payload = {
 			email: email,
 			password: password
@@ -57,6 +56,7 @@ function Home()
 		postData(signInUrl, payload)
 		.then((data) => {
 			console.log("Response data:", data);
+			
 			storeData_Local("token", data.token);
 			storeData_Local("userName", data.existingUser.name);
 			storeData_Local("userEmail", data.existingUser.email);

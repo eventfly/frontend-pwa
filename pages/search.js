@@ -6,25 +6,16 @@ import {Stack, Image, Flex, Avatar, Box, Text, Spacer, Button, Textarea, Center,
 import { postData } from '../services/HttpService';
 import {getData_Local, storeData_Local} from '../services/StorageService';
 
+
+
 const Search = () => {
 
     const [search, setSearch] = useState('');
 
-    const handleSearchChange = () => {
-        console.log("Value: ",search);
-        
-        // const eventUrl = '';
-        // const payload = {
-        //     evenName: search
-        // }
-
-        // postData(eventUrl, payload)
-        // .then((data) => {
-        //     console.log("Response data:", data);
-        //     storeData_Local("token", data.token);
-        // }).catch((err) => {
-        //     console.log(err);
-        // });
+    function handleSearch()
+    {
+        const searchElem = document.getElementById("search");
+        const searchString = searchElem.value;
     }
 
     return (
@@ -35,9 +26,9 @@ const Search = () => {
             <VStack>
                 <Container maxW='2xl' >
                     <Flex>
-                        <Input type='text' variant='filled' placeholder='Search...' value={search} onChange={(e) => {setSearch(e.target.value)}} />
+                        <Input type='text' id='search' variant='filled' placeholder='Search...' value={search} onChange={(e) => {setSearch(e.target.value)}} />
                         <Spacer/>
-                        <Button colorScheme='teal' variant='solid' onClick={() => handleSearchChange()}>
+                        <Button colorScheme='teal' variant='solid' onClick={handleSearch}>
                             Search
                         </Button>
                     </Flex>

@@ -1,20 +1,25 @@
 import { useEffect } from "react";
-import useRequest from "../hooks/use-request";
-import Router from "next/router";
+import { useToast } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
-export default () => {
-    const { doRequest } = useRequest({
-        url: "/api/auth/users/signout",
-        method: "post",
-        body: {},
-        onSuccess: () => Router.push("/login")
-    })
+function SignOut()
+{
+    const toast = useToast();
+    const router = useRouter();
 
     useEffect(() => {
-        doRequest()
-    })
+        localStorage.clear();
+        
+        toast({
+            title: "Signed Out!",
+            description: "You have successfully signed out!",
+            status: "info",
+            timeout: 500,
+            isClosable: true
+        });
 
-    return <div>
-        Signing you out
-    </div>
+        router.push("/login");
+    }, []);
 }
+
+export default SignOut;

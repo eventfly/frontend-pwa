@@ -1,11 +1,13 @@
 async function postData(url='', data={})
 {
+    const authToken = localStorage.getItem("token");
     const response = await fetch(url, {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": authToken
         },
         redirect: "follow",
         referrerPolicy: "no-referrer",
@@ -36,12 +38,14 @@ async function putData(url='', data={})
 
 async function getData(url="")
 {
+    const authToken = localStorage.getItem("token");
     const response = await fetch(url, {
         method: "GET",
         mode: "cors",
         cache: "no-cache",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": authToken
         },
         redirect: "follow",
         referrerPolicy: "no-referrer",

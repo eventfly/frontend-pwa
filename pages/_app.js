@@ -7,14 +7,8 @@ import { useEffect, useState } from "react";
 import { isAuthenticated } from "../services/StorageService";
 
 
-function MyApp({ Component, pageProps}) {
-
-	const currentUser = {
-		_id: '5f4b8f9b9c8f8b3f4c8b4b8b',
-		name: 'John Doe',
-		email: 'john@doe.com'
-	}
-
+function MyApp({ Component, pageProps})
+{
 	const [ isAuth, setIsAuth ] = useState(false);
 
 	useEffect(() => {
@@ -23,20 +17,19 @@ function MyApp({ Component, pageProps}) {
 
 	return (
 		isAuth ? 
-		<ChakraProvider>
-			<Layout currentUser={currentUser}>
-				<Component {...pageProps} />
-			</Layout>
-		</ChakraProvider>
+			<ChakraProvider>
+				<Layout>
+					<Component {...pageProps} />
+				</Layout>
+			</ChakraProvider>
 		:
-		<ChakraProvider>
-			<NoAuthLayout>
-				<Component {...pageProps} />
-			</NoAuthLayout>	
-		</ChakraProvider>
+			<ChakraProvider>
+				<NoAuthLayout>
+					<Component {...pageProps} />
+				</NoAuthLayout>	
+			</ChakraProvider>
 	);
 
 }
 
-
-export default MyApp
+export default MyApp;

@@ -1,10 +1,9 @@
 import SideNavBar from "../components/Navbar";
-import Footer from "../components/Footer";
 
-const Layout = ({ children, currentUser }) => {
+const Layout = ({ children }) => {
   return (
     <div>
-      <SideNavBar currentUser={currentUser}>
+      <SideNavBar>
         {children}
       </SideNavBar>
     </div>
