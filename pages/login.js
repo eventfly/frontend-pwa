@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-
+import FormTitle from "../components/Form/FormTitle";
 import CONFIG from "../config/config.json";
 import { getData, postData } from "../services/HttpService";
 import { getData_Local, isAuthenticated, storeData_Local, storeJSON_Local } from "../services/StorageService";
@@ -90,15 +90,16 @@ function Home()
 	else
 	{
 		return (
+
 			<Container>
 				<Stack>
 					<Box height={'200px'}></Box>
-					<Heading fontSize={'4xl'}>
+					<Heading fontSize={'6xl'} align='center'>
 						EventFly
 					</Heading>
 					<Input placeholder='Email' type="email" size='lg' id="email" />
 					<Input placeholder='Password' type="password" size='lg' id="password" />
-					<ButtonGroup>
+					<ButtonGroup justifyContent='flex-end'>
 						<Button colorScheme='green' size={'md'} onClick={handleSignIn}>Log In</Button>
 						<Link href="/signup">
 							<Button colorScheme='blue' size={'md'}>Sign Up</Button>

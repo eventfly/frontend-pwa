@@ -18,8 +18,8 @@ const PostCard = ({post}) => {
     const handleCommentChange = (e) => {
         let inputComment = e.target.value;
 
-        const userID = getData_Local(""); //need to assign userID in StorageService
-        setComment(inputComment)
+        const userID = getData_Local("userId"); 
+        setComment(inputComment);
 
         const commentUrl = '';
         const payload = {
