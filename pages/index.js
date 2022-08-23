@@ -8,6 +8,8 @@ import { getData_Local, isAuthenticated } from '../services/StorageService';
 import CONFIG from "../config/config.json";
 import { getData } from '../services/HttpService';
 
+import Navbar from '../components/Navbar';
+
 
 function Home()
 {
@@ -23,17 +25,17 @@ function Home()
 		const userId = getData_Local("userId");
 		setAuthenticated(isAuth);
 
-		if (!isAuth)
-		{
-			toast({
-				title: "Please login first!",
-				status: "error",
-				duration: 1000,
-				isClosable: true
-			});
-			router.push("/login");
-			return;
-		}
+		// if (!isAuth)
+		// {
+		// 	toast({
+		// 		title: "Please login first!",
+		// 		status: "error",
+		// 		duration: 1000,
+		// 		isClosable: true
+		// 	});
+		// 	router.push("/login");
+		// 	return;
+		// }
 
 		const newsFeedUrl = `${CONFIG.BASE_URL.PARTICIPANT}/api/participant/${userId}/events`;
 		getData(newsFeedUrl)
@@ -69,6 +71,8 @@ function Home()
 
 	return (
 		loaded ?
+		<>
+			<Navbar />
 			<div className="page_style">
 				<FormTitle title="Newsfeed"/>
 				<VStack>
@@ -83,6 +87,7 @@ function Home()
 					</Container>
 				</VStack>
 			</div>
+		</>
 		:
 			<></>
 	);
