@@ -1,4 +1,3 @@
-import styles from '../styles/PostCard.module.css'
 import {Stack, Image, Flex, Avatar, Box, Text, Spacer, Button, Textarea, Center, Checkbox,RadioGroup, Radio} from "@chakra-ui/react";
 import {
     Popover, PopoverTrigger,PopoverContent,PopoverHeader,PopoverBody,
@@ -61,8 +60,8 @@ const PostCard = ({post}) => {
         <>
             {post.is_deleted != true &&
                 <>
-                    <Box className={"bg-dark text-white " + styles.postCard}> 
-                        <Flex className={styles.postHeader}>
+                    <Box backgroundColor='black' color='white' > 
+                        <Flex padding='1%'>
                             <Avatar src={post.creator.avatar} />
                             <Box ml='3'>
                                 <Text fontWeight='bold'>
@@ -76,7 +75,7 @@ const PostCard = ({post}) => {
 
                         {post.content != '' &&
                             <>
-                                <Box className={styles.postDescription}>
+                                <Box padding='1%'>
                                     <Text fontSize='lg'> 
                                         {post.content}
                                     </Text>
@@ -91,7 +90,7 @@ const PostCard = ({post}) => {
                                     post.medias.map(
                                         (media, i) => (
                                             <div key={i}>
-                                                <Image src={media.url} alt="image" className={styles.postBanner} width='100%'/>
+                                                <Image src={media.url} alt="image" height='300px' objectFit='cover' width='100%'/>
                                                 <Spacer/>
                                                 {media.caption != '' &&
                                                     <>
@@ -124,8 +123,8 @@ const PostCard = ({post}) => {
 
                         }
 
-                        <Flex className={styles.postButtonArea} direction='row' >
-                            <Box className={styles.buttonContainer} align='left'>
+                        <Flex paddingLeft='1%' paddingRight='1%' paddingTop='1%' direction='row' >
+                            <Box width='50%' align='left'>
                                 {post.like_count > 0 &&
                                     <>
                                         {post.like_count} {post.like_count > 1 ? 'likes' : 'like'}
@@ -135,7 +134,7 @@ const PostCard = ({post}) => {
                                 
                             </Box>
                             <Spacer />
-                            <Box className={styles.buttonContainer} align='right'>
+                            <Box width='50%' align='right'>
                                 {post.comments.length > 0 &&
                                     <>
                                         {post.comments.length} {post.comments.length > 1 ? 'comments' : 'comment'}
@@ -146,14 +145,14 @@ const PostCard = ({post}) => {
                         </Flex>
                         
 
-                        <Flex className={styles.postButtonArea} direction='row' >
-                            <Box className={styles.buttonContainer} align='center'>
+                        <Flex paddingLeft='1%' paddingRight='1%' paddingTop='1%' direction='row' >
+                            <Box width='50%' align='center'>
                                 <Button colorScheme='teal' variant='ghost' width='100%' onClick={() => handlePostLikeCount()}>
                                     Like
                                 </Button>
                             </Box>
                             <Spacer />
-                            <Box className={styles.buttonContainer} align='center'>
+                            <Box width='50%'align='center'>
                                 <Button colorScheme='teal' variant='ghost' width='100%'>
                                     Comment
                                 </Button>
@@ -167,15 +166,24 @@ const PostCard = ({post}) => {
                                             <div key={i}>
                                             {comment.is_deleted != true &&
                                                 <>
-                                                    <Flex className={styles.getCommentArea}>
+                                                    <Flex padding='1%'>
                                                         <Avatar src={comment.creator.avatar} />
                                                         <Spacer />
-                                                        <Box ml='3'className={styles.textBoxContainer} direction = "column">
+                                                        <Box ml='3' width='100%' backgroundColor='#464644' borderRadius='10px' overflow='hidden' direction = "column">
                                                                 
-                                                                <Text className={styles.textNameContainer}>
+                                                                <Text width='100%' paddingLeft='1.5%' paddingBottom='1.5%' fontWeight='bold'>
                                                                     {comment.creator.name}
                                                                 </Text>
-                                                                <Text className={styles.textContainer}>
+                                                                <Text width='100%' height='auto' maxHeight='150px' padding='3%'
+                                                                    sx={
+                                                                        { 
+                                                                        '::-webkit-scrollbar':{
+                                                                            display:'none'
+                                                                        }
+                                                                        }
+                                                                    } 
+                                                                    overflow='hidden' overflowY='scroll'
+                                                                >
                                                                     {comment.content}
                                                                 </Text>
                                                         </Box>
@@ -237,18 +245,18 @@ const PostCard = ({post}) => {
                                 }
                             </>
                         }
-                        <Flex className={styles.postCommentArea} direction='row'>
+                        <Flex padding='1%' direction='row'>
                             <Avatar src={post.profilePic} />
                             <Spacer />
-                            <Box ml='3'className={styles.textAreaContainer} >
-                                <Textarea className={styles.postArea} borderRadius='10px' placeholder='Write a comment...' />  
+                            <Box ml='3'width='100%' backgroundColor='#464644' borderRadius='10px'>
+                                <Textarea padding='1%' borderRadius='10px' placeholder='Write a comment...' />  
                                 
                             </Box>
                             <Spacer />
                             
                         </Flex>
-                        <Flex className={styles.textButtonArea} >
-                            <Box className={styles.textButtonContainer} align='center'>
+                        <Flex width='100%' paddingRight='1%' paddingLeft='1%' paddingBottom='1%' justifyContent='flex-end' >
+                            <Box width='25%' align='center'>
                                 <Button colorScheme='teal' variant='ghost' width='100%' onClick={(e) => handleCommentChange(e)}>
                                     Comment!
                                 </Button>
