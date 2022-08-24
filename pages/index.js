@@ -1,7 +1,7 @@
 import EventCard from '../components/EventCard'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
-import { Container, VStack, useToast, Text, Box } from '@chakra-ui/react'
+import { Container, VStack, useToast, Text, Box, Heading } from '@chakra-ui/react'
 import { getData_Local, isAuthenticated } from '../services/StorageService';
 
 import CONFIG from "../config/config.json";
@@ -74,22 +74,20 @@ function Home()
 	return (
 		loaded ?
 		<>
-			<Navbar />
 			<>
-				<Box marginBottom='30px' textAlign='center' fontWeight='700' fontSize='40px'>
-					<Text > Newsfeed </Text>
+				<Box textAlign='center' width='100%' backgroundColor='green'>
+				<Heading as='h2' size='2xl' padding='10px' color='white'>
+					Newsfeed
+				</Heading>
 				</Box>
-				<VStack>
-					<Container maxW='2xl' >
-						{
-							events.map(
-								(event, index) => (
-									<EventCard key={index} event={event} />
-								)
-							)
-						}
-					</Container>
-				</VStack>
+				{
+					events.map(
+						(event, index) => (
+							<EventCard key={index} event={event} />
+						)
+					)
+				}
+
 			</>
 		</>
 		:

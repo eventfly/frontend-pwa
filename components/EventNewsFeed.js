@@ -14,7 +14,7 @@ const EventNewsFeed = ({event, posts}) => {
                 <TabPanel>
                     <VStack>
                         <Container maxW='2xl' >
-                        <Box textAlign='center' fontSize='large'>
+                        <Box textAlign='justify' fontSize='large'>
                             {event.description}
                         </Box>
                             
@@ -22,20 +22,16 @@ const EventNewsFeed = ({event, posts}) => {
                     </VStack>
                     </TabPanel>
                     <TabPanel>
-                    <VStack>
-                        <Container maxW='2xl' >
-                            {
-                                posts.map(
-                                    (post,i) => (
-                                        <>
-                                            <PostCard post={post}/>  
-                                        </>
-                                        
-                                    )
+                        {
+                            posts.map(
+                                (post,i) => (
+                                    <>
+                                        <PostCard post={post}/>  
+                                    </>
+                                    
                                 )
-                            } 
-                        </Container>
-                    </VStack>
+                            )
+                        } 
                     </TabPanel>
                 </TabPanels>
             </Tabs>
