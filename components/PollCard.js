@@ -1,4 +1,4 @@
-import {Stack, Checkbox, Avatar, Box, Text, Spacer, Button} from "@chakra-ui/react";
+import {Stack, Checkbox, Avatar, Box, Text, Spacer,Flex, Button} from "@chakra-ui/react";
 import {
     Popover, PopoverTrigger,PopoverContent,PopoverHeader,PopoverBody,
     PopoverFooter,PopoverArrow,PopoverCloseButton,PopoverAnchor,
@@ -22,11 +22,11 @@ const PollCard = ({post}) => {
                         {
                             post.poll_options.map(
                                 (options,i) => (
-                                <div key={i}>
+                                <>
                                     <Checkbox>
                                         {options.option}
                                     </Checkbox>
-                                </div>
+                                </>
                                 )
                             )
                         }                   

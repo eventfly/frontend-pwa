@@ -1,4 +1,4 @@
-import {Stack, RadioGroup, Radio, Checkbox, Avatar, Box, Text, Spacer, Button} from "@chakra-ui/react";
+import {Stack, RadioGroup, Radio, Checkbox, Avatar, Box, Flex, Text, Spacer, Button} from "@chakra-ui/react";
 import {
     Popover, PopoverTrigger,PopoverContent,PopoverHeader,PopoverBody,
     PopoverFooter,PopoverArrow,PopoverCloseButton,PopoverAnchor,
@@ -22,7 +22,7 @@ const QuizCard = ({post}) => {
                     {
                         post.questions.map(
                             (question, i) => (
-                                <div key={i}>
+                                <>
                                 {/* { console.log(`outer ${index}`)} */}
 
                                     <Box fontSize='1.2rem' padding='1%' backgroundColor='teal' color='white' borderRadius='0.7%'>
@@ -34,19 +34,19 @@ const QuizCard = ({post}) => {
                                         {   
                                             question.answers.map(
                                                 (answer, j) => (
-                                                <div key={j}>
+                                                <>
                                                     {/* { console.log(`    inner ${index}`)} */}
 
                                                 <Radio>
                                                     {answer.answer}
                                                 </Radio>
-                                                </div>
+                                                </>
                                                 )
                                             )
                                         }                   
                                         </Stack>
                                     </RadioGroup>                        
-                                </div>
+                                </>
                             )
                         )
                     }

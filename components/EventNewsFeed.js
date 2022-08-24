@@ -1,4 +1,4 @@
-import {Container, Tabs, TabList, TabPanels, Tab, TabPanel, VStack, Box, Spacer } from '@chakra-ui/react'
+import {Container, Tabs, TabList, TabPanels, Tab, TabPanel, VStack, Box, Spacer, Flex } from '@chakra-ui/react'
 import PostCard from './PostCard';
 
 
@@ -27,9 +27,9 @@ const EventNewsFeed = ({event, posts}) => {
                             {
                                 posts.map(
                                     (post,i) => (
-                                        <div key={i}>
+                                        <>
                                             <PostCard post={post}/>  
-                                        </div>
+                                        </>
                                         
                                     )
                                 )

@@ -75,7 +75,7 @@ function Home()
 		loaded ?
 		<>
 			<Navbar />
-			<div className="page_style">
+			<>
 				<Box marginBottom='30px' textAlign='center' fontWeight='700' fontSize='40px'>
 					<Text > Newsfeed </Text>
 				</Box>
@@ -90,7 +90,7 @@ function Home()
 						}
 					</Container>
 				</VStack>
-			</div>
+			</>
 		</>
 		:
 			<></>

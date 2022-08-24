@@ -89,7 +89,7 @@ const PostCard = ({post}) => {
                                 {   
                                     post.medias.map(
                                         (media, i) => (
-                                            <div key={i}>
+                                            <>
                                                 <Image src={media.url} alt="image" height='300px' objectFit='cover' width='100%'/>
                                                 <Spacer/>
                                                 {media.caption != '' &&
@@ -101,7 +101,7 @@ const PostCard = ({post}) => {
                                                         </Box>
                                                     </>
                                                 }
-                                            </div>
+                                            </>
                                         )
                                     )
 
@@ -163,7 +163,7 @@ const PostCard = ({post}) => {
                                 {
                                     post.comments.map(
                                         (comment, i) => (
-                                            <div key={i}>
+                                            <>
                                             {comment.is_deleted != true &&
                                                 <>
                                                     <Flex padding='1%'>
@@ -238,7 +238,7 @@ const PostCard = ({post}) => {
                                                     </Flex>
                                                 </>
                                             }
-                                            </div>
+                                            </>
                                             
                                         )
                                     )
