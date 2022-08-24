@@ -1,7 +1,7 @@
 import styles from '../styles/EventCard.module.css'
 // import Link from 'next/link'
 import {Card} from 'react-bootstrap';
-import {Image,Link, Flex, Avatar, Box, Text,Stack, Spacer, Button, Textarea} from "@chakra-ui/react";
+import {Image,Link, Flex, Avatar, Box, Text,Stack, Spacer, Button, Textarea, chakra} from "@chakra-ui/react";
 import { useEffect, useState } from 'react';
 
 const EventCard = (props) => {
@@ -20,7 +20,68 @@ const EventCard = (props) => {
 
     return (
         loaded ?
-            <Box className={"bg-dark text-white " + styles.eventCard} backgroundImage={event.image}>
+            <>
+            <Flex
+              bg="#edf3f8"
+              _dark={{ bg: "#3e3e3e" }}
+              p={50}
+              w="full"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Box
+                mx="auto"
+                rounded="lg"
+                shadow="md"
+                bg="white"
+                _dark={{ bg: "gray.800" }}
+                maxW="2xl"
+              >
+                <Image
+                  roundedTop="lg"
+                  w="full"
+                  h={64}
+                  fit="cover"
+                  src={event.image}
+                  alt="Article"
+                />
+        
+                <Box p={6}>
+                  <Box>
+                    <chakra.span
+                      fontSize="xs"
+                      textTransform="uppercase"
+                      color="brand.600"
+                      _dark={{ color: "brand.400" }}
+                    >
+                      {event.date}
+                    </chakra.span>
+                    <Link
+                      display="block"
+                      color="gray.800"
+                      _dark={{ color: "white" }}
+                      fontWeight="bold"
+                      href={"/event/" + event.url}
+                      fontSize="2xl"
+                      mt={2}
+                      _hover={{ color: "gray.600", textDecor: "underline" }}
+                    >
+                      {event.title}
+                    </Link>
+                    <chakra.p
+                      mt={2}
+                      fontSize="sm"
+                      color="gray.600"
+                      _dark={{ color: "gray.400" }}
+                    >
+                      {event.description}
+                    </chakra.p>
+                  </Box>
+                </Box>
+                </Box>
+        
+            </Flex>
+            {/* <Box className={"bg-dark text-white " + styles.eventCard} backgroundImage={event.image}>
                 <Flex className={styles.overlay}>
                         <Text>
                             {event.date}
@@ -32,7 +93,8 @@ const EventCard = (props) => {
                             {event.description}
                         </Text>
                 </Flex>
-            </Box>
+            </Box> */}
+            </>
         :
             <></>
     );

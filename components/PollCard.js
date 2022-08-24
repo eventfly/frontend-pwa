@@ -1,4 +1,3 @@
-import styles from '../styles/PollCard.module.css'
 import {Stack, Checkbox, Avatar, Box, Text, Spacer, Button} from "@chakra-ui/react";
 import {
     Popover, PopoverTrigger,PopoverContent,PopoverHeader,PopoverBody,
@@ -19,7 +18,7 @@ const PollCard = ({post}) => {
                 <PopoverContent>
                     <PopoverArrow />
                     <PopoverBody>
-                    <Stack className={styles.pollOptionsContainer}>
+                    <Stack padding='1%' color='black'>
                         {
                             post.poll_options.map(
                                 (options,i) => (

@@ -86,9 +86,9 @@ function Navbar({ children }) {
 
 
 const SidebarContent = ({ onClose, ...rest }) => {
-	const userName = getData_Local("userName");
-	const userEmail = getData_Local("userEmail");
-	const userId = getData_Local("userId");
+	// const userName = getData_Local("userName");
+	// const userEmail = getData_Local("userEmail");
+	// const userId = getData_Local("userId");
 
 	return (
 		<Box
@@ -108,10 +108,12 @@ const SidebarContent = ({ onClose, ...rest }) => {
 			</Flex>
 			<Flex direction="column" marginBottom="10" alignItems="left" mx="8">
 				<Text fontSize="lg" fontWeight="bold">
-					{userName}
+					{/* {userName} */}
+					jawad
 				</Text>
 				<Text fontSize="md">
-					{userEmail}
+					{/* {userEmail} */}
+					jawaduk15@gmail.com
 				</Text>
 				{/* <Text fontSize="md" fontFamily="monospace">
           ID: { userId }
