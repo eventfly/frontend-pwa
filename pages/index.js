@@ -1,8 +1,7 @@
 import EventCard from '../components/EventCard'
-import FormTitle from "../components/Form/FormTitle";
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
-import { Container, VStack, useToast } from '@chakra-ui/react'
+import { Container, VStack, useToast, Text, Box } from '@chakra-ui/react'
 import { getData_Local, isAuthenticated } from '../services/StorageService';
 
 import CONFIG from "../config/config.json";
@@ -77,7 +76,9 @@ function Home()
 		<>
 			<Navbar />
 			<div className="page_style">
-				<FormTitle title="Newsfeed"/>
+				<Box marginBottom='30px' textAlign='center' fontWeight='700' fontSize='40px'>
+					<Text > Newsfeed </Text>
+				</Box>
 				<VStack>
 					<Container maxW='2xl' >
 						{

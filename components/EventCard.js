@@ -1,6 +1,3 @@
-import styles from '../styles/EventCard.module.css'
-// import Link from 'next/link'
-import {Card} from 'react-bootstrap';
 import {Image,Link, Flex, Avatar, Box, Text,Stack, Spacer, Button, Textarea, chakra} from "@chakra-ui/react";
 import { useEffect, useState } from 'react';
 

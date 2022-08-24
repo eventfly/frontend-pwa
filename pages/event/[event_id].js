@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
-
-import ImageHeader from '../../components/ImageHeader'
 import SponsorContainer from '../../components/SponsorContainer'
-import EventDesc from '../../components/EventDesc'
 import FAQ from '../../components/FAQ'
 import EventNewsFeed from '../../components/EventNewsFeed'
 
 import CONFIG from "../../config/config.json";
 import { getData } from '../../services/HttpService'
+
+import {Stack, Image, Flex, Avatar, Box, Text, Spacer, Button, Textarea, Center, Checkbox,RadioGroup, Radio} from "@chakra-ui/react";
+
 
 
 function EventDetails()
@@ -356,15 +356,17 @@ function EventDetails()
 		},
 	]
 
+
 	return (
 		loaded ?
-			<div className="event_page_style">
-				<ImageHeader />
-				<EventDesc />
-				<EventNewsFeed posts={posts} />
+			<>
+				<Flex width='100%' height='450px' overflow='hidden' opacity='0.9'>
+					<Image src={event.image} width='100%'/>
+				</Flex>
+				<EventNewsFeed event={event} posts={posts} />
 				<SponsorContainer sponsors={sponsors} />
 				<FAQ faqs={faqs} />
-			</div>
+			</>
 		:
 			<></>
 	);

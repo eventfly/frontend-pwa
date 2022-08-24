@@ -1,16 +1,26 @@
-import styles from '../styles/EventNewsFeed.module.css'
-import {Container, Tabs, TabList, TabPanels, Tab, TabPanel, VStack } from '@chakra-ui/react'
+import {Container, Tabs, TabList, TabPanels, Tab, TabPanel, VStack, Box, Spacer } from '@chakra-ui/react'
 import PostCard from './PostCard';
 
 
-const EventNewsFeed = ({posts}) => {
+const EventNewsFeed = ({event, posts}) => {
     return ( 
         <>
             <Tabs size="lg" isFitted variant='enclosed' >
-                <TabList className={styles.eventNewsFeedTab} >
-                    <Tab _selected={{fontSize:"x-large", bgColor:'green', color:'white'}} _hover={{fontSize:"x-large"}}>Newsfeed</Tab>
+                <TabList backgroundColor='teal.100' color='blue' fontWeight='bold' >
+                    <Tab _selected={{fontSize:"x-large", bgColor:'green', color:'white'}} _hover={{fontSize:"x-large"}}>About</Tab>
+                    <Tab _selected={{fontSize:"x-large", bgColor:'green', color:'white'}} _hover={{fontSize:"x-large"}}>Eventfeed</Tab>
                 </TabList>
                 <TabPanels>
+                <TabPanel>
+                    <VStack>
+                        <Container maxW='2xl' >
+                        <Box textAlign='center' fontSize='large'>
+                            {event.description}
+                        </Box>
+                            
+                        </Container>
+                    </VStack>
+                    </TabPanel>
                     <TabPanel>
                     <VStack>
                         <Container maxW='2xl' >
