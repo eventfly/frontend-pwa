@@ -13,7 +13,7 @@ function Ticket()
     const [ loaded, setLoaded ] = useState(false);
 
     useEffect(() => {
-        const userID = "62fd2a1febb0879735a36814";
+        const userID = getData_Local("userId");
         const userTicketInfoUrl = `${CONFIG.BASE_URL.PARTICIPANT}/api/participant/${userID}/tickets`;
 
         if (!loaded)

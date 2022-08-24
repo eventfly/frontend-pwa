@@ -35,16 +35,16 @@ function Home()
 			return;
 		}
 
-		const newsFeedUrl = `${CONFIG.BASE_URL.PARTICIPANT}/api/participant/${userId}/events`;
-		getData(newsFeedUrl)
-		.then((res) => {
-			console.log("Newsfeed data:", res);
-			setEvents(res);
+		// const newsFeedUrl = `${CONFIG.BASE_URL.PARTICIPANT}/api/participant/${userId}/events`;
+		// getData(newsFeedUrl)
+		// .then((res) => {
+		// 	console.log("Newsfeed data:", res);
+			// setEvents(res);
 			setLoaded(true);
-		})
-		.catch((err) => {
-			console.error(err);
-		});	
+		// })
+		// .catch((err) => {
+		// 	console.error(err);
+		// });	
 	
 	}, []);
 
