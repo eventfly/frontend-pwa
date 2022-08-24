@@ -20,6 +20,8 @@ function Home()
 	// const [ events, setEvents ] = useState(null);
 	const [ loaded, setLoaded ] = useState(true);
 
+	
+
 	useEffect(() => {
 		const isAuth = isAuthenticated();
 		const userId = getData_Local("userId");
@@ -68,6 +70,7 @@ function Home()
 			'description': 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
 		}
 	]
+
 
 	return (
 		loaded ?

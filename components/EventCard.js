@@ -18,6 +18,8 @@ const EventCard = (props) => {
         }
     });
 
+    
+
     return (
         loaded ?
             <>
@@ -42,7 +44,7 @@ const EventCard = (props) => {
                   w="full"
                   h={64}
                   fit="cover"
-                  src={event.image}
+                  src={props.event.image}
                   alt="Article"
                 />
         
@@ -54,19 +56,19 @@ const EventCard = (props) => {
                       color="brand.600"
                       _dark={{ color: "brand.400" }}
                     >
-                      {event.date}
+                      {props.event.date}
                     </chakra.span>
                     <Link
                       display="block"
                       color="gray.800"
                       _dark={{ color: "white" }}
                       fontWeight="bold"
-                      href={"/event/" + event.url}
+                      href={"/event/" + props.event.url}
                       fontSize="2xl"
                       mt={2}
                       _hover={{ color: "gray.600", textDecor: "underline" }}
                     >
-                      {event.title}
+                      {props.event.title}
                     </Link>
                     <chakra.p
                       mt={2}
@@ -74,7 +76,7 @@ const EventCard = (props) => {
                       color="gray.600"
                       _dark={{ color: "gray.400" }}
                     >
-                      {event.description}
+                      {props.event.description}
                     </chakra.p>
                   </Box>
                 </Box>
@@ -95,8 +97,8 @@ const EventCard = (props) => {
                 </Flex>
             </Box> */}
             </>
-        :
-            <></>
+       :
+           <></>
     );
 }
  
