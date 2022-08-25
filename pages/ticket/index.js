@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Container } from "@chakra-ui/react";
+import { Center, Container, Flex, Text, useToast } from "@chakra-ui/react";
 
 import TicketCard from "../../components/TicketCard";
 import { getData_Local } from "../../services/StorageService";
@@ -11,6 +11,9 @@ function Ticket()
 {
     const [ tickets, setTickets ] = useState(null);
     const [ loaded, setLoaded ] = useState(false);
+    const [ hasTicket, setHasTicket ] = useState(false);
+
+    const toast = useToast();
 
     useEffect(() => {
         const userID = getData_Local("userId");
@@ -20,9 +23,19 @@ function Ticket()
         {
             getData(userTicketInfoUrl)
             .then((res) => {
+
+                if (res.length == 0)
+                {
+                    setHasTicket(false);
+                    setLoaded(true);
+                    return;
+                }
+
                 console.log("Tickets Data:", res);
                 setTickets(res);
+                setHasTicket(true);
                 setLoaded(true);
+                return;
             })
             .catch((err) => {
                 console.error(err);
@@ -34,15 +47,33 @@ function Ticket()
     return (
         loaded ?
         <Container>
-        {
-            tickets.map((each, index) => {
-                return <TicketCard key={index} ticket={each} />
-            })
-        }
+            {
+                hasTicket ?
+                <>
+                {
+                    tickets.map((each, index) => {
+                        return <TicketCard key={index} ticket={each} />
+                    })
+                }
+                </>
+                :
+                <>
+                {
+                    <Flex>
+                        <Center
+                            px={"10%"}
+                            py={"80%"}
+                            textAlign={"center"}
+                        >
+                            You have no tickets. Register in events to buy tickets.
+                        </Center>
+                    </Flex>
+                }
+                </>                
+            } 
         </Container>
         :
-        <>
-        </>
+        <></>
     );
 
 }
