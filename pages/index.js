@@ -74,24 +74,21 @@ function Home()
 	return (
 		loaded ?
 		<>
-			<>
-				<Box textAlign='center' width='100%' backgroundColor='green'>
-				<Heading as='h2' size='2xl' padding='10px' color='white'>
-					Newsfeed
-				</Heading>
-				</Box>
-				{
-					events.map(
-						(event, index) => (
-							<EventCard key={index} event={event} />
-						)
+			<Box textAlign='center' width='100%' backgroundColor='green'>
+			<Heading as='h2' size='2xl' padding='10px' color='white'>
+				Newsfeed
+			</Heading>
+			</Box>
+			{
+				events.map(
+					(event, index) => (
+						<EventCard key={index} event={event} />
 					)
-				}
-
-			</>
+				)
+			}
 		</>
 		:
-			<></>
+		<></>
 	);
 }
 
