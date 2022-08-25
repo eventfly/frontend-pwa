@@ -55,19 +55,19 @@ const EventNewsFeed = ({event, posts}) => {
                     <VStack>
                       <MarkdownPost setHtml={setHtml} html={html} />
                         <Center >
-                          <Box maxW="2xl" w={"2xl"} rounded={"2xl"} overflow={"hidden"}>
-                            {
-                                posts.map(
-                                    (post,i) => (
-                                        <>
-                                            <PostCard post={post}/>  
-                                        </>
-                                        
-                                    )
+                      <Box maxW="2xl" w={"2xl"} rounded={"2xl"} overflow={"hidden"}>
+                        {
+                            posts.map(
+                                (post,i) => (
+                                    <>
+                                        <PostCard post={post}/>  
+                                    </>
+                                    
                                 )
-                            }
-                          </Box>
-                        </Center>
+                            )
+                        }
+                      </Box>
+                    </Center>
                     </VStack>
                   </TabPanel>
                 </TabPanels>

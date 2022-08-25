@@ -1,18 +1,21 @@
 import { useState } from 'react';
-import Router from "next/router";
-import FormTitle from "../../components/Form/FormTitle";
 
 import { Stack, Image, Flex, Avatar, Box, Text, Spacer, Button, Textarea, Center, Input, Container, VStack } from "@chakra-ui/react";
 import { postData } from '../../services/HttpService';
 import { getData_Local, storeData_Local } from '../../services/StorageService';
 
-
 import {
-    Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverBody, PopoverCloseButton,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverHeader,
+    PopoverBody,
+    PopoverCloseButton,
 } from '@chakra-ui/react'
 
 import MapBox from '../../components/Map/MapBox'
 import meterPerPixel from '../../components/Map/PixelToMeter';
+
 
 const Search = () => {
 
@@ -41,7 +44,6 @@ const Search = () => {
 
         const latDiff = 360 * radiusKM / earthCircumference;
         const longDiff = 360 * radiusKM / earthCircumference / Math.cos(locationSearch.lat * Math.PI / 180);
-
 
         //api call here/
         console.log("get events within ")
@@ -84,25 +86,26 @@ const Search = () => {
                                     {({ isOpen, onClose }) => (
                                         <>
                                             <PopoverTrigger>
-                                                <Input type='text' id='search' variant='filled' placeholder='Search...' value={textSearch} onChange={(e) => { setTextSearch(e.target.value) }} />
+                                                <Input type='text' id='search' variant='outlined' placeholder='Enter Keywords to Search ...' value={textSearch} onChange={(e) => { setTextSearch(e.target.value) }} />
                                             </PopoverTrigger>
                                             <PopoverContent>
-                                                <PopoverBody p={4}>
-                                                    <VStack py={4} display='flex' flexDirection='column' alignItems='center'>
-                                                        <Button rounded={'md'} colorScheme='blue' onClick={() => { changeSearchMode("location") }}>Search By Location Instead</Button>
-                                                        <Button rounded={'md'} variant='ghost' onClick={onClose}>Cancel</Button>
+                                                <PopoverBody p={2}>
+                                                    <VStack py={2} display='flex' flexDirection='column' alignItems='center'>
+                                                        <Button rounded={'md'} w={"full"} colorScheme='blue' onClick={() => { changeSearchMode("location") }}>Search By Location Instead</Button>
+                                                        <Button rounded={'md'} w={"full"} variant='ghost' onClick={onClose}>Cancel</Button>
                                                     </VStack>
                                                 </PopoverBody>
                                             </PopoverContent>
                                         </>
                                     )}
                                 </Popover>
-
-                                <Spacer px={4} />
-                                <Button w={32} colorScheme='teal' variant='solid' onClick={handleTextSearch}>
-                                    Search
-                                </Button>
                             </Flex>
+
+                            <Spacer py={2} />
+                                <Button w={"full"} colorScheme='teal' variant='solid' onClick={handleTextSearch}>
+                                    Search
+                            </Button>
+
                         </Container>
                     </VStack>
                 ) : (
@@ -133,7 +136,4 @@ const Search = () => {
     );
 }
 
-
-
 export default Search;
-
