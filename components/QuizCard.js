@@ -56,7 +56,7 @@ const QuizCard = ({post}) => {
         for( var i = 0; i < size; i++){
             quizAnswers.push({
                 "answer_index": 0,
-                "time": new Date().toUTCString
+                "time": new Date().toUTCString()
             });
         }
     }, []);
