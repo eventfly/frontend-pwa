@@ -62,14 +62,20 @@ function UserProfileCard()
 	];
 
 	const [ userName, setUserName ] = useState("");
+	const [ userAvatar, setUserAvatar ] = useState("");
 	const [ loaded, setLoaded ] = useState(false);
 	const [ eventList, setEventList ] = useState(null);
 	const [ reviewList, setReviewList ] = useState(null);
 	
 	useEffect(() => {
+		setUserName(getData_Local("userName"));
+		setUserAvatar(getData_Local("userAvatar"));
+
+		//	TODO	->	Get Data from Backend
 		setEventList(_eventList);
 		setReviewList(_reviewList);
-		setUserName(getData_Local("userName"));
+		//	---------------------------------
+
 		setLoaded(true);
 	}, []);
 
@@ -81,23 +87,11 @@ function UserProfileCard()
 					w={"full"}
 					bg={useColorModeValue("white", "gray.800")}
 					rounded={"md"}
-					overflow={"hidden"}
 				>
-					<Image
-						h={"180px"}
-						w={"full"}
-						src={
-							"https://images.unsplash.com/photo-1612865547334-09cb8cb455da?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-						}
-						objectFit={"cover"}
-					/>
-					<Flex justify={"center"} mt={-12}>
+					<Flex justify={"center"} mt={12}>
 						<Avatar
-							size={"xxl"}
-							src={
-								"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-							}
-							alt={"Author"}
+							size={"2xl"}
+							src={ userAvatar}
 							css={{
 								border: "6px solid white",
 							}}
@@ -111,7 +105,7 @@ function UserProfileCard()
 							</Heading>
 						</Stack>
 
-						<Tabs variant="soft-rounded" colorScheme="green">
+						<Tabs variant="soft-rounded" colorScheme="teal">
 							<Center>
 								<TabList>
 									<Tab>Reviews</Tab>
@@ -121,16 +115,21 @@ function UserProfileCard()
 
 							<TabPanels>
 								<TabPanel>
-									<ReviewCard review={reviewList[0]} />
-									<ReviewCard review={reviewList[1]} />
-									<ReviewCard review={reviewList[0]} />
+									{
+										reviewList.map((review, index) => {
+											return <ReviewCard key={index} review={review} />
+										})
+									}
 								</TabPanel>
 
 								<TabPanel>
 									<Center >
 										<Box maxW="lg" w="lg" rounded={"md"} overflow={"hidden"}>
-											<EventCard event={eventList[0]} />
-											<EventCard event={eventList[1]} />
+											{
+												eventList.map((event, index) => {
+													return <EventCard key={index} event={event} />
+												})
+											}
 										</Box>
 									</Center>
 								</TabPanel>
