@@ -1,8 +1,11 @@
-import '../styles/globals.css';
 import { ChakraProvider } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { initializeApp } from "firebase/app";
+import { getStorage, getStoreage } from "firebase/storage";
+
 import Layout from '../layouts/Default';
 import NoAuthLayout from '../layouts/NoAuth';
-import { useEffect, useState } from "react";
+import firebaseConfig from "../config/firebase.json";
 
 import { isAuthenticated } from "../services/StorageService";
 
@@ -33,3 +36,6 @@ function MyApp({ Component, pageProps})
 }
 
 export default MyApp;
+
+export const app = initializeApp(firebaseConfig);
+export const storage = getStorage(app);
