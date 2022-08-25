@@ -25,7 +25,11 @@ import {
 	FiLock,
 	FiEyeOff,
 	FiSearch,
-	FiChevronDown
+	FiChevronDown,
+	FiSettings,
+	FiUser,
+	FiSmartphone,
+	FiCalendar
 } from 'react-icons/fi';
 
 import Link from "next/link";
@@ -39,9 +43,14 @@ const LinkItems = [
 		icon: FiLock
 	},
 	{
+		name: "My Events",
+		link: "/my-events",
+		icon: FiCalendar
+	},
+	{
 		name: "Ticket",
 		link: "/ticket",
-		icon: FiInfo
+		icon: FiSmartphone
 	},
 	{
 		name: "Search",
@@ -49,10 +58,20 @@ const LinkItems = [
 		icon: FiSearch
 	},
 	{
+		name: "Profile",
+		link: "/profile",
+		icon: FiUser
+	},
+	{
+		name: "Settings",
+		link: "/settings",
+		icon: FiSettings
+	},
+	{
 		name: "Signout",
 		link: "/signout",
 		icon: FiEyeOff
-	}
+	},
 ];
 
 function Navbar({ children }) {
@@ -86,9 +105,8 @@ function Navbar({ children }) {
 
 
 const SidebarContent = ({ onClose, ...rest }) => {
-	// const userName = getData_Local("userName");
-	// const userEmail = getData_Local("userEmail");
-	// const userId = getData_Local("userId");
+	const userName = getData_Local("userName");
+	const userEmail = getData_Local("userEmail");
 
 	return (
 		<Box
@@ -99,7 +117,8 @@ const SidebarContent = ({ onClose, ...rest }) => {
 			w={{ base: 'full', md: 60 }}
 			pos="fixed"
 			h="full"
-			{...rest}>
+			{...rest}
+		>
 			<Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
 				<Text fontSize="3xl" fontWeight="bold">
 					EventFly
@@ -108,16 +127,11 @@ const SidebarContent = ({ onClose, ...rest }) => {
 			</Flex>
 			<Flex direction="column" marginBottom="10" alignItems="left" mx="8">
 				<Text fontSize="lg" fontWeight="bold">
-					{/* {userName} */}
-					jawad
+					{userName}
 				</Text>
 				<Text fontSize="md">
-					{/* {userEmail} */}
-					jawaduk15@gmail.com
+					{userEmail}
 				</Text>
-				{/* <Text fontSize="md" fontFamily="monospace">
-          ID: { userId }
-        </Text> */}
 			</Flex>
 			{
 				LinkItems.map((each) => (
