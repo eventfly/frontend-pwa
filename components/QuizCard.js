@@ -29,7 +29,7 @@ const QuizCard = ({post}) => {
                                         {question.question}
                                     </Box>
                                     
-                                    <RadioGroup>
+                                    <RadioGroup >
                                         <Stack padding='1%' backgroundColor='white' color='#464644' borderRadius='0.7%'>
                                         {   
                                             question.answers.map(
@@ -37,7 +37,7 @@ const QuizCard = ({post}) => {
                                                 <>
                                                     {/* { console.log(`    inner ${index}`)} */}
 
-                                                <Radio>
+                                                <Radio value={answer.answer} key={j}>
                                                     {answer.answer}
                                                 </Radio>
                                                 </>
