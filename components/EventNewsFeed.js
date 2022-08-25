@@ -1,9 +1,15 @@
 import {Container, Tabs, TabList, TabPanels, Tab, TabPanel, VStack,useColorModeValue, Box,Center, Image, Spacer, Flex } from '@chakra-ui/react'
 import PostCard from './PostCard';
 
+import MarkdownPost from './MarkdownPost';
+import {useState} from 'react';
 
 const EventNewsFeed = ({event, posts}) => {
+
+    const [html, setHtml] = useState('');
     return (
+      <>
+      
         <Center py={6}>
           <Box
             maxW={"90%"}
@@ -46,7 +52,9 @@ const EventNewsFeed = ({event, posts}) => {
                   </TabPanel>
     
                   <TabPanel>
-                    <Center >
+                    <VStack>
+                      <MarkdownPost setHtml={setHtml} html={html} />
+                        <Center >
                       <Box maxW="2xl" w={"2xl"} rounded={"2xl"} overflow={"hidden"}>
                         {
                             posts.map(
@@ -54,17 +62,20 @@ const EventNewsFeed = ({event, posts}) => {
                                     <>
                                         <PostCard post={post}/>  
                                     </>
+                                    
                                 )
                             )
                         }
                       </Box>
                     </Center>
+                    </VStack>
                   </TabPanel>
                 </TabPanels>
               </Tabs>
             </Box>
           </Box>
         </Center>
+      </>
       );
 }
  

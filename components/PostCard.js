@@ -9,6 +9,9 @@ import {getData_Local, storeData_Local} from '../services/StorageService';
 import PollCard from './PollCard';
 import QuizCard from './QuizCard';
 
+import parse from 'html-react-parser'
+
+
 
 
 const PostCard = ({post}) => {
@@ -88,7 +91,7 @@ const PostCard = ({post}) => {
                                     <>
                                         <Box padding='1%'>
                                             <Text fontSize='lg' textAlign='justify' padding='1%'> 
-                                                {post.content}
+                                                {parse(post.content)}
                                             </Text>
                                         </Box>
                                     </>
