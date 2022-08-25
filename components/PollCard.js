@@ -12,22 +12,28 @@ const PollCard = ({post}) => {
     var pollOptions = [];
     const size = post.poll_options.length;
 
-    function handleOptionSelected(i) {
+    function handleOptionSelected(event, index)
+    {
         console.log("inside handle select")
-        console.log("i: ",i)
-        console.log(pollOptions[i].is_selected)
-        if(pollOptions[i].is_selected)
-            pollOptions[i].is_selected = false;
+        console.log("i:", index)
+
+        if (pollOptions[index].is_selected)
+            pollOptions[index].is_selected = false;
         else
-            pollOptions[i].is_selected = true;   
-        console.log(pollOptions[i].is_selected)    
+            pollOptions[index].is_selected = true;
+
+        console.log("Poll Options:");
+        console.table(pollOptions);
     }
 
-    const sendData = () => {
+    function sendData()
+    {
         console.log("inside sendData")
         setPollOptionData(pollOptions);
+
         console.log("pollOptions--")
         console.log(pollOptions);
+
         console.log("pollOptionData--")
         console.log(pollOptionData);
 
@@ -50,9 +56,8 @@ const PollCard = ({post}) => {
         }).catch((err) => {
             console.log("error");
         });
-
-
     }
+
     useEffect(() => {
         for( var i = 0; i < size; i++){
             pollOptions.push({
@@ -63,7 +68,6 @@ const PollCard = ({post}) => {
     }, []);
 
     return ( 
-
         <>
             <Popover>
                 <Stack direction='column'>
@@ -80,7 +84,7 @@ const PollCard = ({post}) => {
                             post.poll_options.map(
                                 (options,i) => (
                                 <>
-                                    <Checkbox onChange={handleOptionSelected(i)}>
+                                    <Checkbox onChange={(e) => handleOptionSelected(e, i)}>
                                         {options.option}
                                     </Checkbox>
                                 </>
