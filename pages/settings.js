@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import Router from "next/router";
+import { useEffect, useState } from 'react';
 import { postData } from '../services/HttpService';
-import {getData_Local, storeData_Local} from '../services/StorageService';
+import { getData_Local, storeData_Local } from '../services/StorageService';
+import CONFIG from "../config/config.json";
+
 import {
     Button,
     Flex,
@@ -11,66 +12,133 @@ import {
     Input,
     Stack,
     useColorModeValue,
-    HStack,
     Avatar,
-    AvatarBadge,
-    IconButton,
     Center,
-    Box, 
+    Box,
     VStack,
-    Container
-  } from '@chakra-ui/react';
-  import { SmallCloseIcon } from '@chakra-ui/icons';
+    Container,
+    RadioGroup,
+    HStack,
+    Radio,
+    FormHelperText,
+    useToast
+} from '@chakra-ui/react';
 
-const Settings = () => {
+import {
+    getStorage,
+    ref,
+    uploadBytesResumable,
+    getDownloadURL
+} from "firebase/storage";
 
-    const [email, setEmail] = useState('');
-    const [name, setName] = useState('');
-    const [profileImage, setProfileImage] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+function Settings() {
+    const toast = useToast();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('handleSubmit')
-        console.log(name)
-        console.log(email)
-        console.log(password)
-        console.log(confirmPassword)
-        if(password != confirmPassword){
-            console.log("Password doesn't match")
-        }
-        else{
-            const userID = getData_Local("userId"); 
+    const [loaded, setLoaded] = useState(false);
+    const [userName, setUserName] = useState("");
+    const [password, setPassword] = useState("");
+    const [userAvatar, setUserAvatar] = useState("");
 
-            const updatedUrl = '';
-            let updatedParticipant = {
-                userID: userID,
-                name: name,
-                email: email,
-                password: password,
-                profileImage: profileImage
 
-            }
-
-            postData(updatedUrl, updatedParticipant)
-            .then((data) => {
-                console.log("Response data:", data);
-                storeData_Local("token", data.token);
-            }).catch((err)=>{
-                console.log('error')
-            })
-
-        }
-
-        
-
-        
-
+    function openFilePicker(e) {
+        const avatarImageFileElem = document.getElementById("avatarImage");
+        avatarImageFileElem.click();
     }
 
-    return (
+    function uploadImage(e) {
+        const avatarImageFile = e.target.files[0];
+        const fileNameParts = avatarImageFile.name.split(".");
+        const fileExtension = fileNameParts[fileNameParts.length - 1];
 
+        const randomUUID = crypto.randomUUID();
+        const avatarImageFileName = `${randomUUID}.${fileExtension}`;
+        console.log(avatarImageFileName);
+
+        //  Uploading to firebase
+        //  baseRef is the default bucket reference
+        //  storageRef is the folder reference for 'avatar'
+        const storage = getStorage();
+        const baseRef = ref(storage, avatarImageFileName);
+        const storageRef = ref(baseRef, "avatar");
+        const uploadTask = uploadBytesResumable(storageRef, avatarImageFile);
+
+        uploadTask.on("state_changed",
+            (snapshot) => {
+                console.log("Loading");
+            },
+            (error) => {
+                console.log("Error in uploading avatar!");
+                toast({
+                    title: "Error in uploading avatar image",
+                    duration: 2000,
+                    status: "error",
+                    isClosable: true
+                });
+            },
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref)
+                    .then((url) => {
+                        console.log("Download url:", url);
+                        storeData_Local("userAvatar", url);
+                        setUserAvatar(url);
+                    });
+            }
+        );
+    }
+
+    function updateProfile(e)
+    {
+        e.preventDefault();
+
+        const passwordElem = document.getElementById("password");
+        const confirmPasswordElem = document.getElementById("confirmPassword");
+        const genderElem = document.getElementById("gender");
+
+        const userName = document.getElementById("userName");
+        const password = passwordElem.value.trim();
+        const confirmPassword = confirmPasswordElem.value.trim();
+        const gender = genderElem.value;
+
+        if (userName === "")
+        {
+            toast({
+                title: "Username can't be blank!",
+                duration: 2000,
+                isClosable: true,
+            });
+            return;            
+        }
+
+        if (password != confirmPassword) {
+            toast({
+                title: "Passwords don't match!",
+                description: "Make sure you have entered your password correctly!",
+                duration: 2000,
+                status: "error",
+                isClosable: true
+            });
+            passwordElem.value = "";
+            confirmPasswordElem.value = "";
+            return;
+        }
+
+        console.log("password: ", password);
+        console.log("confirmPassword:", confirmPassword);
+        console.log("avatar Link: ", userAvatar);
+
+        const url = `${CONFIG.BASE_URL.PARTICIPANT}/api/participant/profile`;
+        //  TO DO
+        //  POST/UPDATE data to backend
+    }
+
+    useEffect(() => {
+        //  Settings existing data
+        setUserName(getData_Local("userName"));
+        setUserAvatar(getData_Local("userAvatar"));
+    }, []);
+
+
+    return (
         <>
             <Box textAlign='center' width='100%' backgroundColor='green'>
                 <Heading as='h2' size='2xl' padding='10px' color='white'>
@@ -79,93 +147,91 @@ const Settings = () => {
             </Box>
 
             <VStack>
-				<Container maxW='2xl' >
+                <Container maxW='2xl' >
                     <Flex
-                    align={'center'}
-                    justify={'center'}
-                    bg={useColorModeValue('gray.50', 'gray.800')}
-                    width='100%'
+                        align={'center'}
+                        justify={'center'}
+                        bg={useColorModeValue('gray.50', 'gray.800')}
+                        width='100%'
                     >
                         <Stack
-                        spacing={4}
-                        bg={useColorModeValue('white', 'gray.700')}
-                        p={6}
-                        my={12}
-                        width='100%'
+                            spacing={4}
+                            bg={useColorModeValue('white', 'gray.700')}
+                            p={6}
+                            my={12}
+                            width='100%'
                         >
-                            <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl' }} textAlign='center'>
-                                Account
-                            </Heading>
-                            <FormControl id="userName">
+                            <FormControl>
                                 <Stack direction={['column', 'row']} spacing={6}>
-                                <Center>
-                                    <Avatar size="xl" src="https://bit.ly/sage-adebayo">
-                                    </Avatar>
-                                </Center>
-                                <Center w="full">
-                                    <Button w="full">Change Profile Photo</Button>
-                                </Center>
+                                    <Center>
+                                        <Avatar size="xl" src={userAvatar}>
+                                        </Avatar>
+                                    </Center>
+                                    <Center w="full">
+                                        <Button w="full" onClick={openFilePicker}>
+                                            Change Profile Photo
+                                            <input type="file" hidden id="avatarImage" onChange={uploadImage} />
+                                        </Button>
+                                    </Center>
                                 </Stack>
                             </FormControl>
-                            <FormControl id="userName">
+                            <FormControl>
                                 <FormLabel>Name</FormLabel>
                                 <Input
-                                placeholder="UserName"
-                                _placeholder={{ color: 'gray.500' }}
-                                type="text"
-                                value={name}
-                                onChange={(e) => {setName(e.target.value)}}
+                                    id="userName"
+                                    placeholder="Type your name"
+                                    _placeholder={{ color: 'gray.500' }}
+                                    type="text"
                                 />
                             </FormControl>
-                            <FormControl id="email">
-                                <FormLabel>Email</FormLabel>
-                                <Input
-                                placeholder="your-email@example.com"
-                                _placeholder={{ color: 'gray.500' }}
-                                type="email"
-                                value={email}
-                                onChange={(e) => {setEmail(e.target.value)}}
-                                />
-                            </FormControl>
-                            <FormControl id="password">
+                            <FormControl>
                                 <FormLabel>Password</FormLabel>
                                 <Input
-                                placeholder="password"
-                                _placeholder={{ color: 'gray.500' }}
-                                type="password"
-                                value={password}
-                                onChange={(e) => {setPassword(e.target.value)}}
+                                    placeholder="Type your password"
+                                    _placeholder={{ color: 'gray.500' }}
+                                    type="password"
+                                    id="password"
                                 />
                             </FormControl>
-                            <FormControl id="confirmPassword">
+                            <FormControl>
                                 <FormLabel>Confirm Password</FormLabel>
                                 <Input
-                                placeholder="password"
-                                _placeholder={{ color: 'gray.500' }}
-                                type="password"
-                                value={confirmPassword}
-                                onChange={(e) => {setConfirmPassword(e.target.value)}}
+                                    placeholder="Type your password again"
+                                    _placeholder={{ color: 'gray.500' }}
+                                    type="password"
+                                    id="confirmPassword"
                                 />
+                            </FormControl>
+                            <FormControl as='fieldset'>
+                                <FormLabel as='legend'>Gender</FormLabel>
+                                <RadioGroup defaultValue='Itachi' id="gender">
+                                    <HStack spacing='24px'>
+                                        <Radio value='Man'>Man</Radio>
+                                        <Radio value='Woman'>Woman</Radio>
+                                        <Radio value='Others'>Others</Radio>
+                                    </HStack>
+                                </RadioGroup>
                             </FormControl>
                             <Stack spacing={6} direction={['column', 'row']}>
                                 <Button
-                                bg={'red.400'}
-                                color={'white'}
-                                w="full"
-                                _hover={{
-                                    bg: 'red.500',
-                                }}>
-                                Cancel
+                                    bg={'red.400'}
+                                    color={'white'}
+                                    w="full"
+                                    _hover={{
+                                        bg: 'red.500',
+                                    }}>
+                                    Cancel
                                 </Button>
                                 <Button
-                                bg={'blue.400'}
-                                color={'white'}
-                                w="full"
-                                onClick={(e) => handleSubmit(e)}
-                                _hover={{
-                                    bg: 'blue.500',
-                                }}>
-                                Save
+                                    bg={'blue.400'}
+                                    color={'white'}
+                                    w="full"
+                                    _hover={{
+                                        bg: 'blue.500',
+                                    }}
+                                    onClick={updateProfile}
+                                >
+                                    Update Profile
                                 </Button>
                             </Stack>
                         </Stack>
@@ -173,7 +239,6 @@ const Settings = () => {
 
                 </Container>
             </VStack>
-                   
         </>
 
     );
