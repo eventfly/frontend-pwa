@@ -54,7 +54,6 @@ const EventNewsFeed = ({event, posts}) => {
                                     <>
                                         <PostCard post={post}/>  
                                     </>
-                                    
                                 )
                             )
                         }
