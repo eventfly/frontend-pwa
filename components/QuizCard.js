@@ -3,8 +3,64 @@ import {
     Popover, PopoverTrigger,PopoverContent,PopoverHeader,PopoverBody,
     PopoverFooter,PopoverArrow,PopoverCloseButton,PopoverAnchor,
   } from '@chakra-ui/react'
+import { postData } from '../services/HttpService';  
+import {getData_Local, storeData_Local} from '../services/StorageService';
+import {useState, useEffect} from 'react';
+
 
 const QuizCard = ({post}) => {
+    var quizAnswers = [];
+    const size = post.questions.length;
+
+    function handleQuizAnswers(event, index1, index2)
+    {
+        console.log("inside handle Answer")
+        console.log("i:", index1)
+        console.log("j:", index2)
+        
+        quizAnswers[index1].answer_index = index2;
+
+        console.log("quiz Answers:");
+        console.table(quizAnswers);
+    }
+
+    function sendData()
+    {
+        console.log("inside sendData")
+
+        console.log("quizAnswers--")
+        console.log(quizAnswers);
+
+
+        const userID = getData_Local("userId"); 
+
+        const quizUrl = '';
+        const payload = {
+            postID: post._id,
+            userID: userID,
+            answer_index: quizAnswers
+        }
+        console.log("payload--")
+        console.log(payload)
+
+        postData(quizUrl, payload)
+        .then((data) => {
+            console.log("Response data:", data);
+            storeData_Local("token", data.token);
+        }).catch((err) => {
+            console.log("error");
+        });
+    }
+
+    useEffect(() => {
+        for( var i = 0; i < size; i++){
+            quizAnswers.push({
+                "answer_index": 0,
+                "time": new Date().toUTCString
+            });
+        }
+    }, []);
+
     return ( 
 
         <>
@@ -23,8 +79,6 @@ const QuizCard = ({post}) => {
                         post.questions.map(
                             (question, i) => (
                                 <>
-                                {/* { console.log(`outer ${index}`)} */}
-
                                     <Box fontSize='1.2rem' padding='1%' backgroundColor='teal' color='white' borderRadius='0.7%'>
                                         {question.question}
                                     </Box>
@@ -35,11 +89,9 @@ const QuizCard = ({post}) => {
                                             question.answers.map(
                                                 (answer, j) => (
                                                 <>
-                                                    {/* { console.log(`    inner ${index}`)} */}
-
-                                                <Radio value={answer.answer} key={j}>
-                                                    {answer.answer}
-                                                </Radio>
+                                                    <Radio value={answer.answer} key={j} onChange={(e) => handleQuizAnswers(e, i, j)}>
+                                                        {answer.answer}
+                                                    </Radio>
                                                 </>
                                                 )
                                             )
@@ -50,7 +102,7 @@ const QuizCard = ({post}) => {
                             )
                         )
                     }
-                    <Button colorScheme='teal'  width='100%'>Submit</Button>           
+                    <Button colorScheme='teal'  width='100%' onClick={() => sendData()} >Submit</Button>           
                     </PopoverBody>
                 </PopoverContent>
             </Popover>

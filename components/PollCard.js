@@ -8,7 +8,6 @@ import {getData_Local, storeData_Local} from '../services/StorageService';
 import {useState, useEffect} from 'react';
 
 const PollCard = ({post}) => {
-    const [pollOptionData, setPollOptionData] = useState(null);
     var pollOptions = [];
     const size = post.poll_options.length;
 
@@ -29,13 +28,9 @@ const PollCard = ({post}) => {
     function sendData()
     {
         console.log("inside sendData")
-        setPollOptionData(pollOptions);
 
         console.log("pollOptions--")
         console.log(pollOptions);
-
-        console.log("pollOptionData--")
-        console.log(pollOptionData);
 
 
         const userID = getData_Local("userId"); 
