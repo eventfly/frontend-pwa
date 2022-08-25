@@ -1,18 +1,41 @@
-import {Container, Tabs, TabList, TabPanels, Tab, TabPanel, VStack, Box, Spacer, Flex } from '@chakra-ui/react'
+import {Container, Tabs, TabList, TabPanels, Tab, TabPanel, VStack,useColorModeValue, Box,Center, Image, Spacer, Flex } from '@chakra-ui/react'
 import PostCard from './PostCard';
 
 
 const EventNewsFeed = ({event, posts}) => {
-    return ( 
-        <>
-            <Tabs size="lg" isFitted variant='enclosed' >
-                <TabList backgroundColor='teal.100' color='blue' fontWeight='bold' >
-                    <Tab _selected={{fontSize:"x-large", bgColor:'green', color:'white'}} _hover={{fontSize:"x-large"}}>About</Tab>
-                    <Tab _selected={{fontSize:"x-large", bgColor:'green', color:'white'}} _hover={{fontSize:"x-large"}}>Eventfeed</Tab>
-                </TabList>
+    return (
+        <Center py={6}>
+          <Box
+            maxW={"90%"}
+            w={"full"}
+            bg={useColorModeValue("white", "gray.800")}
+            rounded={"md"}
+            overflow={"hidden"}
+          >
+            <Image
+              h={"180px"}
+              w={"full"}
+              src={
+                "https://images.unsplash.com/photo-1612865547334-09cb8cb455da?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+              }
+              // src = {event.banner_url}
+              objectFit={"cover"}
+            />
+            
+    
+            <Box p={0.1}>
+    
+              <Tabs variant="soft-rounded" colorScheme="green">
+                <Center>
+                  <TabList>
+                    <Tab>About</Tab>
+                    <Tab>Discussion</Tab>
+                  </TabList>
+                </Center>
+    
                 <TabPanels>
-                <TabPanel>
-                    <VStack>
+                  <TabPanel>
+                  <VStack>
                         <Container maxW='2xl' >
                         <Box textAlign='justify' fontSize='large'>
                             {event.description}
@@ -20,8 +43,11 @@ const EventNewsFeed = ({event, posts}) => {
                             
                         </Container>
                     </VStack>
-                    </TabPanel>
-                    <TabPanel>
+                  </TabPanel>
+    
+                  <TabPanel>
+                    <Center >
+                      <Box maxW="2xl" w={"2xl"} rounded={"2xl"} overflow={"hidden"}>
                         {
                             posts.map(
                                 (post,i) => (
@@ -31,12 +57,16 @@ const EventNewsFeed = ({event, posts}) => {
                                     
                                 )
                             )
-                        } 
-                    </TabPanel>
+                        }
+                      </Box>
+                    </Center>
+                  </TabPanel>
                 </TabPanels>
-            </Tabs>
-        </>
-    );
+              </Tabs>
+            </Box>
+          </Box>
+        </Center>
+      );
 }
  
 export default EventNewsFeed;

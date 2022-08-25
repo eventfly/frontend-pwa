@@ -13,6 +13,15 @@ import QuizCard from './QuizCard';
 
 const PostCard = ({post}) => {
     const [comment, setComment] = useState('');
+    const [showComment, setShowComment] = useState(false);
+
+    const handleShowComment = () => {
+        console.log(showComment)
+        if(showComment == false)
+            setShowComment(true)
+        else if(showComment == true)
+            setShowComment(false)
+    }
 
     const handleCommentChange = (e) => {
         let inputComment = e.target.value;
@@ -59,10 +68,10 @@ const PostCard = ({post}) => {
     return ( 
         <>
             <VStack>
-                    <Container maxW='2xl' padding='40px' borderRadius='10px' >      
+                <Container maxW='2xl' padding='40px' borderRadius='10px' >      
                     {post.is_deleted != true &&
                         <>
-                            <Box backgroundColor='black' color='white' borderRadius='10px'> 
+                            <Box backgroundColor='gray.100' color='black' borderRadius='10px'> 
                                 <Flex padding='1%'>
                                     <Avatar src={post.creator.avatar} />
                                     <Box ml='3'>
@@ -78,7 +87,7 @@ const PostCard = ({post}) => {
                                 {post.content != '' &&
                                     <>
                                         <Box padding='1%'>
-                                            <Text fontSize='lg' textAlign='justify'> 
+                                            <Text fontSize='lg' textAlign='justify' padding='1%'> 
                                                 {post.content}
                                             </Text>
                                         </Box>
@@ -96,8 +105,8 @@ const PostCard = ({post}) => {
                                                         <Spacer/>
                                                         {media.caption != '' &&
                                                             <>
-                                                                <Box padding='1%' backgroundColor='#464644' borderRadius="10px">
-                                                                    <Text fontSize='md' textAlign='justify'> 
+                                                                <Box padding='1%' backgroundColor='gray.200' borderRadius="10px" color='black'>
+                                                                    <Text fontSize='md' textAlign='justify' padding='1%'> 
                                                                         {media.caption}
                                                                     </Text>
                                                                 </Box>
@@ -155,12 +164,12 @@ const PostCard = ({post}) => {
                                     </Box>
                                     <Spacer />
                                     <Box width='50%'align='center'>
-                                        <Button colorScheme='teal' variant='ghost' width='100%'>
+                                        <Button colorScheme='teal' variant='ghost' width='100%' onClick={() => handleShowComment()}>
                                             Comment
                                         </Button>
                                     </Box>
                                 </Flex>
-                                {post.comments.length > 0 &&
+                                {post.comments.length > 0 && showComment === true &&
                                     <>
                                         {
                                             post.comments.map(
@@ -171,7 +180,7 @@ const PostCard = ({post}) => {
                                                             <Flex padding='1%'>
                                                                 <Avatar src={comment.creator.avatar} />
                                                                 <Spacer />
-                                                                <Box ml='3' width='100%' backgroundColor='#464644' borderRadius='10px' overflow='hidden' direction = "column">
+                                                                <Box ml='3' width='100%' backgroundColor='white' borderRadius='10px' overflow='hidden' direction = "column">
                                                                         
                                                                         <Text width='100%' paddingLeft='1.5%' paddingBottom='1.5%' fontWeight='bold'>
                                                                             {comment.creator.name}
@@ -250,7 +259,7 @@ const PostCard = ({post}) => {
                                 <Flex padding='1%' direction='row'>
                                     <Avatar src={post.profilePic} />
                                     <Spacer />
-                                    <Box ml='3'width='100%' backgroundColor='#464644' borderRadius='10px'>
+                                    <Box ml='3'width='100%' backgroundColor='white' borderRadius='10px'>
                                         <Textarea padding='1%' borderRadius='10px' placeholder='Write a comment...' />  
                                         
                                     </Box>
@@ -260,7 +269,7 @@ const PostCard = ({post}) => {
                                 <Flex width='100%' paddingRight='1%' paddingLeft='1%' paddingBottom='1%' justifyContent='flex-end' >
                                     <Box width='25%' align='center'>
                                         <Button colorScheme='teal' variant='ghost' width='100%' onClick={(e) => handleCommentChange(e)}>
-                                            Comment!
+                                            Comment
                                         </Button>
                                     </Box>
                     

@@ -11,6 +11,7 @@ import {Stack, Image, Flex, Avatar, Box, Text, Spacer, Button, Textarea, Center,
 
 
 
+
 function EventDetails()
 {
 	const router = useRouter();
@@ -360,9 +361,9 @@ function EventDetails()
 	return (
 		loaded ?
 			<>
-				<Flex width='100%' height='450px' overflow='hidden' opacity='0.9'>
-					<Image src={event.image} width='100%'/>
-				</Flex>
+				{/* <Flex width='100%' height='450px' overflow='hidden' opacity='0.9'>
+					<Image src={event.banner_url} width='100%'/>
+				</Flex> */}
 				<EventNewsFeed event={event} posts={posts} />
 				<SponsorContainer sponsors={sponsors} />
 				<FAQ faqs={faqs} />
