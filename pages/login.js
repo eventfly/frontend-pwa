@@ -7,7 +7,12 @@ import {
 	Heading,
 	Box,
 	Link,
-	useToast
+	useToast,
+	Checkbox,
+	Flex,
+	FormControl,
+	FormLabel,
+	Image,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
@@ -16,23 +21,20 @@ import { getData, postData } from "../services/HttpService";
 import { getData_Local, isAuthenticated, storeData_Local, storeJSON_Local } from "../services/StorageService";
 
 
-function Home()
-{
+function Home() {
 	const toast = useToast();
 	const router = useRouter();
 
-	const [ authenticated, setAuthenticated ] = useState(false);
+	const [authenticated, setAuthenticated] = useState(false);
 
-	function handleSignIn()
-	{
+	function handleSignIn() {
 		const emailElem = document.getElementById("email");
 		const email = emailElem.value;
 		const passwordElem = document.getElementById("password");
 		const password = passwordElem.value;
 
 		//	Cheking Email Format using Regex
-		if (! /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email) )
-		{
+		if (! /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
 			emailElem.value = "";
 			passwordElem.value = "";
 
@@ -54,28 +56,40 @@ function Home()
 		}
 
 		postData(signInUrl, payload)
-		.then((data) => {
-			console.log("Response data:", data);
-			
-			storeData_Local("token", data.token);
-			storeData_Local("userName", data.existingUser.name);
-			storeData_Local("userEmail", data.existingUser.email);
-			storeData_Local("userId", data.existingUser.ref_id);
+			.then((data) => {
+				console.log("Response data:", data);
 
-			toast({
-				title: "Login Successful!",
-				status: "success",
-				duration: 1000,
-				isClosable: true,
+				if (data.errors) {
+					data.errors.map((error, index) => {
+						toast({
+							title: error.message,
+							duration: 3000,
+							isClosable: true,
+							status: "error"
+						});
+					})
+					return;
+				}
+
+				storeData_Local("token", data.token);
+				storeData_Local("userName", data.existingUser.name);
+				storeData_Local("userEmail", data.existingUser.email);
+				storeData_Local("userId", data.existingUser.ref_id);
+
+				toast({
+					title: "Login Successful!",
+					status: "success",
+					duration: 1000,
+					isClosable: true,
+				});
+				router.push("/");
+				return;
+			})
+			.catch((err) => {
+				console.error(err);
 			});
-			router.push("/");
-			return;
-		})
-		.catch((err) => {
-			console.error(err);
-		});
 	}
-    
+
 	useEffect(() => {
 		const isauth = isAuthenticated();
 		console.log(isauth);
@@ -83,31 +97,39 @@ function Home()
 		setAuthenticated(isauth);
 	}, []);
 
-	if (authenticated)
-	{
+	if (authenticated) {
 		router.push("/");
 		return;
 	}
-	else
-	{
+	else {
 		return (
-
-			<Container>
-				<Stack>
-					<Box height={'200px'}></Box>
-					<Heading fontSize={'6xl'} align='center'>
-						EventFly
-					</Heading>
-					<Input placeholder='Email' type="email" size='lg' id="email" />
-					<Input placeholder='Password' type="password" size='lg' id="password" />
-					<ButtonGroup justifyContent='flex-end'>
-						<Button colorScheme='green' size={'md'} onClick={handleSignIn}>Log In</Button>
-						<Link href="/signup">
-							<Button colorScheme='blue' size={'md'}>Sign Up</Button>
-						</Link>
-					</ButtonGroup>
-				</Stack>
-			</Container>
+			<Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
+				<Flex p={8} flex={1} align={'center'} justify={'center'}>
+					<Stack spacing={4} w={'full'} maxW={'md'}>
+						<Heading fontSize={'2xl'}>Sign in to your account</Heading>
+						<FormControl>
+							<FormLabel>Email address</FormLabel>
+							<Input id="email" type="email" />
+						</FormControl>
+						<FormControl>
+							<FormLabel>Password</FormLabel>
+							<Input id="password" type="password" />
+						</FormControl>
+						<Stack spacing={6}>
+							<Button colorScheme={'blue'} variant={'solid'} onClick={handleSignIn}>
+								Sign in
+							</Button>
+						</Stack>
+					</Stack>
+				</Flex>
+				<Flex flex={1}>
+					<Image
+						alt={'Login Image'}
+						objectFit={'cover'}
+						src={CONFIG.BG_LOGIN}
+					/>
+				</Flex>
+			</Stack>
 		);
 	}
 }

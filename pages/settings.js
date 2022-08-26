@@ -21,6 +21,8 @@ import {
     HStack,
     Radio,
     FormHelperText,
+    InputGroup,
+    Select,
     useToast
 } from '@chakra-ui/react';
 
@@ -36,16 +38,16 @@ function Settings() {
 
     const [loaded, setLoaded] = useState(false);
     const [userName, setUserName] = useState("");
-    const [password, setPassword] = useState("");
     const [userAvatar, setUserAvatar] = useState("");
 
-
-    function openFilePicker(e) {
+    function openFilePicker(e)
+    {
         const avatarImageFileElem = document.getElementById("avatarImage");
         avatarImageFileElem.click();
     }
 
-    function uploadImage(e) {
+    function uploadImage(e)
+    {
         const avatarImageFile = e.target.files[0];
         const fileNameParts = avatarImageFile.name.split(".");
         const fileExtension = fileNameParts[fileNameParts.length - 1];
@@ -58,8 +60,8 @@ function Settings() {
         //  baseRef is the default bucket reference
         //  storageRef is the folder reference for 'avatar'
         const storage = getStorage();
-        const baseRef = ref(storage, avatarImageFileName);
-        const storageRef = ref(baseRef, "avatar");
+        const baseRef = ref(storage, "avatar");
+        const storageRef = ref(baseRef, avatarImageFileName);
         const uploadTask = uploadBytesResumable(storageRef, avatarImageFile);
 
         uploadTask.on("state_changed",
@@ -86,27 +88,25 @@ function Settings() {
         );
     }
 
-    function updateProfile(e)
+    function handleUpdateProfile(e)
     {
-        e.preventDefault();
-
         const passwordElem = document.getElementById("password");
         const confirmPasswordElem = document.getElementById("confirmPassword");
         const genderElem = document.getElementById("gender");
+        const userNameElem = document.getElementById("userName");
 
-        const userName = document.getElementById("userName");
+        const userName = userNameElem.value;
         const password = passwordElem.value.trim();
         const confirmPassword = confirmPasswordElem.value.trim();
         const gender = genderElem.value;
 
-        if (userName === "")
-        {
+        if (userName === "") {
             toast({
                 title: "Username can't be blank!",
                 duration: 2000,
                 isClosable: true,
             });
-            return;            
+            return;
         }
 
         if (password != confirmPassword) {
@@ -122,9 +122,26 @@ function Settings() {
             return;
         }
 
-        console.log("password: ", password);
-        console.log("confirmPassword:", confirmPassword);
-        console.log("avatar Link: ", userAvatar);
+        if (password.length < 6) {
+            toast({
+                title: "Password too short!",
+                description: "Make sure your password is at least 6 characters long!",
+                duration: 2000,
+                status: "error",
+                isClosable: true
+            });
+            passwordElem.value = "";
+            confirmPasswordElem.value = "";
+            return;
+        }
+
+        const payload = {
+            name: userName,
+            password: password,
+            gender: gender,
+            avatar: userAvatar
+        }
+        console.table(payload);
 
         const url = `${CONFIG.BASE_URL.PARTICIPANT}/api/participant/profile`;
         //  TO DO
@@ -202,15 +219,15 @@ function Settings() {
                                     id="confirmPassword"
                                 />
                             </FormControl>
-                            <FormControl as='fieldset'>
-                                <FormLabel as='legend'>Gender</FormLabel>
-                                <RadioGroup defaultValue='Itachi' id="gender">
-                                    <HStack spacing='24px'>
-                                        <Radio value='Man'>Man</Radio>
-                                        <Radio value='Woman'>Woman</Radio>
-                                        <Radio value='Others'>Others</Radio>
-                                    </HStack>
-                                </RadioGroup>
+                            <FormControl isRequired>
+                                <FormLabel>Gender</FormLabel>
+                                <InputGroup>
+                                    <Select id="gender" colorScheme={"telegram"} defaultValue="" placeholder='Select option'>
+                                        <option value='Man'>Man</option>
+                                        <option value='Woman'>Woman</option>
+                                        <option value='Other'>Other</option>
+                                    </Select>
+                                </InputGroup>
                             </FormControl>
                             <Stack spacing={6} direction={['column', 'row']}>
                                 <Button
@@ -229,7 +246,7 @@ function Settings() {
                                     _hover={{
                                         bg: 'blue.500',
                                     }}
-                                    onClick={updateProfile}
+                                    onClick={handleUpdateProfile}
                                 >
                                     Update Profile
                                 </Button>
