@@ -55,7 +55,7 @@ const EventNewsFeed = ({ event, posts }) => {
                     <CreatePost />
 
                     <Center >
-                      <Box maxW="2xl" w={"2xl"} rounded={"2xl"} overflow={"hidden"}>
+                      <Box overflow={"hidden"}>
                         {
                           posts.map(
                             (post, i) => (

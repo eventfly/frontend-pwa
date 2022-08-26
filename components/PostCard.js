@@ -17,6 +17,8 @@ import parse from 'html-react-parser'
 const PostCard = ({post}) => {
     const [comment, setComment] = useState('');
     const [showComment, setShowComment] = useState(false);
+    const [isCommented, setIsCommented] = useState(false);
+    const [isLiked, setIsLiked] = useState(false);
 
     const handleShowComment = () => {
         console.log(showComment)
@@ -29,13 +31,21 @@ const PostCard = ({post}) => {
     const handleCommentChange = (e) => {
         let inputComment = e.target.value;
 
+
+        console.log("before isCommented: ",isCommented)
+        
+        if(isCommented == false)
+            setIsCommented(true);
+        
+       // console.log("after isCommented: ",isCommented)
+
         const userID = getData_Local("userId"); 
         setComment(inputComment);
 
         const commentUrl = '';
         const payload = {
-            postID: post._id,
-            userID: userID,
+            post_id: post._id,
+            user_id: userID,
             comment: comment
         }
 
@@ -44,25 +54,37 @@ const PostCard = ({post}) => {
             console.log("Response data:", data);
             storeData_Local("token", data.token);
         }).catch((err) => {
-            console.log(err);
+            console.log("error");
         });
 
     }
 
     const handlePostLikeCount = () => {
-        // setPostLike(postLike + 1);
 
-        // const postUrl = '';
-        // const payload = {
-        //     id: post._id,
-        //     likeCount: postLike
-        // }
+        console.log("before isLiked: ",isLiked)
+        
+        if(isLiked == false)
+            setIsLiked(true);
+        else
+            setIsLiked(false);
+        
+        //console.log("after isLiked: ",isLiked)
 
-        // postData(postUrl, payload)
-        // .then((data) => {
-        //     console.log("Response data:", data);
-        //     storeData_Local("token", data.token);
-        // });
+        const userID = getData_Local("userId"); 
+        const likeUrl = '';
+        const payload = {
+            post_id: post._id,
+            user_id: userID,
+            is_liked: isLiked
+        }
+
+        postData(likeUrl, payload)
+        .then((data) => {
+            console.log("Response data:", data);
+            storeData_Local("token", data.token);
+        }).catch((err) => {
+            console.log("error");
+        });
     }
 
     const handleCommentLikeCount = () => {
@@ -161,9 +183,15 @@ const PostCard = ({post}) => {
 
                                 <Flex paddingLeft='1%' paddingRight='1%' paddingTop='1%' direction='row' >
                                     <Box width='50%' align='center'>
+                                        {isLiked == true ? 
+                                        <Button colorScheme='red' variant='ghost' width='100%' onClick={() => handlePostLikeCount()}>
+                                            Liked
+                                        </Button> 
+                                        : 
                                         <Button colorScheme='teal' variant='ghost' width='100%' onClick={() => handlePostLikeCount()}>
                                             Like
                                         </Button>
+                                        }
                                     </Box>
                                     <Spacer />
                                     <Box width='50%'align='center'>
@@ -271,7 +299,7 @@ const PostCard = ({post}) => {
                                 </Flex>
                                 <Flex width='100%' paddingRight='1%' paddingLeft='1%' paddingBottom='1%' justifyContent='flex-end' >
                                     <Box width='25%' align='center'>
-                                        <Button colorScheme='teal' variant='ghost' width='100%' onClick={(e) => handleCommentChange(e)}>
+                                        <Button colorScheme='teal' fontSize='small' variant='ghost' width='100%' onClick={(e) => handleCommentChange(e)}>
                                             Comment
                                         </Button>
                                     </Box>

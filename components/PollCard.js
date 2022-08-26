@@ -37,8 +37,8 @@ const PollCard = ({post}) => {
 
         const pollUrl = '';
         const payload = {
-            postID: post._id,
-            userID: userID,
+            post_id: post._id,
+            user_id: userID,
             poll_options: pollOptions
         }
         console.log("payload--")
