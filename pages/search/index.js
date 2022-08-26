@@ -15,10 +15,12 @@ import {
 
 import MapBox from '../../components/Map/MapBox'
 import meterPerPixel from '../../components/Map/PixelToMeter';
+import { useRouter } from 'next/router';
 
 
-const Search = () => {
-
+function Search()
+{
+    const router = useRouter();
     const radiusInPixel = 100;
 
     const [textSearch, setTextSearch] = useState('');
@@ -30,8 +32,12 @@ const Search = () => {
 
     const [searchMode, setSearchMode] = useState('text');
 
-    const handleTextSearch = () => {
-        console.log(textSearch);
+    function handleTextSearch()
+    {
+        if (!router.isReady) {
+            return;
+        }
+        router.push(`/search/${textSearch}`);
     }
 
     const handleLocationSearch = () => {

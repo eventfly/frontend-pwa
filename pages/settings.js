@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { postData } from '../services/HttpService';
+import { postData, putData } from '../services/HttpService';
 import { getData_Local, storeData_Local } from '../services/StorageService';
 import CONFIG from "../config/config.json";
 
@@ -135,6 +135,8 @@ function Settings() {
             return;
         }
 
+        const participantId = getData_Local("userId");
+        const editProfileUrl = `${CONFIG.BASE_URL.PARTICIPANT}/api/participant/${participantId}/edit`;
         const payload = {
             name: userName,
             password: password,
@@ -143,7 +145,14 @@ function Settings() {
         }
         console.table(payload);
 
-        const url = `${CONFIG.BASE_URL.PARTICIPANT}/api/participant/profile`;
+        putData(editProfileUrl, payload)
+        .then((res) => {
+            console.log("Res: ", res);
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+
         //  TO DO
         //  POST/UPDATE data to backend
     }
