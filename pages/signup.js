@@ -61,11 +61,35 @@ function SignUp()
             return;
         }
 
+        //	Cheking Email Format using Regex
+		if (! /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email) )
+		{
+			emailElem.value = "";
+			toast({
+				title: "Enter a valid email!",
+				description: "The email you have entered doesn't match with email format. Please check it again and enter.",
+				status: "warning",
+				duration: 8000,
+				isClosable: true,
+			});
+			return;
+		}
+
         if (password === "") {
             toast({
                 title: "Enter a password!",
                 duration: 2000,
-                status: "info",
+                status: "warning",
+                isClosable: true
+            });
+            return;
+        }
+
+        if (password.length < 6) {
+            toast({
+                title: "Password must be at least 6 character long!",
+                duration: 2000,
+                status: "warning",
                 isClosable: true
             });
             return;
@@ -75,7 +99,7 @@ function SignUp()
             toast({
                 title: "Enter your both name!",
                 duration: 2000,
-                status: "info",
+                status: "warning",
                 isClosable: true
             });
             return;
@@ -85,7 +109,7 @@ function SignUp()
             toast({
                 title: "Select your gender",
                 duration: 2000,
-                status: "info",
+                status: "warning",
                 isClosable: true
             });
             return;
@@ -95,13 +119,14 @@ function SignUp()
             toast({
                 title: "Select your date of birth!",
                 duration: 2000,
-                status: "info",
+                status: "warning",
                 isClosable: true
             });
             return;
         }
 
         const fullName = `${firstName} ${lastName}`;
+        const dobValue = new Date(dob).toISOString();
 
         const signUpUrl = `${CONFIG.BASE_URL.PARTICIPANT}/api/participant`;
         const payload = {
@@ -109,13 +134,37 @@ function SignUp()
             password: password,
             email: email,
             gender: gender,
-            dateOfBirth: dob
+            dob: dobValue
         }
         console.table(payload);
 
         postData(signUpUrl, payload)
             .then((res) => {
                 console.log("Response:", res);
+
+                if (res.errors) {
+                    res.errors.map((error, index) => {
+                        toast({
+                            title: error.message,
+                            duration: 3000,
+                            isClosable: true,
+                            status: "error"
+                        });
+                    })
+                    return;
+                }
+
+                if (res.token) {
+                    toast({
+                        title: "Account created!",
+                        description: `You can now login using email ${res.user.email}`,
+                        duration: 3000,
+                        isClosable: true,
+                        status: "success"
+                    });
+                    router.push("/login");
+                    return;
+                }
             })
             .catch((err) => {
                 console.log("Error:", err);
