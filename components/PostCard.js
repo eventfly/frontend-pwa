@@ -18,7 +18,9 @@ const PostCard = ({post}) => {
     const [comment, setComment] = useState('');
     const [showComment, setShowComment] = useState(false);
     const [isCommented, setIsCommented] = useState(false);
-    const [isLiked, setIsLiked] = useState(false);
+    const [isLiked, setIsLiked] = useState(false); // need to change that after getting the stored info
+    var likeToggle = false; // need to change that after getting the stored info
+
 
     const handleShowComment = () => {
         console.log(showComment)
@@ -31,13 +33,6 @@ const PostCard = ({post}) => {
     const handleCommentChange = (e) => {
         let inputComment = e.target.value;
 
-
-        console.log("before isCommented: ",isCommented)
-        
-        if(isCommented == false)
-            setIsCommented(true);
-        
-       // console.log("after isCommented: ",isCommented)
 
         const userID = getData_Local("userId"); 
         setComment(inputComment);
@@ -69,36 +64,52 @@ const PostCard = ({post}) => {
 
         if (buttonValue === "not-liked") {
             buttonElem.value = "liked";
+            buttonElem.textContent = "Liked";
         }
         else if (buttonValue === "liked") {
             buttonElem.value = "not-liked";
+            buttonElem.textContent = "Like";
         }
 
         //  IMPORATANT
         //  the final value is updated
         //  use `buttonElem.value` to get the final value;
         
-        const is_liked = (buttonElem.value === "liked");
-        console.log("is_liked: ", is_liked);
+        likeToggle = (buttonElem.value === "liked");
+        console.log("likeToggle: ", likeToggle);
 
     }
 
-    const handlePostLikeCount = async (e) => {
+    const handlePostLikeCount = () => {
 
-        console.log(e);
+        const buttonElem = document.getElementById("likeButton");
+        const buttonValue = buttonElem.value;
 
-        console.log("before isLiked: ",isLiked)
-        const send_isLiked = isLiked;
-        await setIsLiked(!isLiked);
-        console.log(isLiked);
+        if (buttonValue === "not-liked") {
+            buttonElem.value = "liked";
+        }
+        else if (buttonValue === "liked") {
+            buttonElem.value = "not-liked";
+        }
+
+        setIsLiked(!isLiked);
+
+        //  IMPORATANT
+        //  the final value is updated
+        //  use `buttonElem.value` to get the final value;
+        
+        likeToggle = (buttonElem.value === "liked");
+        console.log("likeToggle: ", likeToggle);
 
         const userID = getData_Local("userId"); 
         const likeUrl = '';
         const payload = {
             post_id: post._id,
             user_id: userID,
-            is_liked: isLiked
+            is_liked: likeToggle
         }
+
+        console.log("payload: ", payload)
 
         postData(likeUrl, payload)
         .then((data) => {
@@ -204,25 +215,16 @@ const PostCard = ({post}) => {
 
                                 <Flex paddingLeft='1%' paddingRight='1%' paddingTop='1%' direction='row' >
                                     <Box width='50%' align='center'>
-                                        {isLiked == true ? 
-                                        <Button colorScheme='red' variant='ghost' width='100%' onClick={(e) => handlePostLikeCount(e)}>
-                                            Liked
-                                        </Button> 
-                                        : 
-                                        <Button colorScheme='teal' variant='ghost' width='100%' onClick={(e) => handlePostLikeCount(e)}>
-                                            Like
+                    
+                                        <Button colorScheme='teal' variant='ghost' width='100%' id="likeButton" value="not-liked" onClick={() => handlePostLikeCount()}>
+                                         {isLiked ? 'Liked' : 'Like' }
                                         </Button>
-                                        }
+                                        
                                     </Box>
                                     <Spacer />
                                     <Box width='50%'align='center'>
                                         <Button colorScheme='teal' variant='ghost' width='100%' onClick={() => handleShowComment()}>
                                             Comment
-                                        </Button>
-                                    </Box>
-                                    <Box width='50%'align='center'>
-                                        <Button colorScheme='teal' variant='ghost' width='100%' id="likeButton" value="not-liked" onClick={onTestLike}>
-                                            Test Like
                                         </Button>
                                     </Box>
                                 </Flex>
