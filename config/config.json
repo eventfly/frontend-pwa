@@ -5,5 +5,7 @@
         "EVENT": "http://localhost:3002",
         "NEWSFEED": "http://localhost:3003",
         "PARTICIPANT": "http://localhost:3004"
-    }
+    },
+    "LOGO": "https://firebasestorage.googleapis.com/v0/b/eventfly-e19b7.appspot.com/o/asset%2Flogo.png?alt=media&token=6c851155-045d-4834-8df9-20368896db12",
+    "BG_LOGIN": "https://firebasestorage.googleapis.com/v0/b/eventfly-e19b7.appspot.com/o/asset%2Flogin-bg.jpg?alt=media&token=327356c7-d1e1-4fde-ad4e-b22769d4318c"
 }

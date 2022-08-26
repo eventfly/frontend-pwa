@@ -16,7 +16,8 @@ import {
 	VStack,
 	MenuList,
 	MenuItem,
-	Avatar
+	Avatar,
+	Image
 } from '@chakra-ui/react';
 
 import {
@@ -34,6 +35,7 @@ import {
 
 import Link from "next/link";
 import { getData_Local } from "../services/StorageService";
+import CONFIG from "../config/config.json";
 
 
 const LinkItems = [
@@ -203,12 +205,11 @@ const MobileNav = ({ onOpen, ...rest }) => {
 			/>
 
 			<Box>
-				<Text
-					display={{ base: 'flex', md: 'none' }}
-					fontSize="3xl"
-					fontWeight="bold">
-					EventFly
-				</Text>
+				<Image
+					src={CONFIG.LOGO}
+					maxW={"32"}
+					w={"32"}
+				/>
 			</Box>
 
 		</Flex>
