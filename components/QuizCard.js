@@ -36,8 +36,8 @@ const QuizCard = ({post}) => {
 
         const quizUrl = '';
         const payload = {
-            postID: post._id,
-            userID: userID,
+            post_id: post._id,
+            user_id: userID,
             answer_index: quizAnswers
         }
         console.log("payload--")
