@@ -1,4 +1,4 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
 import { getStorage, getStoreage } from "firebase/storage";
@@ -10,6 +10,13 @@ import firebaseConfig from "../config/firebase.json";
 import { isAuthenticated } from "../services/StorageService";
 
 
+const theme = extendTheme({
+	fonts: {
+		body: `'Work Sans', sans-serif`,
+		heading: `'Inter', sans-serif`,	
+	}
+});
+
 function MyApp({ Component, pageProps})
 {
 	const [ isAuth, setIsAuth ] = useState(false);
@@ -20,13 +27,13 @@ function MyApp({ Component, pageProps})
 
 	return (
 		isAuth ? 
-			<ChakraProvider>
+			<ChakraProvider theme={theme}>
 				<Layout>
 					<Component {...pageProps} />
 				</Layout>
 			</ChakraProvider>
 		:
-			<ChakraProvider>
+			<ChakraProvider theme={theme}>
 				<NoAuthLayout>
 					<Component {...pageProps} />
 				</NoAuthLayout>	
