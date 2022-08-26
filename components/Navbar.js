@@ -107,6 +107,7 @@ function Navbar({ children }) {
 
 
 const SidebarContent = ({ onClose, ...rest }) => {
+
 	const userName = getData_Local("userName");
 	const userEmail = getData_Local("userEmail");
 
@@ -195,7 +196,8 @@ const MobileNav = ({ onOpen, ...rest }) => {
 			borderBottomWidth="1px"
 			borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
 			justifyContent={{ base: 'space-between', md: 'flex-end' }}
-			{...rest}>
+			{...rest}
+		>
 			<IconButton
 				display={{ base: 'flex', md: 'none' }}
 				onClick={onOpen}

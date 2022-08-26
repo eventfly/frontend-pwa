@@ -17,12 +17,12 @@ import {
 import ReviewCard from "./ReviewCard";
 import EventCard from "./EventCard";
 import { useEffect, useState } from "react";
+import CONFIG from "../config/config.json";
+import { getData } from "../services/HttpService";
+import { getData_Local, storeData_Local } from "../services/StorageService";
 
-import { getData_Local } from "../services/StorageService";
 
-
-function UserProfileCard()
-{
+function UserProfileCard() {
 	const _eventList = [
 		{
 			id: 1,
@@ -43,7 +43,7 @@ function UserProfileCard()
 				"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
 		},
 	];
-	
+
 	const _reviewList = [
 		{
 			date: "10 March, 2021",
@@ -61,26 +61,47 @@ function UserProfileCard()
 		},
 	];
 
-	const [ userName, setUserName ] = useState("");
-	const [ userAvatar, setUserAvatar ] = useState("");
-	const [ loaded, setLoaded ] = useState(false);
-	const [ eventList, setEventList ] = useState(null);
-	const [ reviewList, setReviewList ] = useState(null);
-	
+	const [loaded, setLoaded] = useState(false);
+	const [userName, setUserName] = useState("");
+	const [userAvatar, setUserAvatar] = useState("");
+	const [userEmail, setUserEmail] = useState("");
+	const [eventList, setEventList] = useState(null);
+	const [reviewList, setReviewList] = useState(null);
+
 	useEffect(() => {
-		setUserName(getData_Local("userName"));
-		setUserAvatar(getData_Local("userAvatar"));
 
-		//	TODO	->	Get Data from Backend
-		setEventList(_eventList);
-		setReviewList(_reviewList);
-		//	---------------------------------
+		const userId = getData_Local("userId");
+		const getProfileUrl = `${CONFIG.BASE_URL.PARTICIPANT}/api/participant/${userId}/profile`;
 
-		setLoaded(true);
-	}, []);
+		getData(getProfileUrl)
+			.then((res) => {
+				setUserAvatar(res.avatar);
+				setUserEmail(res.email);
+				setUserName(res.name);
+
+				//	TODO	->	Get Data from Backend
+				setEventList(_eventList);
+				setReviewList(_reviewList);
+				//	---------------------------------
+
+				setLoaded(true);
+				
+				storeData_Local("userName", userName);
+				storeData_Local("userEmail", userEmail);
+				storeData_Local("userAvatar", userAvatar);
+
+				return;
+			})
+			.catch((err) => {
+				console.error(err);
+				setLoaded(false);
+				return;
+			});
+
+	});
 
 	return (
-		loaded ?
+		loaded &&
 			<Center py={6}>
 				<Box
 					maxW={"90%"}
@@ -91,7 +112,7 @@ function UserProfileCard()
 					<Flex justify={"center"} mt={12}>
 						<Avatar
 							size={"2xl"}
-							src={ userAvatar}
+							src={userAvatar}
 							css={{
 								border: "6px solid white",
 							}}
@@ -101,7 +122,7 @@ function UserProfileCard()
 					<Box p={0.1}>
 						<Stack spacing={0} align={"center"} mb={5}>
 							<Heading fontSize={"2xl"} fontWeight={600} fontFamily={"body"}>
-								{ userName }
+								{userName}
 							</Heading>
 						</Stack>
 
@@ -138,8 +159,6 @@ function UserProfileCard()
 					</Box>
 				</Box>
 			</Center>
-		:
-			<></>
 	);
 }
 
