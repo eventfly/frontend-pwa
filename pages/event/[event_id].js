@@ -9,8 +9,6 @@ import { getData } from '../../services/HttpService'
 
 import {Stack, Image, Flex, Avatar, Box, Text, Spacer, Button, Textarea, Center, Checkbox,RadioGroup, Radio} from "@chakra-ui/react";
 
-import MarkdownPost from '../../components/MarkdownPost'
-
 
 function EventDetails()
 {
@@ -361,7 +359,6 @@ function EventDetails()
 	return (
 		loaded ?
 			<>
-				
 				{/* <Flex width='100%' height='450px' overflow='hidden' opacity='0.9'>
 					<Image src={event.banner_url} width='100%'/>
 				</Flex> */}
