@@ -18,8 +18,9 @@ const PostCard = ({post}) => {
     const [comment, setComment] = useState('');
     const [showComment, setShowComment] = useState(false);
     const [isCommented, setIsCommented] = useState(false);
-    const [isLiked, setIsLiked] = useState(false); // need to change that after getting the stored info
     var likeToggle = false; // need to change that after getting the stored info
+
+    //need to check getData for changing textContent of Like button
 
 
     const handleShowComment = () => {
@@ -54,11 +55,8 @@ const PostCard = ({post}) => {
 
     }
 
-    //  TODO    Test like
-    //  -----------------
+    const handlePostLikeCount = () => {
 
-    function onTestLike()
-    {
         const buttonElem = document.getElementById("likeButton");
         const buttonValue = buttonElem.value;
 
@@ -70,33 +68,6 @@ const PostCard = ({post}) => {
             buttonElem.value = "not-liked";
             buttonElem.textContent = "Like";
         }
-
-        //  IMPORATANT
-        //  the final value is updated
-        //  use `buttonElem.value` to get the final value;
-        
-        likeToggle = (buttonElem.value === "liked");
-        console.log("likeToggle: ", likeToggle);
-
-    }
-
-    const handlePostLikeCount = () => {
-
-        const buttonElem = document.getElementById("likeButton");
-        const buttonValue = buttonElem.value;
-
-        if (buttonValue === "not-liked") {
-            buttonElem.value = "liked";
-        }
-        else if (buttonValue === "liked") {
-            buttonElem.value = "not-liked";
-        }
-
-        setIsLiked(!isLiked);
-
-        //  IMPORATANT
-        //  the final value is updated
-        //  use `buttonElem.value` to get the final value;
         
         likeToggle = (buttonElem.value === "liked");
         console.log("likeToggle: ", likeToggle);
@@ -217,7 +188,7 @@ const PostCard = ({post}) => {
                                     <Box width='50%' align='center'>
                     
                                         <Button colorScheme='teal' variant='ghost' width='100%' id="likeButton" value="not-liked" onClick={() => handlePostLikeCount()}>
-                                         {isLiked ? 'Liked' : 'Like' }
+                                            Like
                                         </Button>
                                         
                                     </Box>
