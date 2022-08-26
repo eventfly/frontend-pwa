@@ -59,16 +59,38 @@ const PostCard = ({post}) => {
 
     }
 
-    const handlePostLikeCount = () => {
+    //  TODO    Test like
+    //  -----------------
+
+    function onTestLike()
+    {
+        const buttonElem = document.getElementById("likeButton");
+        const buttonValue = buttonElem.value;
+
+        if (buttonValue === "not-liked") {
+            buttonElem.value = "liked";
+        }
+        else if (buttonValue === "liked") {
+            buttonElem.value = "not-liked";
+        }
+
+        //  IMPORATANT
+        //  the final value is updated
+        //  use `buttonElem.value` to get the final value;
+        
+        const is_liked = (buttonElem.value === "liked");
+        console.log("is_liked: ", is_liked);
+
+    }
+
+    const handlePostLikeCount = async (e) => {
+
+        console.log(e);
 
         console.log("before isLiked: ",isLiked)
-        
-        if(isLiked == false)
-            setIsLiked(true);
-        else
-            setIsLiked(false);
-        
-        //console.log("after isLiked: ",isLiked)
+        const send_isLiked = isLiked;
+        await setIsLiked(!isLiked);
+        console.log(isLiked);
 
         const userID = getData_Local("userId"); 
         const likeUrl = '';
@@ -103,7 +125,7 @@ const PostCard = ({post}) => {
                                         <Text fontWeight='bold'>
                                             {post.creator.name}
                                         </Text>
-                                        <Text fontSize='sm'> 
+                                        <Text fontSize='sm'>
                                             {post.creator.role} &bull; {post.created_at}
                                         </Text>
                                     </Box>
@@ -117,7 +139,6 @@ const PostCard = ({post}) => {
                                             </Text>
                                         </Box>
                                     </>
-
                                 }
 
                                 {post.medias.length > 0 &&
@@ -184,11 +205,11 @@ const PostCard = ({post}) => {
                                 <Flex paddingLeft='1%' paddingRight='1%' paddingTop='1%' direction='row' >
                                     <Box width='50%' align='center'>
                                         {isLiked == true ? 
-                                        <Button colorScheme='red' variant='ghost' width='100%' onClick={() => handlePostLikeCount()}>
+                                        <Button colorScheme='red' variant='ghost' width='100%' onClick={(e) => handlePostLikeCount(e)}>
                                             Liked
                                         </Button> 
                                         : 
-                                        <Button colorScheme='teal' variant='ghost' width='100%' onClick={() => handlePostLikeCount()}>
+                                        <Button colorScheme='teal' variant='ghost' width='100%' onClick={(e) => handlePostLikeCount(e)}>
                                             Like
                                         </Button>
                                         }
@@ -197,6 +218,11 @@ const PostCard = ({post}) => {
                                     <Box width='50%'align='center'>
                                         <Button colorScheme='teal' variant='ghost' width='100%' onClick={() => handleShowComment()}>
                                             Comment
+                                        </Button>
+                                    </Box>
+                                    <Box width='50%'align='center'>
+                                        <Button colorScheme='teal' variant='ghost' width='100%' id="likeButton" value="not-liked" onClick={onTestLike}>
+                                            Test Like
                                         </Button>
                                     </Box>
                                 </Flex>
