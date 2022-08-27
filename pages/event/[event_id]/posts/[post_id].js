@@ -13,6 +13,7 @@ import {
     Stack
 } from "@chakra-ui/react";
 import CreateComment from '../../../../components/Post/CreateComment';
+import ShowComment from '../../../../components/Post/ShowComment';
 
 function SinglePostDetails()
 {
@@ -73,6 +74,7 @@ function SinglePostDetails()
                     <Center>
                         <Stack direction='column'>
                             <FullPostCard post={post}/>
+                            <ShowComment post={post}/>
                             <CreateComment post={post}/>
                         </Stack>
                         

@@ -46,7 +46,6 @@ const QuizCard = ({post}) => {
         postData(quizUrl, payload)
         .then((data) => {
             console.log("Response data:", data);
-            storeData_Local("token", data.token);
         }).catch((err) => {
             console.log("error");
         });

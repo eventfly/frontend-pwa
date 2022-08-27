@@ -47,7 +47,6 @@ const PollCard = ({post}) => {
         postData(pollUrl, payload)
         .then((data) => {
             console.log("Response data:", data);
-            storeData_Local("token", data.token);
         }).catch((err) => {
             console.log("error");
         });

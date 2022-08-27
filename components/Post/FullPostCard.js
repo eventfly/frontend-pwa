@@ -10,7 +10,7 @@ import {
     Container,
     Avatar,
     Button,
-    chakra
+    Spacer
 } from "@chakra-ui/react";
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
@@ -75,6 +75,26 @@ function FullPostCard(props)
                             >
                                 <PostContent post={post} />
                             </Box>
+                            <Flex paddingLeft='1%' paddingRight='1%' paddingTop='1%' direction='row' >
+                                <Box width='50%' align='left'>
+                                    {post.like_count > 0 &&
+                                        <>
+                                            {post.like_count} {post.like_count > 1 ? 'likes' : 'like'}
+                                        </>
+
+                                    }
+                                    
+                                </Box>
+                                <Spacer />
+                                <Box width='50%' align='right' >
+                                    {post.comments.length > 0 &&
+                                        <>
+                                            {post.comments.length} {post.comments.length > 1 ? 'comments' : 'comment'}
+                                        </>
+
+                                    }
+                                </Box>
+                            </Flex>
                             <HStack>
                                     <Button
                                         width={"50%"}

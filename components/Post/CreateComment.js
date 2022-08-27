@@ -34,20 +34,18 @@ function CreateComment(props)
         const userID = getData_Local("userId"); 
         setComment(inputComment);
 
-        // const commentUrl = `${CONFIG.BASE_URL.NEWSFEED}/api/newsfeed/post/${postId}/comment`;
-        // const payload = {
-        //     post_id: post._id,
-        //     user_id: userID,
-        //     comment: comment
-        // }
+        const commentUrl = `${CONFIG.BASE_URL.NEWSFEED}/api/newsfeed/post/${postId}/comment`;
+        const payload = {
+            content: inputComment
+        }
 
-        // postData(commentUrl, payload)
-        // .then((data) => {
-        //     console.log("Response data:", data);
-        //     storeData_Local("token", data.token);
-        // }).catch((err) => {
-        //     console.log("error");
-        // });
+        postData(commentUrl, payload)
+        .then((data) => {
+            console.log("Response data:", data);
+            console.log("comment sent")
+        }).catch((err) => {
+            console.log("error in comment sent");
+        });
 
     }
 
