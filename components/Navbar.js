@@ -30,6 +30,7 @@ import {
 	FiSettings,
 	FiUser,
 	FiSmartphone,
+	FiBox,
 	FiCalendar
 } from 'react-icons/fi';
 
@@ -53,6 +54,11 @@ const LinkItems = [
 		name: "Ticket",
 		link: "/ticket",
 		icon: FiSmartphone
+	},
+	{
+		name: "Orders",
+		link: "/order",
+		icon: FiBox
 	},
 	{
 		name: "Search",

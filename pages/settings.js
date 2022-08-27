@@ -32,9 +32,13 @@ import {
     uploadBytesResumable,
     getDownloadURL
 } from "firebase/storage";
+import { useRouter } from 'next/router';
 
-function Settings() {
+
+function Settings()
+{
     const toast = useToast();
+    const router = useRouter();
 
     const [loaded, setLoaded] = useState(false);
     const [userName, setUserName] = useState("");
@@ -86,6 +90,12 @@ function Settings() {
                     });
             }
         );
+    }
+
+    function handleCancel(e)
+    {
+        router.back();
+        return;
     }
 
     function handleUpdateProfile(e)
@@ -143,11 +153,29 @@ function Settings() {
             gender: gender,
             avatar: userAvatar
         }
-        console.table(payload);
 
         putData(editProfileUrl, payload)
         .then((res) => {
-            console.log("Res: ", res);
+            if (res.errors) {
+                res.errors.map((error, index) => {
+                    toast({
+                        title: error.message,
+                        duration: 3000,
+                        isClosable: true,
+                        status: "error"
+                    });
+                })
+                return;
+            }
+
+            toast({
+                title: "Profile Updated!",
+                duration: 4000,
+                isClosable: true,
+                status: "success"
+            });
+            router.reload();
+            return;
         })
         .catch((err) => {
             console.error(err);
@@ -201,17 +229,18 @@ function Settings() {
                                     </Center>
                                 </Stack>
                             </FormControl>
-                            <FormControl>
+                            <FormControl isRequired>
                                 <FormLabel>Name</FormLabel>
                                 <Input
                                     id="userName"
                                     placeholder="Type your name"
                                     _placeholder={{ color: 'gray.500' }}
                                     type="text"
+                                    value={userName}
                                 />
                             </FormControl>
-                            <FormControl>
-                                <FormLabel>Password</FormLabel>
+                            <FormControl isRequired>
+                                <FormLabel>New Password</FormLabel>
                                 <Input
                                     placeholder="Type your password"
                                     _placeholder={{ color: 'gray.500' }}
@@ -219,8 +248,8 @@ function Settings() {
                                     id="password"
                                 />
                             </FormControl>
-                            <FormControl>
-                                <FormLabel>Confirm Password</FormLabel>
+                            <FormControl isRequired>
+                                <FormLabel>Confirm New Password</FormLabel>
                                 <Input
                                     placeholder="Type your password again"
                                     _placeholder={{ color: 'gray.500' }}
@@ -245,7 +274,9 @@ function Settings() {
                                     w="full"
                                     _hover={{
                                         bg: 'red.500',
-                                    }}>
+                                    }}
+                                    onClick={handleCancel}
+                                >
                                     Cancel
                                 </Button>
                                 <Button

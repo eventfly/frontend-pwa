@@ -15,7 +15,8 @@ import CONFIG from "../../../config/config.json";
 import { getData } from "../../../services/HttpService";
 
 
-function Feature(props) {
+function Feature(props)
+{
 	return (
 		<Flex align="center">
 			<Flex shrink={0}>
@@ -55,11 +56,15 @@ function Feature(props) {
 function TicketClassCard(props)
 {
 	const ticket = props.ticket;
+	const eventId = props.eventId;
+
 	const ticketPrice = ticket.price;
 	const ticketClass = ticket.class;
 	const ticketPerks = ticket.perks;
 	const ticketAvailable = ticket.available;
 	const ticketQuantity = ticket.quantity;
+
+	const ticketCheckoutUrl = `/order/checkout?p=${ticketPrice}&q=1&c=${ticketClass}&eid=${eventId}`;
 
 	return (
 		<Box
@@ -129,7 +134,9 @@ function TicketClassCard(props)
 					shadow="md"
 					colorScheme={"whatsapp"}
 				>
-					<Link href="#">
+					<Link
+						href={ticketCheckoutUrl}
+					>
 						Purchase
 					</Link>
 				</Button>
@@ -153,6 +160,7 @@ function TicketClassPage()
 	const router = useRouter();
 
 	const [ ticketClassList, setTicketClassList ] = useState([]);
+	const [ eventId, setEventId ] = useState("");
 	const [ loaded, setLoaded ] = useState(false);
 
 	useEffect(() => {
@@ -170,6 +178,7 @@ function TicketClassPage()
 			.then((res) => {
 				console.log(res);
 				setTicketClassList(res.tickets);
+				setEventId(res.id || res._id);
 				setLoaded(true);
 			})
 			.catch((err) => {
@@ -198,7 +207,7 @@ function TicketClassPage()
 						{
 							ticketClassList.map((each, index) => {
 								return (
-									<TicketClassCard key={index} ticket={each}/>
+									<TicketClassCard key={index} eventId={eventId} ticket={each}/>
 								)
 							})
 						}

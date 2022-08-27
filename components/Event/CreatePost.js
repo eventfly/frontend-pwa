@@ -19,6 +19,7 @@ import {
     getDownloadURL
 } from "firebase/storage";
 import { postData } from "../../services/HttpService";
+import { useRouter } from "next/router";
 
 
 function CreatePost(props)
@@ -27,6 +28,7 @@ function CreatePost(props)
     const eventId = event.id || event._id;
 
     const toast = useToast();
+    const router = useRouter();
     const [ content, setContent ] = useState("");
 
     useEffect(() => {
@@ -94,8 +96,6 @@ function CreatePost(props)
     function submitPost(e)
     {
         e.preventDefault();
-
-        //  Checking if empty
         const srcContentElem = document.getElementById("srcContent");                
 
         if (srcContentElem.value.trim() === "")
@@ -120,7 +120,14 @@ function CreatePost(props)
         postData(url, payload)
         .then((res) => {
             console.log("Response:", res);
-            //  Toast deya uchit
+            toast({
+                title: "Post Created!",
+                description: "Your post has been created! Write another one, maybe?",
+                status: "success",
+                duration: 4000,
+                isClosable: true
+            });
+            router.reload();
         })
         .catch((err) => {
             console.error("Error:", err);

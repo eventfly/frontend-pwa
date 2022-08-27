@@ -1,4 +1,4 @@
-import EventCard from '../components/EventCard'
+import EventCard from '../components/Event/EventCard'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import { useToast, Text, Box, Heading } from '@chakra-ui/react'

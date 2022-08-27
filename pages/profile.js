@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 
 import ReviewCard from "../components/ReviewCard";
-import EventCard from "../components/EventCard";
+import EventCard from "../components/Event/EventCard";
 import { useEffect, useState } from "react";
 import CONFIG from "../config/config.json";
 import { getData } from "../services/HttpService";
