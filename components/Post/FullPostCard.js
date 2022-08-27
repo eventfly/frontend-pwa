@@ -15,8 +15,9 @@ import {
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import PostContent from "./PostContent";
-import ReactMarkdown from "react-markdown";
-import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
+import {getData_Local, storeData_Local} from '../../services/StorageService';
+import { putData } from '../../services/HttpService';
+import CONFIG from "../../config/config.json";
 
 
 function FullPostCard(props)
@@ -27,11 +28,44 @@ function FullPostCard(props)
     const posterId = post.creator.id;
     const postId = post._id;
     const eventId = post.event_id;
+    var likeToggle = false;
 
     useEffect(() => {
         
 
     });
+    const handlePostLikeCount = () => {
+
+        const buttonElem = document.getElementById("likeButton");
+        const buttonValue = buttonElem.value;
+
+        if (buttonValue === "not-liked") {
+            buttonElem.value = "liked";
+            buttonElem.textContent = "Liked";
+        }
+        else if (buttonValue === "liked") {
+            buttonElem.value = "not-liked";
+            buttonElem.textContent = "Like";
+        }
+        
+        likeToggle = (buttonElem.value === "liked");
+        console.log("likeToggle: ", likeToggle);
+
+        const userID = getData_Local("userId"); 
+        const likeUrl = `${CONFIG.BASE_URL.NEWSFEED}/api/newsfeed/edit-like`;
+        const payload = {
+            post_id: post._id,
+        }
+
+        console.log("payload: ", payload)
+
+        putData(likeUrl, payload)
+        .then((data) => {
+            console.log("Response data:", data);
+        }).catch((err) => {
+            console.log("error");
+        });
+    }
 
     return (
         <Box backgroundColor='gray.200' color='black' borderRadius='10px'>
@@ -99,6 +133,8 @@ function FullPostCard(props)
                                     <Button
                                         width={"50%"}
                                         colorScheme={"facebook"}
+                                        id="likeButton" value="not-liked"
+                                        onClick={() => handlePostLikeCount()}
                                     >
                                         Like
                                     </Button>
