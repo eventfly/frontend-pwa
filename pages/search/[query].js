@@ -1,36 +1,44 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 
 import EventCard from "../../components/Event/EventCard";
 import CONFIG from "../../config/config.json";
-import { getData } from "../../services/HttpService";
+import { getData, postData } from "../../services/HttpService";
 
 
 function SearchResult()
 {
     const router = useRouter();
+    const [ queryString, setQueryString ] = useState("");
     const [ searchResults, setSearchResults ] = useState(null);
     const [ loaded, setLoaded ] = useState(false);
     //  Perform the API GET
 
     useEffect(() => {
 
-        if (!router.isReady) {
-            return;
-        }
-
         const { query } = router.query;
-        console.log("Search query string: ", query);
-        const textSearchUrl = `${CONFIG.BASE_URL.PARTICIPANT}/api/participant/search?query=${query}`;
+        setQueryString(query);
+
+        const textSearchUrl = `${CONFIG.BASE_URL.ANALYTICS}/api/analytics/search/query`;
+        const payload = {
+            query: query
+        };
 
         if (!loaded)
         {
-            getData(textSearchUrl)
+            postData(textSearchUrl, payload)
             .then((res) => {
-                setSearchResults(res.events);
-                console.table(res);
-                setLoaded(true);
+                if (res.events) 
+                {
+                    if (res.events.length > 0)
+                    {
+                        setSearchResults(res.events);
+                        console.log("QUERY SEARCH")
+                        console.table(res);
+                        setLoaded(true);        
+                    }
+                }
             })
             .catch((err) => {
                 console.error(err);
@@ -43,15 +51,22 @@ function SearchResult()
         loaded ?
         <Box>
             {
-                searchResults.map((event, index) => {
+                searchResults.map((eventId, index) => {
                     return (
-                        <EventCard key={index} eventId={event.id || event._id} />
+                        <EventCard key={index} eventId={eventId} />
                     )
                 })
             }
         </Box>
         :
-        <></>
+        <Heading
+            fontWeight={"normal"}
+            textAlign={"center"}
+            fontSize={"md"}
+            mt={"70%"}
+        >
+            No events found using search query: {`'${queryString}'`}
+        </Heading>
     );
 }
 

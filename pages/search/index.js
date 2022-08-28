@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Stack, Image, Flex, Avatar, Box, Text, Spacer, Button, Textarea, Center, Input, Container, VStack } from "@chakra-ui/react";
 import { postData } from '../../services/HttpService';
@@ -16,28 +16,62 @@ import {
 import MapBox from '../../components/Map/MapBox'
 import meterPerPixel from '../../components/Map/PixelToMeter';
 import { useRouter } from 'next/router';
+import CONFIG from "../../config/config.json";
+import EventCard from '../../components/Event/EventCard';
 
 
-function Search()
-{
+const BASE_LAT = 23.8;
+const BASE_LONG = 90.4;
+
+function Search() {
     const router = useRouter();
     const radiusInPixel = 100;
 
-    const [textSearch, setTextSearch] = useState('');
+    const [searchText, setSearchText] = useState('');
     const [locationSearch, setLocationSearch] = useState({
-        lat: 23.8,
-        long: 90.4,
+        lat: BASE_LAT,
+        long: BASE_LONG,
         zoom: 10
     });
 
     const [searchMode, setSearchMode] = useState('text');
+    const [gpsLocked, setGpsLocked] = useState(false);
+    const [eventsAreLoaded, setEventsAreLoaded] = useState(false);
+    const [searchResults, setSearchResults] = useState([]);
 
-    function handleTextSearch()
-    {
+    useEffect(() => {
+
+        if (!gpsLocked) {
+            const options = {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0
+            };
+
+            navigator.geolocation.getCurrentPosition((data) => {
+                console.log("Permission given");
+                console.table(data.coords);
+                const newLoc = {
+                    lat: data.coords.latitude,
+                    long: data.coords.longitude,
+                    zoom: Math.round(locationSearch.zoom)
+                };
+                setLocationSearch(newLoc);
+                setGpsLocked(true);
+            },
+                (err) => {
+                    console.error(error);
+                },
+                options);
+        }
+    });
+
+
+    function handleTextSearch() {
         if (!router.isReady) {
             return;
         }
-        router.push(`/search/${textSearch}`);
+        router.push(`/search/${searchText}`);
     }
 
     const handleLocationSearch = () => {
@@ -51,10 +85,24 @@ function Search()
         const latDiff = 360 * radiusKM / earthCircumference;
         const longDiff = 360 * radiusKM / earthCircumference / Math.cos(locationSearch.lat * Math.PI / 180);
 
-        //api call here/
-        console.log("get events within ")
-        console.log("latdiff: " + latDiff + " of " + locationSearch.lat);
-        console.log("longdiff: " + longDiff + " of " + locationSearch.long);
+
+        const locationSearchUrl = `${CONFIG.BASE_URL.ANALYTICS}/api/analytics/search/location`;
+        const participantId = getData_Local("userId");
+        const payload = {
+            participantId: participantId,
+            participantLng: locationSearch.long,
+            participantLat: locationSearch.lat
+        };
+
+        postData(locationSearchUrl, payload)
+            .then((res) => {
+                console.table(res);
+                setSearchResults(res.events);
+                setEventsAreLoaded(true);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
     }
 
     const onDragMarker = (lat, lng) => {
@@ -62,8 +110,8 @@ function Search()
             lat: lat,
             long: lng,
             zoom: Math.round(locationSearch.zoom)
-        }
-        setLocationSearch(newLoc)
+        };
+        setLocationSearch(newLoc);
     }
 
     const onZoom = (zoom) => {
@@ -79,7 +127,6 @@ function Search()
         setSearchMode(mode)
     }
 
-
     return (
         <>
             <Spacer h={8} />
@@ -92,7 +139,7 @@ function Search()
                                     {({ isOpen, onClose }) => (
                                         <>
                                             <PopoverTrigger>
-                                                <Input type='text' id='search' variant='outlined' placeholder='Enter Keywords to Search ...' value={textSearch} onChange={(e) => { setTextSearch(e.target.value) }} />
+                                                <Input type='text' id='search' variant='outlined' placeholder='Enter Keywords to Search ...' value={searchText} onChange={(e) => { setSearchText(e.target.value) }} />
                                             </PopoverTrigger>
                                             <PopoverContent>
                                                 <PopoverBody p={2}>
@@ -108,14 +155,13 @@ function Search()
                             </Flex>
 
                             <Spacer py={2} />
-                                <Button w={"full"} colorScheme='teal' variant='solid' onClick={handleTextSearch}>
-                                    Search
+                            <Button w={"full"} colorScheme='teal' variant='solid' onClick={handleTextSearch}>
+                                Search
                             </Button>
 
                         </Container>
                     </VStack>
                 ) : (
-
                     <>
                         <Container maxW={'xl'}>
                             <Button colorScheme='teal' variant='ghost' onClick={() => { changeSearchMode("text") }}> {"<"} Back</Button>
@@ -123,8 +169,8 @@ function Search()
                             <Flex flexDirection='column' alignItems='center'>
                                 <MapBox
                                     //  DEFAULT:: Own Location ??
-                                    defaultLat={23.8}
-                                    defaultLng={90.4}
+                                    defaultLat={locationSearch.lat}
+                                    defaultLng={locationSearch.long}
                                     onDrag={onDragMarker}
                                     displayType={'block'}
                                     displayMarker={'block'}
@@ -132,12 +178,20 @@ function Search()
                                     onZoom={onZoom}
                                 />
                                 <Button m={5} colorScheme={"blue"} onClick={handleLocationSearch}> Search </Button>
-
                             </Flex>
                         </Container>
                     </>
                 )
             }
+            <>
+                {
+                    eventsAreLoaded &&
+                    searchResults.map((eventId, index) => {
+                        return <EventCard key={index} eventId={eventId} />
+                    })
+                }
+
+            </>
         </>
     );
 }
