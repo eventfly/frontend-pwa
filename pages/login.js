@@ -7,6 +7,7 @@ import {
 	Heading,
 	Box,
 	Link,
+	Text,
 	useToast,
 	Checkbox,
 	Flex,
@@ -119,6 +120,18 @@ function Home() {
 							<Button colorScheme={'blue'} variant={'solid'} onClick={handleSignIn}>
 								Sign in
 							</Button>
+							<Text
+								fontSize={"sm"}
+								textAlign={"center"}
+							>
+								New here? Create account
+								<Link
+									href={"/signup"}
+									color="green.400"
+								>
+									{" now"}
+								</Link>
+							</Text>
 						</Stack>
 					</Stack>
 				</Flex>

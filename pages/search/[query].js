@@ -45,7 +45,7 @@ function SearchResult()
             {
                 searchResults.map((event, index) => {
                     return (
-                        <EventCard key={index} event={event} />
+                        <EventCard key={index} eventId={event.id || event._id} />
                     )
                 })
             }
