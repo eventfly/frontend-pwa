@@ -3,14 +3,18 @@ import {
     Popover, PopoverTrigger,PopoverContent,PopoverHeader,PopoverBody,
     PopoverFooter,PopoverArrow,PopoverCloseButton,PopoverAnchor,
   } from '@chakra-ui/react'
-import { postData } from '../services/HttpService';  
-import {getData_Local, storeData_Local} from '../services/StorageService';
+  import {getData_Local, storeData_Local} from '../../services/StorageService';
+  import { putData } from '../../services/HttpService';
 import {useState, useEffect} from 'react';
+import CONFIG from "../../config/config.json";
 
-
-const QuizCard = ({post}) => {
-    var quizAnswers = [];
+function QuizCard (props)
+{
+    const post = props.post;
+    const postId = post._id;
+    const [quizAnswers, setQuizAnswers] = useState([]);
     const size = post.questions.length;
+    const [quizCreated,setQuizCreated] = useState(false);
 
     function handleQuizAnswers(event, index1, index2)
     {
@@ -18,7 +22,11 @@ const QuizCard = ({post}) => {
         console.log("i:", index1)
         console.log("j:", index2)
         
-        quizAnswers[index1].answer_index = index2;
+        // quizAnswers[index1].answer_index = index2;
+        var temp = quizAnswers;
+        temp[index1].question_index = index1;
+        temp[index1].answer_index = index2;
+        setQuizAnswers(temp);
 
         console.log("quiz Answers:");
         console.table(quizAnswers);
@@ -34,16 +42,14 @@ const QuizCard = ({post}) => {
 
         const userID = getData_Local("userId"); 
 
-        const quizUrl = '';
+        const quizUrl = `${CONFIG.BASE_URL.NEWSFEED}/api/newsfeed/post/${postId}/answer`;
         const payload = {
-            post_id: post._id,
-            user_id: userID,
-            answer_index: quizAnswers
+            quiz_answers: quizAnswers
         }
         console.log("payload--")
         console.log(payload)
 
-        postData(quizUrl, payload)
+        putData(quizUrl, payload)
         .then((data) => {
             console.log("Response data:", data);
         }).catch((err) => {
@@ -52,12 +58,18 @@ const QuizCard = ({post}) => {
     }
 
     useEffect(() => {
-        for( var i = 0; i < size; i++){
-            quizAnswers.push({
-                "answer_index": 0,
-                "time": new Date().toUTCString()
-            });
+        if(!quizCreated){
+            var temp = []
+            for( var i = 0; i < size; i++){
+                temp.push({
+                    "question_index":i,
+                    "answer_index": 0
+                });
+            }
+            setQuizAnswers(temp);
+            setQuizCreated(true);
         }
+        
     }, []);
 
     return ( 

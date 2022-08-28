@@ -20,6 +20,7 @@ import { putData } from '../../services/HttpService';
 import CONFIG from "../../config/config.json";
 import { getData } from '../../services/HttpService';
 import PollCard from "./PollCard";
+import QuizCard from "./QuizCard";
 
 
 function FullPostCard(props)
@@ -157,6 +158,21 @@ function FullPostCard(props)
                                     overflow={"clip"}
                                 >
                                     <PollCard post={post} />
+                                </Box>
+
+                                </>
+
+                            }
+
+                            {post.questions.length > 0 &&
+                                <>
+                                    <Box
+                                    my={5}
+                                    width={"xs"}
+                                    overflowWrap={"break-word"}
+                                    overflow={"clip"}
+                                >
+                                    <QuizCard post={post} />
                                 </Box>
 
                                 </>
