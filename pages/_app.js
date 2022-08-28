@@ -9,7 +9,6 @@ import firebaseConfig from "../config/firebase.json";
 
 import { isAuthenticated } from "../services/StorageService";
 
-
 const theme = extendTheme({
 	fonts: {
 		body: `'Work Sans', sans-serif`,
