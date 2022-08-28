@@ -15,53 +15,19 @@ import {
     TabPanels,
 } from "@chakra-ui/react";
 
-import ReviewCard from "../components/ReviewCard";
-import EventCard from "../components/Event/EventCard";
+import ReviewCard from "../../components/ReviewCard";
+import EventCard from "../../components/Event/EventCard";
 import { useEffect, useState } from "react";
-import CONFIG from "../config/config.json";
-import { getData } from "../services/HttpService";
-import { getData_Local, storeData_Local } from "../services/StorageService";
-
-const _eventList = [
-    {
-        id: 1,
-        image: "event1.jpg",
-        title: "Chicago Art Exhibition 2022",
-        date: "Dec 12,2021",
-        url: "1",
-        description:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    },
-    {
-        id: 2,
-        image: "event2.jpg",
-        title: "Chicago Art Exhibition 2022",
-        date: "Dec 12,2021",
-        url: "2",
-        description:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    },
-];
-
-const _reviewList = [
-    {
-        date: "10 March, 2021",
-        stars: 3,
-        eventTitle: "Cannes Film Festival 2021",
-        description:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    },
-    {
-        date: "20 July 2021",
-        stars: 4,
-        eventTitle: "Charcoal Art Exhibition 2.0",
-        description:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    },
-];
+import CONFIG from "../../config/config.json";
+import { getData } from "../../services/HttpService";
+import { getData_Local, storeData_Local } from "../../services/StorageService";
+import { useRouter } from "next/router";
 
 
-function UserProfileCard() {
+function UserPublicProfile()
+{
+    const router = useRouter();
+
     const [profileLoaded, setProfileLoaded] = useState(false);
     const [reviewsLoaded, setReviewsLoaded] = useState(false);
     const [pastEventsLoaded, setPastEventsLoaded] = useState(false);
@@ -74,7 +40,11 @@ function UserProfileCard() {
 
     useEffect(() => {
 
-        const userId = getData_Local("userId");
+        if (!router.isReady) {
+            return;
+        }
+
+        const userId = router.query.user_id;
 
         if (!profileLoaded) {
             const getProfileUrl = `${CONFIG.BASE_URL.PARTICIPANT}/api/participant/${userId}/profile`;
@@ -236,4 +206,4 @@ function UserProfileCard() {
 }
 
 
-export default UserProfileCard;
+export default UserPublicProfile;
