@@ -12,30 +12,32 @@ import CONFIG from "../../config/config.json";
 import { getData } from '../../services/HttpService';
 
 
-function EventBodyDiscussion(props)
-{
+function EventBodyDiscussion(props) {
     const event = props.event;
     const eventId = event.id || event._id;
     const description = event.description;
-    
+
     const [loaded, setLoaded] = useState(false);
     const [postList, setPostList] = useState([]);
 
     useEffect(() => {
 
-		if (!loaded)
-		{
-			const getPostUrl = `${CONFIG.BASE_URL.NEWSFEED}/api/newsfeed/${eventId}/post`;
-			getData(getPostUrl)
-			.then((res) => {
-				console.table(res);
-				setPostList(res.event.posts);
-				setLoaded(true);
-			})
-			.catch((err) => {
-				console.error(err);
-			});
-		}
+        if (!loaded) {
+            const getPostUrl = `${CONFIG.BASE_URL.NEWSFEED}/api/newsfeed/${eventId}/post`;
+            getData(getPostUrl)
+                .then((res) => {
+                    if (res.event) {
+                        if (res.event.posts) {
+                            console.table(res);
+                            setPostList(res.event.posts);
+                            setLoaded(true);
+                        }
+                    }
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        }
 
     });
 
@@ -61,15 +63,15 @@ function EventBodyDiscussion(props)
                 <CreatePost event={event} />
                 {
                     loaded ?
-                    <>
-                        {
-                            postList.map((post, index) => {
-                                return <PostCard post={post} />
-                            })
-                        }
-                    </>
-                    :
-                    <></>
+                        <>
+                            {
+                                postList.map((post, index) => {
+                                    return <PostCard key={index} post={post} />
+                                })
+                            }
+                        </>
+                        :
+                        <></>
                 }
             </Box>
         </Box>

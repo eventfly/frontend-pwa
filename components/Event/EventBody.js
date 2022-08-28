@@ -19,10 +19,7 @@ function EventBody(props)
 
     return (
         <Box p={0.1}>
-            <Stack spacing={0} align={"center"} mb={5}>
-                <Heading fontSize={"2xl"} fontWeight={600} fontFamily={"body"}>
-
-                </Heading>
+            <Stack spacing={0} align={"center"} m={5}>
             </Stack>
 
             <Tabs variant="soft-rounded" colorScheme="blackAlpha">
@@ -30,9 +27,9 @@ function EventBody(props)
                     <TabList>
                         <Tab>About</Tab>
                         <Tab>Discussion</Tab>
+                        <Tab>Reviews</Tab>
                     </TabList>
                 </Center>
-
                 <TabPanels>
                     <TabPanel>
                         <EventBodyAbout event={event} />
