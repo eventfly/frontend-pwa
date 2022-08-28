@@ -17,6 +17,22 @@ async function postData(url='', data={})
     return response.json();
 }
 
+async function deleteData(url='')
+{
+    const authToken = localStorage.getItem("token");
+    const response = await fetch(url, {
+        method: "DELETE",
+        mode: "cors",
+        cache: "no-cache",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": authToken
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer"
+    });
+}
+
 async function putData(url='', data={})
 {
     const authToken = localStorage.getItem("token");
@@ -58,5 +74,6 @@ async function getData(url="")
 export {
     postData,
     putData,
-    getData
+    getData,
+    deleteData
 };
