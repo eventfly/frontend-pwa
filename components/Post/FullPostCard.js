@@ -8,6 +8,8 @@ import {
     VStack,
     HStack,
     Container,
+    Tag,
+    TagLabel,
     Avatar,
     Button,
     Spacer
@@ -115,7 +117,7 @@ function FullPostCard(props)
             >
                 <Box ml='3'>
                     <HStack>
-                        <Avatar src={props.post.creator.avatar} />
+                        <Avatar size={"lg"} src={props.post.creator.avatar} />
                         <VStack>
                             <Text
                                 fontWeight='bold'
@@ -123,6 +125,15 @@ function FullPostCard(props)
                                 mb={-2}
                             >
                                 {post.creator.name}
+                                <br />
+                                {
+                                    post.creator.role != "Participant" &&
+                                    <HStack>
+                                        <Tag size={"sm"} mb={1} variant='outline' colorScheme='blue'>
+                                            <TagLabel>{post.creator.role}</TagLabel>
+                                        </Tag>
+                                    </HStack>
+                                }
                             </Text>
                             <Text
                             >

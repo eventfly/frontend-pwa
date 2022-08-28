@@ -7,6 +7,10 @@ import {
     Text,
     VStack,
     HStack,
+    Tag,
+    TagLabel,
+    TagRightIcon,
+    MdSettings,
     Container,
     Avatar,
     Button,
@@ -17,8 +21,7 @@ import ReactMarkdown from "react-markdown";
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 
 
-function PostCard(props)
-{
+function PostCard(props) {
     const post = props.post;
     const postContent = post.content;
     const postCreationDate = new Date(post.created_at).toDateString();
@@ -36,7 +39,7 @@ function PostCard(props)
             >
                 <Box ml='3'>
                     <HStack>
-                        <Avatar src={post.creator.avatar} />
+                        <Avatar size={"lg"} src={post.creator.avatar} />
                         <VStack>
                             <Text
                                 fontWeight='bold'
@@ -44,6 +47,15 @@ function PostCard(props)
                                 mb={-2}
                             >
                                 {post.creator.name}
+                                <br />
+                                {
+                                    post.creator.role != "Participant" &&
+                                    <HStack>
+                                        <Tag size={"sm"} mb={1} variant='outline' colorScheme='blue'>
+                                            <TagLabel>{post.creator.role}</TagLabel>
+                                        </Tag>
+                                    </HStack>
+                                }
                             </Text>
                             <Link
                                 fontSize={"sm"}
@@ -73,18 +85,18 @@ function PostCard(props)
                                 <PostContent post={post} />
                             </Box>
                             <HStack>
-                                    <Button
-                                        width={"auto"}
-                                        colorScheme={"facebook"}
-                                    >
-                                        Like
-                                    </Button>
-                                    <Button
-                                        width={"auto"}
-                                        colorScheme={"blackAlpha"}
-                                    >
-                                        Comment
-                                    </Button>
+                                <Button
+                                    width={"auto"}
+                                    colorScheme={"facebook"}
+                                >
+                                    Like
+                                </Button>
+                                <Button
+                                    width={"auto"}
+                                    colorScheme={"blackAlpha"}
+                                >
+                                    Comment
+                                </Button>
                             </HStack>
                         </Box>
                     </Flex>
