@@ -3,11 +3,13 @@ import {
     Popover, PopoverTrigger,PopoverContent,PopoverHeader,PopoverBody,
     PopoverFooter,PopoverArrow,PopoverCloseButton,PopoverAnchor,
   } from '@chakra-ui/react'
-import { postData } from '../services/HttpService';  
-import {getData_Local, storeData_Local} from '../services/StorageService';
+  import {getData_Local, storeData_Local} from '../../services/StorageService';
+  import { postData } from '../../services/HttpService';
 import {useState, useEffect} from 'react';
 
-const PollCard = ({post}) => {
+function PollCard (props)
+{
+    const post = props.post;
     var pollOptions = [];
     const size = post.poll_options.length;
 
@@ -15,6 +17,7 @@ const PollCard = ({post}) => {
     {
         console.log("inside handle select")
         console.log("i:", index)
+        console.log("handle e poll call: ", pollOptions);
 
         if (pollOptions[index].is_selected)
             pollOptions[index].is_selected = false;
@@ -59,6 +62,7 @@ const PollCard = ({post}) => {
                 "is_selected": false
             });
         }
+        console.log('faka poll: ', pollOptions);
     }, []);
 
     return ( 
