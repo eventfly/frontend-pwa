@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
-import { postData, putData } from '../services/HttpService';
+import React, { useEffect, useState } from 'react';
+import { deleteData, putData } from '../services/HttpService';
 import { getData_Local, storeData_Local } from '../services/StorageService';
 import CONFIG from "../config/config.json";
 
 import {
+    chakra,
     Button,
     Flex,
     FormControl,
@@ -12,6 +13,7 @@ import {
     Input,
     Stack,
     useColorModeValue,
+    Text,
     Avatar,
     Center,
     Box,
@@ -23,8 +25,18 @@ import {
     FormHelperText,
     InputGroup,
     Select,
-    useToast
+    useToast,
+    useDisclosure
 } from '@chakra-ui/react';
+
+import {
+    AlertDialog,
+    AlertDialogBody,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogContent,
+    AlertDialogOverlay,
+} from '@chakra-ui/react'
 
 import {
     getStorage,
@@ -35,8 +47,7 @@ import {
 import { useRouter } from 'next/router';
 
 
-function Settings()
-{
+function Settings() {
     const toast = useToast();
     const router = useRouter();
 
@@ -44,8 +55,12 @@ function Settings()
     const [userName, setUserName] = useState("");
     const [userAvatar, setUserAvatar] = useState("");
 
-    function openFilePicker(e)
-    {
+    //  Delete My Account Modal
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const cancelRef = React.useRef()
+
+
+    function openFilePicker(e) {
         const avatarImageFileElem = document.getElementById("avatarImage");
         avatarImageFileElem.click();
     }
@@ -92,10 +107,27 @@ function Settings()
         );
     }
 
-    function handleCancel(e)
-    {
+    function handleCancel(e) {
         router.back();
         return;
+    }
+
+    function confirmDeleteAccount(e)
+    {
+        const deleteAccountUrl = `${CONFIG.BASE_URL.PARTICIPANT}/api/participant`;
+        
+        deleteData(deleteAccountUrl);
+        toast({
+            title: "Account Deleted!",
+            description: "You have successfully deleted your account!",
+            duration: 4000,
+            isClosable: true,
+            status: "info"
+        });
+
+        localStorage.clear();
+        router.push("/");
+
     }
 
     function handleUpdateProfile(e)
@@ -105,10 +137,10 @@ function Settings()
         const genderElem = document.getElementById("gender");
         const userNameElem = document.getElementById("userName");
 
-        const userName = userNameElem.value;
+        const userName = userNameElem.value.trim();
         const password = passwordElem.value.trim();
         const confirmPassword = confirmPasswordElem.value.trim();
-        const gender = genderElem.value;
+        const gender = genderElem.value.trim();
 
         if (userName === "") {
             toast({
@@ -155,31 +187,31 @@ function Settings()
         }
 
         putData(editProfileUrl, payload)
-        .then((res) => {
-            if (res.errors) {
-                res.errors.map((error, index) => {
-                    toast({
-                        title: error.message,
-                        duration: 3000,
-                        isClosable: true,
-                        status: "error"
-                    });
-                })
-                return;
-            }
+            .then((res) => {
+                if (res.errors) {
+                    res.errors.map((error, index) => {
+                        toast({
+                            title: error.message,
+                            duration: 3000,
+                            isClosable: true,
+                            status: "error"
+                        });
+                    })
+                    return;
+                }
 
-            toast({
-                title: "Profile Updated!",
-                duration: 4000,
-                isClosable: true,
-                status: "success"
+                toast({
+                    title: "Profile Updated!",
+                    duration: 4000,
+                    isClosable: true,
+                    status: "success"
+                });
+                router.reload();
+                return;
+            })
+            .catch((err) => {
+                console.error(err);
             });
-            router.reload();
-            return;
-        })
-        .catch((err) => {
-            console.error(err);
-        });
 
         //  TO DO
         //  POST/UPDATE data to backend
@@ -194,6 +226,38 @@ function Settings()
 
     return (
         <>
+            <AlertDialog
+                isOpen={isOpen}
+                leastDestructiveRef={cancelRef}
+                onClose={onClose}
+            >
+                <AlertDialogOverlay>
+                    <AlertDialogContent
+                        ml={5}
+                        mr={5}
+                        mt={"70%"}
+                    >
+                        <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+                            Delete My Account
+                        </AlertDialogHeader>
+
+                        <AlertDialogBody>
+                            Are you sure? You can't undo this action afterwards.
+                        </AlertDialogBody>
+
+                        <AlertDialogFooter>
+                            <Button ref={cancelRef} onClick={onClose}>
+                                Cancel
+                            </Button>
+                            <Button colorScheme='red' onClick={confirmDeleteAccount} ml={3}>
+                                Delete
+                            </Button>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialogOverlay>
+            </AlertDialog>
+
+
             <Box textAlign='center' width='100%' backgroundColor='green'>
                 <Heading as='h2' size='2xl' padding='10px' color='white'>
                     Settings
@@ -267,20 +331,9 @@ function Settings()
                                     </Select>
                                 </InputGroup>
                             </FormControl>
-                            <Stack spacing={6} direction={['column', 'row']}>
+                            <Stack spacing={2} direction={['column', 'row']}>
                                 <Button
-                                    bg={'red.400'}
-                                    color={'white'}
-                                    w="full"
-                                    _hover={{
-                                        bg: 'red.500',
-                                    }}
-                                    onClick={handleCancel}
-                                >
-                                    Cancel
-                                </Button>
-                                <Button
-                                    bg={'blue.400'}
+                                    bg={'green.500'}
                                     color={'white'}
                                     w="full"
                                     _hover={{
@@ -290,7 +343,31 @@ function Settings()
                                 >
                                     Update Profile
                                 </Button>
+                                <Button
+                                    bg={"red.600"}
+                                    color={'white'}
+                                    w="full"
+                                    _hover={{
+                                        bg: 'red.500',
+                                    }}
+                                    onClick={handleCancel}
+                                >
+                                    Cancel
+                                </Button>
                             </Stack>
+                            <Text
+                                textAlign={"center"}
+                                fontSize={"sm"}
+                            >
+                                I want to {" "}
+                                <chakra.span
+                                    color={"red.500"}
+                                    fontSize={"sm"}
+                                    onClick={onOpen}
+                                >
+                                    delete my account
+                                </chakra.span>
+                            </Text>
                         </Stack>
                     </Flex>
 
