@@ -22,6 +22,7 @@ import {
 
 import {
 	FiInfo,
+	FiStar,
 	FiMenu,
 	FiLock,
 	FiEyeOff,
@@ -49,6 +50,11 @@ const LinkItems = [
 		name: "My Events",
 		link: "/my-events",
 		icon: FiCalendar
+	},
+	{
+		name: "Recommendation",
+		link: "/recommendation",
+		icon: FiStar
 	},
 	{
 		name: "Ticket",
