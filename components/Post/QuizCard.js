@@ -4,9 +4,9 @@ import {
     PopoverFooter,PopoverArrow,PopoverCloseButton,PopoverAnchor,
   } from '@chakra-ui/react'
   import {getData_Local, storeData_Local} from '../../services/StorageService';
-  import { postData } from '../../services/HttpService';
+  import { putData } from '../../services/HttpService';
 import {useState, useEffect} from 'react';
-
+import CONFIG from "../../config/config.json";
 
 function QuizCard (props)
 {
@@ -24,6 +24,7 @@ function QuizCard (props)
         
         // quizAnswers[index1].answer_index = index2;
         var temp = quizAnswers;
+        temp[index1].question_index = index1;
         temp[index1].answer_index = index2;
         setQuizAnswers(temp);
 
@@ -41,16 +42,14 @@ function QuizCard (props)
 
         const userID = getData_Local("userId"); 
 
-        const quizUrl = '';
+        const quizUrl = `${CONFIG.BASE_URL.NEWSFEED}/api/newsfeed/post/${postId}/answer`;
         const payload = {
-            post_id: post._id,
-            user_id: userID,
-            answer_index: quizAnswers
+            quiz_answers: quizAnswers
         }
         console.log("payload--")
         console.log(payload)
 
-        postData(quizUrl, payload)
+        putData(quizUrl, payload)
         .then((data) => {
             console.log("Response data:", data);
         }).catch((err) => {
@@ -63,8 +62,8 @@ function QuizCard (props)
             var temp = []
             for( var i = 0; i < size; i++){
                 temp.push({
-                    "answer_index": 0,
-                    "time": new Date().toUTCString()
+                    "question_index":i,
+                    "answer_index": 0
                 });
             }
             setQuizAnswers(temp);
