@@ -62,36 +62,41 @@ const _reviewList = [
 
 function UserProfileCard()
 {
-    const [loaded, setLoaded] = useState(false);
+    const [profileLoaded, setProfileLoaded] = useState(false);
+    const [reviewsLoaded, setReviewsLoaded] = useState(false);
+    const [pastEventsLoaded, setPastEventsLoaded] = useState(false);
+
     const [userName, setUserName] = useState("");
     const [userAvatar, setUserAvatar] = useState("");
     const [userEmail, setUserEmail] = useState("");
-    const [eventList, setEventList] = useState(null);
-    const [reviewList, setReviewList] = useState(null);
+    const [eventList, setEventList] = useState([]);
+    const [reviewList, setReviewList] = useState([]);
 
     useEffect(() => {
 
         const userId = getData_Local("userId");
-        const getProfileUrl = `${CONFIG.BASE_URL.PARTICIPANT}/api/participant/${userId}/profile`;
 
-        getData(getProfileUrl)
+        if (!profileLoaded)
+        {
+            const getProfileUrl = `${CONFIG.BASE_URL.PARTICIPANT}/api/participant/${userId}/profile`;
+            
+            getData(getProfileUrl)
             .then((res) => {
                 setUserAvatar(res.avatar);
                 setUserEmail(res.email);
                 setUserName(res.name);
-
-                //	TODO	->	Get Data from Backend
-                setEventList(_eventList);
-                setReviewList(_reviewList);
-                //	---------------------------------
-
-                setLoaded(true);
-
+                setProfileLoaded(true);
             })
             .catch((err) => {
                 console.error(err);
-                setLoaded(false);
             });
+        }
+
+
+        if (!reviewsLoaded)
+        {
+        }
+
     });
 
     storeData_Local("userName", userName);

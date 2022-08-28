@@ -30,9 +30,12 @@ function EventDetails()
 			{
 				getData(eventInfoUrl)
 				.then((res) => {
-					console.log("Event Info GET:", res);
-					setEvent(res);
-					setLoaded(true);
+					if (res)
+					{
+						console.log("Event Info GET:", res);
+						setEvent(res);
+						setLoaded(true);	
+					}
 				})
 				.catch((err) => {
 					console.error(err);
@@ -44,13 +47,13 @@ function EventDetails()
 	
 	return (
 		loaded ?
-			<>
-				<EventBanner event={event}/>
-				<EventBody event={event}/>
-			</>
+		<>
+			<EventBanner event={event}/>
+			<EventBody event={event}/>
+		</>
 		:
-			<>
-			</>
+		<>
+		</>
 	);
 }
 
