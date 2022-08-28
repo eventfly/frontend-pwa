@@ -25,6 +25,7 @@ class MyDocument extends Document {
 				<link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
 				<link rel="manifest" href="/manifest.json" />
 				<link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#5bbad5" />
+				<link rel="stylesheet" href="/fonts.css"/>
 
 				<meta name="twitter:card" content="summary" />
 				<meta name="twitter:url" content="https://eventfly.app" />
@@ -40,7 +41,6 @@ class MyDocument extends Document {
 				<meta property="og:image" content="https://eventfly.app/icons/apple-touch-icon.png" />
 
 				<Head>
-					<title>EventFly</title>
 				</Head>
 				<body>
 					<Main />
