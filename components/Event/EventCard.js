@@ -7,34 +7,48 @@ import { getData } from "../../services/HttpService";
 
 function EventCard(props)
 {
-    const [ organizerName, setOrganizerName ] = useState("");
+    const [ finalLoaded, setFinalLoaded ] = useState(false);
     const [ loaded, setLoaded ] = useState(false);
+    
+    const [ eventDescription, setEventDescription ] = useState("");
+    const [ eventDate, setEventDate ] = useState("");
 
-    const event = props.event;
+    const [ organizer, setOrganizer ] = useState({});
+    const [ event, setEvent ] = useState({});
 
-    const eventId = event._id || event.id;
-    const eventTitle = event.name;
-    const eventPrivacy = event.privacy;
-    const eventBanner = event.banner_url;    
-    const eventType = event.type;
-    const eventOrgId = event.organizer;
-    const eventStartDate = new Date(event.start_date).toDateString();
-    console.log(eventStartDate);
-
-    const eventDescription = `${event.description.substring(0, 250)} ...`;
+    const eventId = props.eventId;
     const eventUrl = `/event/${eventId}`;
 
     //  TODO Organzier Info GET
     useEffect(() => {
 
-        if (!loaded)
-        {
-            const organizerUrl = `${CONFIG.BASE_URL.ORG}/api/org/${eventOrgId}/profile`;
-            getData(organizerUrl)
+        if (!loaded) {
+            const getEventUrl = `${CONFIG.BASE_URL.PARTICIPANT}/api/participant/event/${eventId}`;
+            console.log(getEventUrl);
+
+            getData(getEventUrl)
             .then((res) => {
+                console.log("In EventCard : first Fetch");
                 console.table(res);
-                setOrganizerName(res.org.name);
+                setEvent(res);
+                setEventDescription(res.description.substr(0, 200));
+                setEventDate(new Date(res.start_date).toDateString());
                 setLoaded(true);
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+        }
+
+        if (!finalLoaded && loaded)
+        {
+            const getOrganizerUrl = `${CONFIG.BASE_URL.ORG}/api/org/${event.organizer}/profile`;
+            getData(getOrganizerUrl)
+            .then((res) => {
+                console.log("In EventCard : second fetch");
+                console.table(res);
+                setOrganizer(res.org);
+                setFinalLoaded(true);
             })
             .catch((err) => {
                 console.error(err);
@@ -42,11 +56,8 @@ function EventCard(props)
         }
     });
 
-    console.log(eventDescription);
-    console.log("EventCard:");
-    console.table(event);
-
     return (
+        finalLoaded ?
         <Flex
             bg="#edf3f8"
             _dark={{
@@ -72,7 +83,7 @@ function EventCard(props)
                     w="full"
                     h={64}
                     fit="cover"
-                    src={eventBanner}
+                    src={event.banner_url}
                     alt="Article"
                 />
 
@@ -86,7 +97,7 @@ function EventCard(props)
                                 color: "brand.400",
                             }}
                         >
-                            {`${eventPrivacy} • ${eventType}`}
+                            {`${event.privacy} • ${event.type}`}
                         </chakra.span>
                         <Link
                             display="block"
@@ -103,7 +114,7 @@ function EventCard(props)
                                 textDecor: "underline",
                             }}
                         >
-                            { eventTitle }
+                            { event.name }
                         </Link>
                         <chakra.p
                             mt={2}
@@ -129,7 +140,7 @@ function EventCard(props)
                                         color: "gray.200",
                                     }}
                                 >
-                                    by { organizerName }
+                                    by { organizer.name }
                                 </Link>
                             </Flex>
                             <chakra.span
@@ -141,13 +152,15 @@ function EventCard(props)
                                     color: "gray.300",
                                 }}
                             >
-                                { eventStartDate }
+                                { eventDate }
                             </chakra.span>
                         </Flex>
                     </Box>
                 </Box>
             </Box>
         </Flex>
+        :
+        <></>
     );
 }
 
