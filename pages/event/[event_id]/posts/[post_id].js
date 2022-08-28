@@ -39,7 +39,7 @@ function SinglePostDetails()
 			const { post_id } = router.query;
 			setPostId(post_id);
  			const postInfoUrl = `${CONFIG.BASE_URL.NEWSFEED}/api/newsfeed/post/${post_id}`;
-			console.log("Above loaded");
+			 console.log("useEffect of Postid.js----------");
 			if (!loaded)
 			{   
                 console.log('not loaded')

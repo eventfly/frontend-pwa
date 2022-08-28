@@ -3,48 +3,57 @@ import {
     Popover, PopoverTrigger,PopoverContent,PopoverHeader,PopoverBody,
     PopoverFooter,PopoverArrow,PopoverCloseButton,PopoverAnchor,
   } from '@chakra-ui/react'
-import { postData } from '../services/HttpService';  
-import {getData_Local, storeData_Local} from '../services/StorageService';
+  import {getData_Local, storeData_Local} from '../../services/StorageService';
+  import { putData } from '../../services/HttpService';
 import {useState, useEffect} from 'react';
+import CONFIG from "../../config/config.json";
 
-const PollCard = ({post}) => {
-    var pollOptions = [];
+function PollCard (props)
+{
+    const post = props.post;
+    const postId = post._id;
+    const [pollOptions, setPollOptions] = useState([]);
     const size = post.poll_options.length;
+    const [pollCreated,setPollCreated] = useState(false);
 
     function handleOptionSelected(event, index)
     {
         console.log("inside handle select")
         console.log("i:", index)
+        console.log("handle e poll call: ", pollOptions);
 
-        if (pollOptions[index].is_selected)
-            pollOptions[index].is_selected = false;
-        else
-            pollOptions[index].is_selected = true;
+        if (pollOptions[index].is_selected){
+            var temp = pollOptions;
+            temp[index].is_selected = false;
+            setPollOptions(temp);
+        }
+        else{
+            var temp = pollOptions;
+            temp[index].is_selected = true;
+            setPollOptions(temp);
+        }
 
-        console.log("Poll Options:");
-        console.table(pollOptions);
+        console.log("Poll Options:",pollOptions);
     }
 
     function sendData()
     {
         console.log("inside sendData")
 
-        console.log("pollOptions--")
+        console.log("----------------------pollOptions--")
         console.log(pollOptions);
 
 
         const userID = getData_Local("userId"); 
 
-        const pollUrl = '';
+        const pollUrl = `${CONFIG.BASE_URL.NEWSFEED}/api/newsfeed/post/${postId}/answer`;
         const payload = {
-            post_id: post._id,
-            user_id: userID,
-            poll_options: pollOptions
+            poll_answers: pollOptions
         }
         console.log("payload--")
         console.log(payload)
 
-        postData(pollUrl, payload)
+        putData(pollUrl, payload)
         .then((data) => {
             console.log("Response data:", data);
         }).catch((err) => {
@@ -53,12 +62,18 @@ const PollCard = ({post}) => {
     }
 
     useEffect(() => {
-        for( var i = 0; i < size; i++){
-            pollOptions.push({
-                "index": i,
-                "is_selected": false
-            });
+        if(!pollCreated){
+            var temp = []
+            for( var i = 0; i < size; i++){
+                temp.push({
+                    "index": i,
+                    "is_selected": false
+                });
+            }
+            setPollOptions(temp);
+            setPollCreated(true);
         }
+       
     }, []);
 
     return ( 

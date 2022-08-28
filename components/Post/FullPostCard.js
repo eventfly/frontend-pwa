@@ -18,6 +18,8 @@ import PostContent from "./PostContent";
 import {getData_Local, storeData_Local} from '../../services/StorageService';
 import { putData } from '../../services/HttpService';
 import CONFIG from "../../config/config.json";
+import { getData } from '../../services/HttpService';
+import PollCard from "./PollCard";
 
 
 function FullPostCard(props)
@@ -28,9 +30,46 @@ function FullPostCard(props)
     const posterId = post.creator.id;
     const postId = post._id;
     const eventId = post.event_id;
-    var likeToggle = false;
+    var likeToggle;
 
     useEffect(() => {
+        const activityInfoUrl = `${CONFIG.BASE_URL.NEWSFEED}/api/newsfeed/post/${postId}/activity`;
+			console.log("useEffect of FullPostCard");
+
+            const userId = getData_Local("userId"); 
+            console.log('post id: ',postId);
+            console.log('user id: ',userId);
+
+            const payload = {
+                user_id: userId,
+                post_id: postId
+            }
+		
+            getData(activityInfoUrl)
+            .then((res) => {
+                console.log("activity res: ",res);
+                console.log("activity res- like: ",res.is_liked);
+                likeToggle = res.is_liked;
+                if(likeToggle){
+                    console.log('--------------true te dhukse--------------');
+                    buttonElem.value = "liked";
+                    buttonElem.textContent = "Liked";
+                }
+                else{
+                    console.log('--------------false te dhukse--------------');
+                    buttonElem.value = "not-liked";
+                    buttonElem.textContent = "Like";
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+
+            const buttonElem = document.getElementById("likeButton");
+            console.log('toggle: ',likeToggle);
+            
+                
+		
         
 
     });
@@ -109,6 +148,20 @@ function FullPostCard(props)
                             >
                                 <PostContent post={post} />
                             </Box>
+                            {post.poll_options.length > 0 &&
+                                <>
+                                    <Box
+                                    my={5}
+                                    width={"xs"}
+                                    overflowWrap={"break-word"}
+                                    overflow={"clip"}
+                                >
+                                    <PollCard post={post} />
+                                </Box>
+
+                                </>
+
+                            }
                             <Flex paddingLeft='1%' paddingRight='1%' paddingTop='1%' direction='row' >
                                 <Box width='50%' align='left'>
                                     {post.like_count > 0 &&
