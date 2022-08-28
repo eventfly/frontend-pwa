@@ -60,7 +60,7 @@ function Search() {
                 setGpsLocked(true);
             },
                 (err) => {
-                    console.error(error);
+                    console.error(err);
                 },
                 options);
         }
