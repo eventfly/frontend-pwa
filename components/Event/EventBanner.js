@@ -7,9 +7,13 @@ import {
     Link,
     useBreakpointValue,
 } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { getData_Local } from '../../services/StorageService';
+import CONFIG from "../../config/config.json";
+import { getData } from "../../services/HttpService";
 
-function EventBanner (props)
-{
+
+function EventBanner(props) {
     const event = props.event;
     const imageUrl = event.banner_url;
     const eventTitle = event.name;
@@ -17,7 +21,31 @@ function EventBanner (props)
     const eventStartDate = new Date(event.start_date).toDateString();
     const eventEndDate = new Date(event.end_date).toDateString();
 
+    const [isRegistered, setIsRegistered] = useState(false);
+
     const eventTicketUrl = `/event/${eventId}/tickets`;
+
+    useEffect(() => {
+
+        const userId = getData_Local("userId");
+        const getUserEventsUrl = `${CONFIG.BASE_URL.PARTICIPANT}/api/participant/${userId}/events`;
+
+        getData(getUserEventsUrl)
+            .then((res) => {
+                if (res.length > 0) {
+                    res.map((eachEvent, index) => {
+                        if (eachEvent.id === eventId) {
+                            setIsRegistered(true);
+                        }
+                    })
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+
+    });
+
 
     return (
         <Flex
@@ -40,7 +68,7 @@ function EventBanner (props)
                         fontWeight={700}
                         lineHeight={1.2}
                         fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}>
-                        { eventTitle }
+                        {eventTitle}
                     </Text>
                     <Text
                         color={'white'}
@@ -50,26 +78,43 @@ function EventBanner (props)
                         {`${eventStartDate} - ${eventEndDate}`}
                     </Text>
                     <Stack direction={'row'}>
-                        <Button
-                            rounded={'full'}
-                            color={'black'}
-                            colorScheme={"yellow"}
-                            _hover={{ bg: 'blue.500' }}
-                        >
-                            <Link
-                                href={eventTicketUrl}
-                            >
-                                Buy Tickets / Register
-                            </Link>
-                        </Button>
-                        <Button
-                            rounded={'full'}
-                            color={'white'}
-                            colorScheme={"facebook"}
-                            _hover={{ bg: 'whiteAlpha.500' }}
-                        >
-                            + Follow
-                        </Button>
+                        {
+                            !isRegistered ?
+                                <>
+                                    <Button
+                                        rounded={'full'}
+                                        color={'black'}
+                                        colorScheme={"yellow"}
+                                        _hover={{ bg: 'blue.500' }}
+                                    >
+                                        <Link
+                                            href={eventTicketUrl}
+                                        >
+                                            Buy Tickets / Register
+                                        </Link>
+                                    </Button>
+                                    <Button
+                                        rounded={'full'}
+                                        color={'white'}
+                                        colorScheme={"facebook"}
+                                        _hover={{ bg: 'whiteAlpha.500' }}
+                                    >
+                                        + Follow
+                                    </Button>
+                                </>
+                                :
+                                <>
+                                    <Button
+                                        rounded={'full'}
+                                        color={'black'}
+                                        colorScheme={"yellow"}
+                                        _hover={{ bg: 'yellow.200' }}
+                                        disabled={true}
+                                    >
+                                        Registered
+                                    </Button>
+                                </>
+                        }
                     </Stack>
                 </Stack>
             </VStack>
@@ -77,4 +122,4 @@ function EventBanner (props)
     );
 }
 
-export default EventBanner ;
+export default EventBanner;

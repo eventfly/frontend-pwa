@@ -66,7 +66,15 @@ function ReviewCard (props)
 						{ reviewDate }
 					</chakra.span>
 				</Flex>
-
+				<Flex justifyContent="space-between" alignItems="center">
+					<chakra.span
+						fontSize="xl"
+						color="gray.600"
+						fontWeight={"bold"}
+					>
+						{ review.user_id.name }
+					</chakra.span>
+				</Flex>
 				<Flex mt={2} mb={2}>
 					{ renderedStars }
 				</Flex>
@@ -84,7 +92,7 @@ function ReviewCard (props)
 				<Box mt={2}>
 					<chakra.p
 						mt={2}
-						fontSize={'sm'}
+						fontSize={'md'}
 						color="gray.600"
 						_dark={{
 							color: "gray.300",

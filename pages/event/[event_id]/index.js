@@ -12,7 +12,6 @@ function EventDetails()
 
 	const [ event, setEvent ] = useState(null);
 	const [ loaded, setLoaded ] = useState(false);
-	const [ eventId, setEventId ] = useState("");
 
 	useEffect(() => {
 
@@ -23,7 +22,6 @@ function EventDetails()
 		else 
 		{
 			const { event_id } = router.query;
-			setEventId(event_id);
  			const eventInfoUrl = `${CONFIG.BASE_URL.PARTICIPANT}/api/participant/event/${event_id}`;
 			
 			if (!loaded)
@@ -34,7 +32,7 @@ function EventDetails()
 					{
 						console.log("Event Info GET:", res);
 						setEvent(res);
-						setLoaded(true);	
+						setLoaded(true);
 					}
 				})
 				.catch((err) => {

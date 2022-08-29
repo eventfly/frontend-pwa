@@ -34,7 +34,7 @@ function Home() {
 		}
 
 		if (!loaded) {
-			const newsFeedUrl = `${CONFIG.BASE_URL.NEWSFEED}/api/newsfeed/feed`;
+			const newsFeedUrl = `${CONFIG.BASE_URL.NEWSFEED}/api/newsfeed/feed?start=0&count=5`;
 			getData(newsFeedUrl)
 				.then((res) => {
 					console.log("Newsfeed data:", res);
@@ -54,13 +54,13 @@ function Home() {
 	return (
 		loaded ?
 			<Box>
-				{
+				{/* {
 					feed.map((event, index) => {
 						return (
-							<EventCard key={index} eventId={event.id || event._id} />
+							<EventCard key={index} eventId={""} />
 						)
 					})
-				}
+				} */}
 			</Box>
 			:
 			<>
