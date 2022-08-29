@@ -22,14 +22,10 @@ function MyEvents()
 
         if (!loaded)
         {
-            console.log("In !loaded");
             const eventUrl = `${CONFIG.BASE_URL.PARTICIPANT}/api/participant/${participantId}/events`;
-            console.log(eventUrl);
-
+            
             getData(eventUrl)
             .then((res) => {
-                console.log("In promise then");
-                console.log(res);
                 if (res.length > 0)
                 {
                     setEventList(res);
