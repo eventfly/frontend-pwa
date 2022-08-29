@@ -43,6 +43,9 @@ function CreateComment(props)
         .then((data) => {
             console.log("Response data:", data);
             console.log("comment sent")
+
+            window.location.reload(false)
+
         }).catch((err) => {
             console.log("error in comment sent");
         });
