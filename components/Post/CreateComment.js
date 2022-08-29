@@ -52,8 +52,6 @@ function CreateComment(props)
     return (
         <>
                 <Flex padding='1%' direction='row'>
-                    <Avatar src={post.profilePic} />
-                    <Spacer />
                     <Box ml='3'width='100%' backgroundColor='white' borderRadius='10px'>
                         <Textarea id='textArea' padding='1%' borderRadius='10px' placeholder='Write a comment...' />  
                         
