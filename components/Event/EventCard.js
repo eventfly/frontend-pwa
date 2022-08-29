@@ -39,7 +39,7 @@ function EventCard(props) {
         }
 
         if (!finalLoaded && loaded) {
-            const getOrganizerUrl = `${CONFIG.BASE_URL.ORG}/api/org/${event.organizer}/profile`;
+            const getOrganizerUrl = `${CONFIG.BASE_URL.ORG}/api/org/${event.organizer}/profile`;   
             getData(getOrganizerUrl)
                 .then((res) => {
                     if (res.org) {

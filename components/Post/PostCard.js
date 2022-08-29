@@ -46,7 +46,18 @@ function PostCard(props) {
                                 fontSize={"lg"}
                                 mb={-2}
                             >
-                                {post.creator.name}
+                                {
+                                    post.creator.role === "Participant" ?
+                                    <Link
+                                        href={`/user/${post.creator.id}`}
+                                    >
+                                        {post.creator.name}
+                                    </Link>
+                                    :
+                                    <>
+                                        {post.creator.name}
+                                    </>
+                                }
                                 <br />
                                 {
                                     post.creator.role != "Participant" &&
