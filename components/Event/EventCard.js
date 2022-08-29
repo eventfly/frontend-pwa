@@ -7,6 +7,8 @@ import { getData } from "../../services/HttpService";
 
 function EventCard(props)
 {
+    console.log("EventCard", props);
+
     const [finalLoaded, setFinalLoaded] = useState(false);
     const [loaded, setLoaded] = useState(false);
 

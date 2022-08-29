@@ -6,15 +6,16 @@ import { getData_Local, isAuthenticated } from '../services/StorageService';
 
 import CONFIG from "../config/config.json";
 import { getData } from '../services/HttpService';
+import FeedPostCard from '../components/FeedPostCard';
 
 
-
-function Home() {
+function Home()
+{
 	const router = useRouter();
 	const toast = useToast();
 
 	const [authenticated, setAuthenticated] = useState(false);
-	const [feed, setFeed] = useState([]);
+	const [feedPosts, setFeedPosts] = useState([]);
 	const [loaded, setLoaded] = useState(false);
 
 	useEffect(() => {
@@ -37,9 +38,8 @@ function Home() {
 			const newsFeedUrl = `${CONFIG.BASE_URL.NEWSFEED}/api/newsfeed/feed?start=0&count=5`;
 			getData(newsFeedUrl)
 				.then((res) => {
-					console.log("Newsfeed data:", res);
 					if (res.length > 0) {
-						setFeed(res);
+						setFeedPosts(res[0].posts);
 						setLoaded(true);
 					}
 				})
@@ -54,13 +54,13 @@ function Home() {
 	return (
 		loaded ?
 			<Box>
-				{/* {
-					feed.map((event, index) => {
+				{
+					feedPosts.map((post, index) => {
 						return (
-							<EventCard key={index} eventId={""} />
+							<FeedPostCard key={index} post={post} />
 						)
 					})
-				} */}
+				}
 			</Box>
 			:
 			<>

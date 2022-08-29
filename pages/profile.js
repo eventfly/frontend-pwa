@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 import CONFIG from "../config/config.json";
 import { getData } from "../services/HttpService";
 import { getData_Local, storeData_Local } from "../services/StorageService";
+import { Container } from "react-bootstrap";
 
 const _eventList = [
     {
@@ -118,7 +119,7 @@ function UserProfileCard() {
                     if (res) {
                         if (res.length > 0) {
                             console.log("Past events", res);
-                            setPastEventsLoaded(res);
+                            setEventList(res);
                             setPastEventsLoaded(true);
                         }
                     }
@@ -137,9 +138,8 @@ function UserProfileCard() {
     return (
         <Center py={6}>
             <Box
-                maxW={"90%"}
+                maxW={"100%"}
                 w={"full"}
-                bg={useColorModeValue("white", "gray.800")}
                 rounded={"md"}
             >
                 {
@@ -179,7 +179,7 @@ function UserProfileCard() {
 
                         <TabPanels>
                             <TabPanel>
-                                <Center >
+                                <Center>
                                     <Box maxW="lg" w="lg" rounded={"md"} overflow={"hidden"}>
                                         {
                                             reviewsLoaded ?
@@ -204,8 +204,8 @@ function UserProfileCard() {
                             </TabPanel>
 
                             <TabPanel>
-                                <Center >
-                                    <Box maxW="lg" w="lg" rounded={"md"} overflow={"hidden"}>
+                                <Center>
+                                    <Box maxW="full" w="full" rounded={"md"} overflow={"hidden"}>
                                         {
                                             pastEventsLoaded ?
                                                 <>
