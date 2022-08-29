@@ -38,8 +38,8 @@ function Home()
 			const newsFeedUrl = `${CONFIG.BASE_URL.NEWSFEED}/api/newsfeed/feed?start=0&count=5`;
 			getData(newsFeedUrl)
 				.then((res) => {
-					if (res.length > 0) {
-						setFeedPosts(res[0].posts);
+					if (res) {
+						setFeedPosts(res.posts);
 						setLoaded(true);
 					}
 				})
