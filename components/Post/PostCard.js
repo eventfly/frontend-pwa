@@ -95,20 +95,6 @@ function PostCard(props) {
                             >
                                 <PostContent post={post} />
                             </Box>
-                            <HStack>
-                                <Button
-                                    width={"auto"}
-                                    colorScheme={"facebook"}
-                                >
-                                    Like
-                                </Button>
-                                <Button
-                                    width={"auto"}
-                                    colorScheme={"blackAlpha"}
-                                >
-                                    Comment
-                                </Button>
-                            </HStack>
                         </Box>
                     </Flex>
                 </Box>

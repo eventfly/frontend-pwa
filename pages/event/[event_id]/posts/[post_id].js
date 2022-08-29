@@ -10,7 +10,7 @@ import {
     Heading,
     Center,
     Flex,
-    Stack
+    VStack
 } from "@chakra-ui/react";
 import CreateComment from '../../../../components/Post/CreateComment';
 import ShowComment from '../../../../components/Post/ShowComment';
@@ -72,11 +72,11 @@ function SinglePostDetails()
                     overflow={"clip"}
                 >
                     <Center>
-                        <Stack direction='column'>
+                        <VStack>
                             <FullPostCard post={post}/>
                             <ShowComment post={post}/>
                             <CreateComment post={post}/>
-                        </Stack>
+                        </VStack>
                         
                     </Center>
                     
