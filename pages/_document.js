@@ -41,6 +41,7 @@ class MyDocument extends Document {
 				<meta property="og:image" content="https://eventfly.app/icons/apple-touch-icon.png" />
 
 				<Head>
+					<title>EventFly</title>
 				</Head>
 				<body>
 					<Main />
