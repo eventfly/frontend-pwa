@@ -52,6 +52,7 @@ function QuizCard (props)
         putData(quizUrl, payload)
         .then((data) => {
             console.log("Response data:", data);
+            window.location.reload(false)
         }).catch((err) => {
             console.log("error");
         });
