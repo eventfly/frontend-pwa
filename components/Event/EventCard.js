@@ -5,7 +5,10 @@ import CONFIG from "../../config/config.json";
 import { getData } from "../../services/HttpService";
 
 
-function EventCard(props) {
+function EventCard(props)
+{
+    console.log(props);
+
     const [finalLoaded, setFinalLoaded] = useState(false);
     const [loaded, setLoaded] = useState(false);
 

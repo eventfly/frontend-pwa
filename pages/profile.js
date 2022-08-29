@@ -98,11 +98,10 @@ function UserProfileCard() {
             getData(getReviewUrl)
                 .then((res) => {
                     if (res) {
-                        if (res.length > 0)
-                        {
+                        if (res.length > 0) {
                             console.log("Review List", res);
                             setReviewList(res);
-                            setReviewsLoaded(true);    
+                            setReviewsLoaded(true);
                         }
                     }
                 })
@@ -117,11 +116,10 @@ function UserProfileCard() {
             getData(getPastEventsUrl)
                 .then((res) => {
                     if (res) {
-                        if (res.length > 0)
-                        {
+                        if (res.length > 0) {
                             console.log("Past events", res);
                             setPastEventsLoaded(res);
-                            setPastEventsLoaded(true);    
+                            setPastEventsLoaded(true);
                         }
                     }
                 })
@@ -167,8 +165,8 @@ function UserProfileCard() {
                                     {userName}
                                 </Heading>
                             </Stack>
-                        :
-                        <></>
+                            :
+                            <></>
                     }
 
                     <Tabs variant="soft-rounded" colorScheme="teal">
@@ -181,24 +179,28 @@ function UserProfileCard() {
 
                         <TabPanels>
                             <TabPanel>
-                                {
-                                    reviewsLoaded ?
-                                        <>
-                                            {
-                                                reviewList.map((review, index) => {
-                                                    return <ReviewCard key={index} review={review} />
-                                                })
-                                            }
-                                        </>
-                                        :
-                                        <Text
-                                            fontSize={"md"}
-                                            textAlign={"center"}
-                                            mt={"10%"}
-                                        >
-                                            This user hasn't given any reviews yet.
-                                        </Text>
-                                }
+                                <Center >
+                                    <Box maxW="lg" w="lg" rounded={"md"} overflow={"hidden"}>
+                                        {
+                                            reviewsLoaded ?
+                                                <>
+                                                    {
+                                                        reviewList.map((review, index) => {
+                                                            return <ReviewCard key={index} review={review} />
+                                                        })
+                                                    }
+                                                </>
+                                                :
+                                                <Text
+                                                    fontSize={"md"}
+                                                    textAlign={"center"}
+                                                    mt={"10%"}
+                                                >
+                                                    You haven't given any reviews yet.
+                                                </Text>
+                                        }
+                                    </Box>
+                                </Center>
                             </TabPanel>
 
                             <TabPanel>
@@ -209,7 +211,7 @@ function UserProfileCard() {
                                                 <>
                                                     {
                                                         eventList.map((event, index) => {
-                                                            return <EventCard key={index} event={event} />
+                                                            return <EventCard key={index} eventId={event.id} />
                                                         })
                                                     }
                                                 </>
@@ -220,7 +222,7 @@ function UserProfileCard() {
                                                         textAlign={"center"}
                                                         mt={"10%"}
                                                     >
-                                                        {"This user hasn't attended any events."}
+                                                        {"You haven't attended any events."}
                                                     </Text>
                                                 </>
                                         }

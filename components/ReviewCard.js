@@ -48,7 +48,7 @@ function ReviewCard (props)
 				py={3}
 				rounded="lg"
 				shadow="lg"
-				bg="gray.100"
+				bg="white"
 				_dark={{
 					bg: "gray.800",
 				}}

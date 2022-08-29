@@ -24,8 +24,7 @@ import { getData_Local, storeData_Local } from "../../services/StorageService";
 import { useRouter } from "next/router";
 
 
-function UserPublicProfile()
-{
+function UserPublicProfile() {
     const router = useRouter();
 
     const [profileLoaded, setProfileLoaded] = useState(false);
@@ -68,11 +67,10 @@ function UserPublicProfile()
             getData(getReviewUrl)
                 .then((res) => {
                     if (res) {
-                        if (res.length > 0)
-                        {
+                        if (res.length > 0) {
                             console.log("Review List", res);
                             setReviewList(res);
-                            setReviewsLoaded(true);    
+                            setReviewsLoaded(true);
                         }
                     }
                 })
@@ -87,11 +85,10 @@ function UserPublicProfile()
             getData(getPastEventsUrl)
                 .then((res) => {
                     if (res) {
-                        if (res.length > 0)
-                        {
+                        if (res.length > 0) {
                             console.log("Past events", res);
-                            setPastEventsLoaded(res);
-                            setPastEventsLoaded(true);    
+                            setEventList(res);
+                            setPastEventsLoaded(true);
                         }
                     }
                 })
@@ -109,9 +106,8 @@ function UserPublicProfile()
     return (
         <Center py={6}>
             <Box
-                maxW={"90%"}
+                maxW={"100%"}
                 w={"full"}
-                bg={useColorModeValue("white", "gray.800")}
                 rounded={"md"}
             >
                 {
@@ -137,8 +133,8 @@ function UserPublicProfile()
                                     {userName}
                                 </Heading>
                             </Stack>
-                        :
-                        <></>
+                            :
+                            <></>
                     }
 
                     <Tabs variant="soft-rounded" colorScheme="teal">
@@ -151,24 +147,28 @@ function UserPublicProfile()
 
                         <TabPanels>
                             <TabPanel>
-                                {
-                                    reviewsLoaded ?
-                                        <>
-                                            {
-                                                reviewList.map((review, index) => {
-                                                    return <ReviewCard key={index} review={review} />
-                                                })
-                                            }
-                                        </>
-                                        :
-                                        <Text
-                                            fontSize={"md"}
-                                            textAlign={"center"}
-                                            mt={"10%"}
-                                        >
-                                            This user hasn't given any reviews yet.
-                                        </Text>
-                                }
+                                <Center >
+                                    <Box maxW="lg" w="lg" rounded={"md"} overflow={"hidden"}>
+                                        {
+                                            reviewsLoaded ?
+                                                <>
+                                                    {
+                                                        reviewList.map((review, index) => {
+                                                            return <ReviewCard key={index} review={review} />
+                                                        })
+                                                    }
+                                                </>
+                                                :
+                                                <Text
+                                                    fontSize={"md"}
+                                                    textAlign={"center"}
+                                                    mt={"10%"}
+                                                >
+                                                    This user hasn't given any reviews yet.
+                                                </Text>
+                                        }
+                                    </Box>
+                                </Center>
                             </TabPanel>
 
                             <TabPanel>
@@ -179,7 +179,7 @@ function UserPublicProfile()
                                                 <>
                                                     {
                                                         eventList.map((event, index) => {
-                                                            return <EventCard key={index} event={event} />
+                                                            return <EventCard key={index} eventId={event.id} />
                                                         })
                                                     }
                                                 </>
